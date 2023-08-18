@@ -1,0 +1,395 @@
+\documentclass{beamer}
+\setbeamertemplate{theorems}[numbered]
+\usecolortheme{dracula}
+\usepackage[utf8]{inputenc}
+\usepackage[
+  main=spanish
+]{babel}
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+
+\newcounter{Ejercicio}
+%\newcounter{Ejemplo}
+
+%\newtheorem{Theorem}{Teorema}[section]
+%\newtheorem{Lemma}[Theorem]{Lema}
+%\newtheorem{Corollary}[Theorem]{Corolario}
+%\newtheorem{Ejercicio}[Theorem]{Ejercicio}
+%
+%
+\newtheorem{Ejercicio}[theorem]{Ejercicio}%[count-ejercicio]
+
+\newtheorem{Ejemplo}{Ejemplo}
+
+%\newtheorem{Proposition}[Theorem]{Proposici\'on}
+%\newtheorem{Conjecture}[Theorem]{Conjecture}
+%\newtheorem{Definition}[Theorem]{Definici\'on}
+%\newtheorem{Example}[Theorem]{Ejemplo}
+%\newtheorem{Observation}[Theorem]{Observation}
+%\newtheorem{Remark}[Theorem]{Remark}
+
+\def \rk{{\mbox {rk}}\,}
+\def \dim{{\mbox {dim}}\,}
+\def \ex{\mbox{\rm ex}}
+\def\df{\buildrel \rm def \over =}
+\def\ind{{\mbox {ind}}\,}
+\def\Vol{\mbox{Vol}}
+\def\V{\mbox{Var}}
+\newcommand{\comp}{\mbox{\tiny{o}}}
+\newcommand{\QED}{{\hfill$\Box$\medskip}}
+
+
+\def\Z{{\bf Z}}
+\def\R\re
+\def\V{\bf V}
+\def\W{\bf W}
+\def\f{\tilde{f}_{k}}
+\def \e{\varepsilon}
+\def \la{\lambda}
+\def \vr{\varphi}
+\def \R{{\bf R}}
+\def \L{{\mathcal L}}
+
+\def \re{{\mathbb R}}
+\def \Q{{\mathbb Q}}
+\def \cp{{\mathbb CP}}
+\def \T{{\mathbb T}}
+\def \C{{\bf C}}
+\def \M{{\widetilde{M}}}
+\def \I{{\mathbb I}}
+\def \H{{\mathbb H}}
+\def \lv{\left\vert}
+\def \rv{\right\vert}
+\def \ov{\overline}
+\def \tx{{\widehat{x}}}
+\def \0{\lambda_{0}}
+\def \la{\lambda}
+\def \ga{\gamma}
+\def \de{\delta}
+\def \x{\widetilde{x}}
+\def \E{\mathbb{E}}
+\def \y{\widetilde{y}}
+\def \A{{\mathcal A}}
+\def\h{{\rm h}_{\rm top}(g)}
+\def\en{{\rm h}_{\rm top}}
+\def\F{{\mathcal F}}
+\def\co{\colon\thinspace}
+
+\usepackage{ragged2e}  % `\justifying` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}       % `\url`s
+\usepackage{listings}  % Code listings
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+\usepackage{xfrac}
+
+
+\title{Introducción a la Topología Simpléctica 2023-II}
+\subtitle{Clase 1: Motivación dinámica y primeras definiciones} %% that will be typeset on the
+\author{Pablo Suárez Serrato}
+\logo{
+%\includegraphics[width=2cm]{logo-IMUNAM.png}
+\includegraphics[width=3cm]{LogoIMUNAM_Bco.png}
+}
+
+\begin{document}
+
+\frenchspacing
+
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+  \frame{\maketitle}
+
+  \AtBeginSection[]{% Print an outline at the beginning of sections
+    \begin{frame}<beamer>
+      \frametitle{Contenidos}
+      \tableofcontents[currentsection]
+    \end{frame}}
+
+    \section{Motivación dinámica}
+%
+%    \subsection{Motivación}
+    \begin{frame}{Dinámica Hamiltoniana}
+
+Al pensar en el movimiento de una part\'icula e intentar modelarlo, usamos geometr\'ia simpl\'ectica. 
+ \pause
+
+Consideremos una part\'icula, vista como un punto en $\R^{n}$, que se mueve con fuerza $\varphi =\frac{\partial U}{\partial q}$ respecto a un potencial $U$. 
+ \pause
+ 
+La ley de Newton nos dice que $\ddot{q}=-\frac{\partial U}{\partial q}$. 
+ \pause
+
+Escribimos la energ\'ia total $H=U+\frac{\dot{q}^2}{2}$ y al designar $p=\dot{q}$ llegamos a las ecuaciones de Hamilton
+ 
+$$\frac{\partial H}{\partial p} = \dot{q} \quad , \quad \frac{\partial H}{\partial q}  = \dot{p}$$
+
+$ (q,p)\in \R^{2n}$ son la posici\'on $(q)$ y el momento $(p)$. 
+
+\end{frame}
+    
+%    
+%        \begin{block}{Objetivo}
+%            Comparar dos distribuciones de probabilidad considerando todas las formas de transformar, \textit{transportar} o remodelar con \alert{el menor costo} posible.
+%        \end{block}
+%       \pause
+%       \begin{figure}
+%            \centering
+%            \includegraphics[scale = 0.5]{resources/opttransport1-en.png}
+%            \caption{\tiny Tomado de \hyperlink{}{https://www.fv-berlin.de/en/research/research-highlight/von-a-nach-b-oder-doch-besser-nach-c-en}\par}
+%        \end{figure}
+    
+\begin{frame}{Dinámica Hamiltoniana}
+
+El principio de conservaci\'on de la energ\'ia implica que 
+
+$$  \frac{d}{dt}H(q,p)=\frac{\partial H}{\partial q}\dot{q}+\frac{\partial H}{\partial p}\dot{p}=0.$$
+\pause
+
+Estas ecuaciones inducen un flujo $\varphi^{H}$. % que preserva la estructura est\'andar $\omega_0$ de $\R^{2n}$.
+\pause
+
+La evoluci\'on temporal en mec\'anica clasica la podemos pensar como un mapeo $\R \to {\rm Sp}_{2n}(\R)$, usando la derivada $d\varphi^{H}$. % del flujo $\varphi^{H}$.
+
+\end{frame}
+
+\begin{frame}{Dinámica Hamiltoniana}
+
+El movimiento de $x(t)=( q(t),p(t))\in \R^{2n}$ se describe por medio del campo vectorial
+
+$$X_{H}(q,p)= \sum\limits_{i=1}^{n}\left( \frac{\partial H}{\partial p_{i}}\cdot \frac{\partial }{\partial q_{i}}- \frac{\partial H}{\partial q_{i}}\cdot \frac{\partial }{\partial p_{i}} \right)$$
+
+\pause
+
+Todo campo vectorial as\'i definido (para alguna funci\'on lisa $H\co \R^{2n}\to \R$) se llama campo vectorial {\it Hamiltoniano}.
+
+\end{frame}
+
+\section{Primeras definiciones simplécticas}
+\begin{frame}{Geometría Simpléctica}
+
+La geometr\'ia riemanniana es la geometr\'ia de formas bilineales no-degeneradas, en cambio la geometr\'ia simpléctica es la geometr\'ia de $2$--formas bilineales, anti-sim\'etricas y no-degeneradas.
+\pause
+
+
+Sea ${\rm Id_{n}}$ la matriz identidad de $n\times n$ y definamos
+$$\Omega:=\left (  \begin{array}{cc} 0 & {\rm Id_{n}} \\ -{\rm Id_{n}} & 0 \end{array} \right)$$ 
+
+\pause
+
+Al grupo de matrices que preservan $\Omega$, es decir para la que $A^{t}\Omega A =\Omega$ le llamamos ${\rm Sp}_{2n}(\R)$.
+
+
+\end{frame}
+
+\begin{frame}{Geometría Simpléctica}
+
+ \begin{block}{Definición:}
+Una variedad lisa $M^{2n}$ es {\bf simpl\'ectica} si existe un atlas con cartas cuyas derivadas son elementos de  ${\rm Sp}_{2n}(\R)$.
+\end{block}
+
+
+\end{frame}
+
+\begin{frame}{Geometría Simpléctica}
+
+Sea $\omega$ una $2$--forma de De Rham, es decir una secci\'on del haz $\bigwedge^{2}T^{\ast}M\to M$.
+\pause
+
+ \begin{block}{Definición:}
+ \begin{itemize}
+\item Una $2$--forma $\omega$ es cerrada si $d\omega =0$.
+\pause
+\vfill
+
+ \item  En cada punto $p\in M$ la forma $\omega $ define una funci\'on $\tilde{\omega}_{p}\co T_{p}M\to T_{p}^{\ast}M\, ; \, \tilde{\omega}_{p}(v)(u)=\omega_{p}(u,v)$. 
+ \vfill
+
+ \pause
+ 
+ \item  Decimos que $\omega$ es {\bf no-degenerada} si $\tilde{\omega}_{p}$ es un isomorfismo para todo punto $p$ de $M$.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Geometría Simpléctica}
+ \begin{block}{Definición:}
+ La $2$--forma $\omega$ es {\bf simpl\'ectica} si es cerrada y no-degenerada. 
+ 
+ Una variedad $M$ es simpl\'ectica si admite una forma simpl\'ectica. 
+\end{block}
+\vfill
+
+\pause
+
+
+M\'as adelante, veremos que las dos definiciones de hecho son equivalentes. 
+
+Ser\'a consecuencia del teorema de Darboux.
+
+
+\end{frame}
+
+\section{Ejemplos y Ejercicios}
+\begin{frame}{Ejemplos y Ejercicios}
+
+\begin{Ejemplo}
+Sean $(x_1, \cdots, x_{n}, y_1, \cdots , y_{n})$ coordenadas en $\R^{2n}$, la forma  
+
+$$\omega_0=\sum\limits_{i=1}^{n}dx_{i}\wedge dy_{i}$$
+
+es simpl\'ectica.
+\end{Ejemplo}
+\pause
+
+ Es llamada la forma simpl\'ectica \emph{est\'andar}
+
+\end{frame}
+
+\begin{frame}{Geometría Simpléctica y Dinámica Hamiltoniana}
+El flujo Hamiltoniano $\varphi^{H}$ preserva la estructura est\'andar $\omega_0$ de $\R^{2n}$.
+\vfill
+
+\pause
+
+\begin{Ejercicio}\label{contr-anula}
+ Demostrar que $X_{H}$ se caracteriza como el \'unico campo vectorial sobre $\R^{2n}$ tal que $\omega_0(X_{H}, \cdot)=dH$.
+\end{Ejercicio}
+
+\end{frame}
+
+
+\begin{frame}{Ejemplos y Ejercicios}
+
+
+\begin{Ejemplo}
+Sean $(z_1, \cdots , z_{n})$ coordenadas en $\C^{n}$, la forma 
+$$\omega_1=\frac{i}{2} \sum\limits_{k=1}^{n}dz_{k}\wedge d\bar{z}_{k}$$
+
+es simpl\'ectica.
+
+\vfill
+       
+\pause
+
+ De hecho es la misma que $\omega_0$ al hacer el cambio de coordenadas $z_{k}=x_{k}+iy_{k}$.
+\end{Ejemplo}
+
+
+\end{frame}
+
+
+\begin{frame}{Ejemplos y Ejercicios}
+
+\begin{Ejercicio}
+Demuestre que toda forma de area sobre una superficie ($2$--variedad) lisa, compacta y orientable es una forma simpl\'ectica. 
+\end{Ejercicio}
+
+\end{frame}
+
+%%%
+
+\begin{frame}{Ejemplos y Ejercicios}
+
+\begin{Ejercicio}
+Demuestre que el producto de dos variedades simpl\'ecticas es simpl\'ectica. 
+\end{Ejercicio}
+
+\end{frame}
+
+%%%
+
+\begin{frame}{Ejemplos y Ejercicios}
+
+\begin{Ejercicio}
+ Demostrar que $$\begin{array}{cc}                             
+\underbrace{\omega_0\wedge \cdots \wedge \omega_0} & =: \omega_0^{n}
+ \\ n-{\it veces} &
+\end{array}$$ es una forma de volumen.
+\end{Ejercicio}
+
+\vfill
+        \pause
+%        
+La forma $\omega_0^{n}$ se conoce como la forma de volumen de Liouville.
+\end{frame}
+
+%%%
+
+\begin{frame}{Resumen}
+
+\begin{itemize}
+\item Dinámica y ecuaciones de Hamilton
+\pause \vfill
+\item Definiciones de forma y variedad simpléctica 
+\pause \vfill
+\item Ejemplos, formas estándar en ${\mathbf R}^{2n}$ y ${\mathbf C}^{n}$
+
+\end{itemize}
+
+\end{frame}
+
+
+
+
+%
+%
+%\begin{frame}{Ejemplos y Ejercicios}
+%
+%
+%\end{frame}
+
+
+%\begin{frame}{Ejemplos y Ejercicios}
+%
+%
+%\end{frame}
+%
+
+
+%
+%\begin{frame}{Geometría Simpléctica}
+%
+%
+%\end{frame}
+%
+%
+%\begin{frame}{Dinámica Hamiltoniana}
+%
+%
+%\end{frame}
+%
+
+
+\end{document}
+
+%    \subsection{Histogramas y medidas}
+%    
+%    \begin{frame}{Casos discretos}
+%    
+%        \begin{itemize}
+%            \item 
+%            \pause
+%            \item 
+%                \begin{equation*}
+%                    \alpha = \sum_{i=1}^n a_i\delta_{x_i}
+%                \end{equation*}
+%            donde $a_i>0$.
+%    \end{itemize}
+%    \end{frame}
+%    
+%    \begin{frame}{Caso general}
+%        %        
+%        \vfill
+%        \pause
+%        
+%       
+%    \end{frame}
+%    
+ 
