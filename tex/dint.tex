@@ -1,0 +1,371 @@
+\documentclass{beamer}
+\setbeamertemplate{theorems}[numbered]
+\usecolortheme{dracula}
+\usepackage[utf8]{inputenc}
+\usepackage[
+  main=spanish
+]{babel}
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{bm}
+\usepackage{graphicx}
+
+\newcounter{Ejercicio}
+%\newcounter{Ejemplo}
+
+%\newtheorem{Theorem}{Teorema}[section]
+%\newtheorem{Lemma}[Theorem]{Lema}
+%\newtheorem{Corollary}[Theorem]{Corolario}
+%\newtheorem{Ejercicio}[Theorem]{Ejercicio}
+%
+%
+\newtheorem{Ejercicio}[theorem]{Ejercicio}%[count-ejercicio]
+
+\newtheorem{Ejemplo}{Ejemplo}
+
+%\newtheorem{Proposition}[Theorem]{Proposici\'on}
+%\newtheorem{Conjecture}[Theorem]{Conjecture}
+%\newtheorem{Definition}[Theorem]{Definici\'on}
+%\newtheorem{Example}[Theorem]{Ejemplo}
+%\newtheorem{Observation}[Theorem]{Observation}
+%\newtheorem{Remark}[Theorem]{Remark}
+
+\def \rk{{\mbox {rk}}\,}
+\def \dim{{\mbox {dim}}\,}
+\def \ex{\mbox{\rm ex}}
+\def\df{\buildrel \rm def \over =}
+\def\ind{{\mbox {ind}}\,}
+\def\Vol{\mbox{Vol}}
+\def\V{\mbox{Var}}
+\newcommand{\comp}{\mbox{\tiny{o}}}
+\newcommand{\QED}{{\hfill$\Box$\medskip}}
+\newcommand\norm[1]{\lVert#1\rVert}
+
+\def\dint{\operatorname{d}_{\operatorname{int}}}
+\def\Z{{\bf Z}}
+\def\R\re
+\def\V{\bf V}
+\def\W{\bf W}
+\def\f{\tilde{f}_{k}}
+\def \e{\varepsilon}
+\def \la{\lambda}
+\def \vr{\varphi}
+\def \R{{\bf R}}
+\def \L{{\mathcal L}}
+
+\def \FF{{\mathbb F}}
+\def \re{{\mathbb R}}
+\def \Q{{\mathbb Q}}
+\def \cp{{\mathbb CP}}
+\def \T{{\mathbb T}}
+\def \C{{\bf C}}
+\def \M{{\widetilde{M}}}
+\def \I{{\mathbb I}}
+\def \H{{\mathbb H}}
+\def \lv{\left\vert}
+\def \rv{\right\vert}
+\def \ov{\overline}
+\def \tx{{\widehat{x}}}
+\def \0{\lambda_{0}}
+\def \la{\lambda}
+\def \ga{\gamma}
+\def \de{\delta}
+\def \x{\widetilde{x}}
+\def \E{\mathbb{E}}
+\def \y{\widetilde{y}}
+\def \A{{\mathcal A}}
+\def\h{{\rm h}_{\rm top}(g)}
+\def\en{{\rm h}_{\rm top}}
+\def\F{{\mathcal F}}
+\def\co{\colon\thinspace}
+
+\usepackage{ragged2e}  % `\justifying` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}       % `\url`s
+\usepackage{listings}  % Code listings
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+\usepackage{xfrac}
+\usepackage{tikz-cd}
+
+
+\title{Seminario Persistencia en Geometría 2024-I}
+\subtitle{Secciones 1.3-1.4} 
+\author{Miguel Ángel Maurin García de la Vega}
+\logo{
+\includegraphics[width=2cm]{LogoIMUNAM_Bco.png}
+}
+
+\begin{document}
+
+\frenchspacing
+
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+  \frame{\maketitle}
+
+  \AtBeginSection[]{% Print an outline at the beginning of sections
+    \begin{frame}<beamer>
+      \frametitle{Contenidos}
+      \tableofcontents[currentsection]
+    \end{frame}}
+
+    \section{1.3 Distancia de Entrelazamiento}
+
+    \begin{frame}{Motivación}
+
+Es deseable tener una métrica, o al menos una seudométrica en el espacio de módulos de persistencia.  
+
+Primero, definiremos una relación entre módulos de persistencia y revisaremos algunas de sus propiedades. Después, definiremos una distancia usando esta relación. El hecho de que es una métrica genuina se mostrará en secciones posteriores. 
+ 
+
+\end{frame}
+    
+\begin{frame}{Módulos $\delta$-entrelazados}
+
+\begin{block}{Definición 1.3.1:}
+Dado \(\delta>0\), decimos que dos módulos de persistencia \((V,\pi), (W,\theta)\) están \textbf{\(\boldsymbol{\delta}\)-entrelazados} si existen dos morfismos \(F:V \to W[\delta]\) y \(G:W \to V[\delta]\) tales que los siguientes diagramas conmutan:
+\end{block}
+
+\pause
+\begin{center}
+    \includegraphics[scale=0.35]{d_interleaved_diagrams.png}
+\end{center}
+
+\end{frame}
+
+
+\begin{frame}{Módulos $\delta$-entrelazados}
+Así, en los espacios vectoriales que componen los módulos tenemos el siguiente diagrama:
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+
+\node (V1) at (2,0) {$V_{t}$};
+\node (V2) at (3,0) {$V_{t+\delta}$};
+\node (V3) at (4,0) {$V_{t+2\delta}$};
+\node (W1) at (2,-1) {$W_{t}$};
+\node (W2) at (3,-1) {$W_{t+\delta}$};
+\node (W3) at (4,-1) {$W_{t+2\delta}$};
+
+\draw[->] (V1) -- (V2);
+\draw[->] (V2) -- (V3);
+\draw[->] (W1) -- (W2);
+\draw[->] (W2) -- (W3);
+\draw[->] (V1) -- (W2) node[near end, right] {$F_t$};
+\draw[->] (W2) -- (V3) node[near end, right] {$G_{t+\delta}$};
+\draw[->] (W1) -- (V2) node[near end, right] {$G_t$};
+\draw[->] (V2) -- (W3) node[near end, right] {$F_{t+\delta}$};
+
+\end{tikzpicture}
+\end{center}
+
+\end{frame}
+
+
+\begin{frame}{Propiedades (Ejercicio 1.3.2)}
+
+\begin{enumerate}
+  \item Dos módulos de persistencia están $\delta$-entrelazados con $\delta$ finita si y sólo si \(\operatorname{dim}V_\infty=\operatorname{dim}W_\infty\)
+  \pause
+  \item Si $V,W$ están $\delta$-entrelazados, entonces, están $\delta'$-entrelazados para cualquier $\delta'>\delta$
+  \pause
+  \item Si $V,W$ están $\delta_1$-entrelazados y $W,Z$ están $\delta_2$-entrelazados, entonces, $V,Z$ están $(\delta_1+\delta_2)$-entrelazados
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Distancia de Entrelazamiento}
+
+\begin{block}{Definición 1.3.3:}
+Para dos módulos de persistencia \((V,\pi)\) y \((W,\theta)\) definimos la \textbf{distancia de entrelazamiento} entre ellos como: 
+
+\[\dint(V,W)=\operatorname{inf} \{\delta > 0 \hspace{3pt}|\hspace{3pt} (V,\pi), (W,\theta)\hspace{3pt} \text{están $\delta$-entrelazados}\} \]
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Seudométrica}
+
+Obtenemos asi una pseudométrica en las clases de isomorfismo de módulos de persistencia con mismo $V_\infty$:
+\begin{itemize}
+\item \(\dint(V,V')=0\) para $V\cong V'$. 
+\item \(\dint(V,W) = \dint(W,V)\)
+\item Cumple la desigualdad del triángulo por la transitividad de $\delta$-entrelazamiento
+\end{itemize}
+Pero, a priori, puede ocurrir que \(\dint(V,W)\) se anula para $V\ncong W$. 
+\pause
+Sin embargo, la condición de semicontinuidad nos asegura que $\dint$ es no degenerada (2.2.8 y 2.2.10)
+ 
+
+\end{frame}
+
+\section{1.3.1 Primer Ejemplo: Módulos Intervalo}
+\begin{frame}{Afirmación 1.3.4}
+
+Fijamos $a, b, c, d < \infty$ con $a<b, c<d$ entonces: 
+
+\begin{equation}
+\footnotesize
+    \dint(\FF(a,b], \FF(c,d]) \leq \min \left( \max \left( \frac{b-a}{2}, \frac{d-c}{2} \right), \max \left( |a-c|, |b-d| \right)\right)
+\end{equation}
+
+\pause
+Veremos que se da la igualdad pero primero, probaremos la desigualdad. Consideraremos dos maneras de $\delta$-entrelazar los módulos intervalo. 
+\end{frame}
+
+\begin{frame}{Entrelazado I}
+
+Tomamos \(\delta = \max \left( |a-c|, |b-d| \right)\). Queremos probar que \(\FF(a,b], \FF(c,d])\) están $\delta$-entrelazados.
+\pause
+Por la definición de $\delta$ tenemos las siguientes desigualdades:
+
+\[a-2\delta \leq c-\delta \leq a\]
+\[b-2\delta \leq d-\delta \leq b\]
+\pause
+Además, notamos que los $\delta$-desplazamientos son:
+\[(\FF(c,d])[\delta]=\FF(c-\delta,d-\delta]\]
+\[(\FF(a,b])[2\delta]=\FF(a-2\delta,b-2\delta]\]
+\end{frame}
+
+\begin{frame}{Entrelazado I}
+Tenemos entonces la siguiente configuración: 
+\begin{center}
+\includegraphics[scale=0.35]{intervals_interleaving_I-1.png}
+\end{center}
+\pause
+Así, por el ejercicio 1.2.8 podemos considerar los morfismos \(F:\FF(a,b]\to\FF(c-\delta,d-\delta]\) y \(G:\FF(c,d]\to\FF(a-\delta,b-\delta]\), los cuales pueden ser cero (por ejemplo, si \(d-\delta<a, F=0\)) de manera que los módulos están $\delta$-entrelazados.
+\end{frame}
+
+\begin{frame}{Entrelazado II}
+Tomamos ahora \(\delta=\max \left( \frac{b-a}{2}, \frac{d-c}{2} \right)\). Notamos que los morfismos de 2$\delta$-desplazamiento se anulan para ambos módulos ya que \(b-2\delta\leq a\), es decir, \((a,b]\cap(a-2\delta,b-2\delta]=\emptyset\)
+\begin{center}
+\includegraphics[scale=0.15]{intervals_interleaving_II.png}
+\end{center}
+\pause
+Así, basta tomar $F, G = 0$ para que los módulos estén $\delta$-entrelazados. Por la definicion de $\dint$ como los módulos estan $\delta$-entrelazados de la manera I y II, se sigue la afirmación. 
+\end{frame}
+
+\begin{frame}{Ejercicio 1.3.5}
+Para dos intervalos infinitos:
+\[\dint(\FF(a,\infty),\FF(c,\infty))=|a-c|\]
+
+\end{frame}
+
+\begin{frame}{Ejemplo 1.3.6}
+Aterricemos la cota obtenida en 1.3.4 mediante ejemplos concretos. Escribimos $\delta_I$ y $\delta_{II}$ para referirnos a los métodos de entrelazamiento I y II vistos anteriormente. 
+\pause
+\begin{itemize}
+    \item \(\FF(1,2], \FF(1,3]\):
+        \[\delta_I=\max \left( \frac{1}{2}, 1 \right),\delta_{II}=\max \left( 0,1 \right), \implies \dint\leq1\]
+        \pause
+    \item \(\FF(1,2], \FF(2,3]\):
+        \[\delta_I=\max \left( \frac{1}{2}, \frac{1}{2} \right),\delta_{II}=\max \left( 1, 1 \right), \implies \dint\leq\frac{1}{2}\]
+        \pause
+    \item \(\FF(1,4], \FF(2,5]\):
+        \[\delta_I=\max \left( \frac{3}{2}, \frac{3}{2} \right),\delta_{II}=\max \left( 1, 1\right), \implies \dint\leq1\]
+\end{itemize}
+\end{frame}
+
+\section{1.4 Módulos de Persistencia de Morse y Aproximación}
+\begin{frame}{$\dint$ para módulos de Morse}
+
+Recordemos que los módulos de persistencia de Morse $V(f)$ están compuestos por $V_t(f) = H_*(\{f<t\})$, de manera que:
+\[V(f-\delta)=V(f)[\delta]\]
+\pause
+Queremos encontrar una cota para $\dint$ en el caso de módulos de Morse. Sea $M$ una variedad cerrada, \(f,g:M\to\re\) funciones de Morse tales que $f\leq g$, y consideramos la norma uniforme $\norm{f} = \max|f|$. 
+\pause
+Si $f\leq g$, entonces $\{g<t\}\subset\{f<t\}$, así, obtenemos un morfismo natural 
+\[F:V(g)\to V(f)\]
+Además, $\max |f-g|\geq f-g$, entonces, $g\geq f - \norm{f-g}$.
+Entonces, sea $\delta=\norm{f-g}$, mostraremos que $V(f)$ y $V(g)$ están $\delta$-entrelazados.
+
+\end{frame}
+
+\begin{frame}{$\dint$ para módulos de Morse}
+Por un lado, $f-\delta \leq g$ da un morfismo natural \(F:V(g)\to V(f)[\delta]\). Por otro lado, como $g-\delta\leq f$, tenemos \(G:V(f)\to V(g)[\delta]\). Combinando las dos desigualdades tenemos:
+\[f-2\delta\leq g-\delta\leq f\]
+\pause
+De esta forma, obtenemos los tres morfismos del siguiente diagrama:
+\begin{center}
+\includegraphics[scale=0.5]{morse_dint.png}
+\end{center}
+El segundo diagrama para la definición de $\delta$-entrelazamiento se obtiene de manera análoga. Por lo tanto:
+\[\dint(V(f),V(g))\leq\delta=\norm{f-g}\]
+\end{frame}
+
+\begin{frame}{$\dint$ para módulos de Morse}
+Finalmente, si $\phi\in\operatorname{Diff}(M)$, entonces $V(f)\cong V(\phi^*f)$, así
+\begin{equation}
+    \dint(V(f),V(g))\leq\inf_{\phi\in\operatorname{Diff}(M)}\norm{f-\phi^*g}
+\end{equation}
+\end{frame}
+
+\begin{frame}{Aproximación por funciones de Morse}
+Consideremos el siguiente problema: dada una función $f:S^2\to\re$, ¿qué tan bien es posible $C^0$-aproximarla por una función de Morse con 2 puntos críticos? gráficamente:
+\begin{center}
+\includegraphics[scale=0.35]{approx_morse.png}
+\end{center}
+En el ejemplo 4.2.6 calcularemos la cota obtenida en (2) para resolver este problema. En el capítulo 6 se discuten aplicaciones de módulos de persistencia a teoría de funciones y aproximación. 
+\end{frame}
+%
+%
+%\begin{frame}{Ejemplos y Ejercicios}
+%
+%
+%\end{frame}
+
+
+%\begin{frame}{Ejemplos y Ejercicios}
+%
+%
+%\end{frame}
+%
+
+
+%
+%\begin{frame}{Geometría Simpléctica}
+%
+%
+%\end{frame}
+%
+%
+%\begin{frame}{Dinámica Hamiltoniana}
+%
+%
+%\end{frame}
+%
+
+
+\end{document}
+
+%    \subsection{Histogramas y medidas}
+%    
+%    \begin{frame}{Casos discretos}
+%    
+%        \begin{itemize}
+%            \item 
+%            \pause
+%            \item 
+%                \begin{equation*}
+%                    \alpha = \sum_{i=1}^n a_i\delta_{x_i}
+%                \end{equation*}
+%            donde $a_i>0$.
+%    \end{itemize}
+%    \end{frame}
+%    
+%    \begin{frame}{Caso general}
+%        %        
+%        \vfill
+%        \pause
+%        
+%       
+%    \end{frame}
+%    
+ 
