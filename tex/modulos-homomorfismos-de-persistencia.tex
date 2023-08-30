@@ -1,0 +1,554 @@
+\documentclass{beamer}
+\setbeamertemplate{theorems}[numbered]
+\usecolortheme{dracula}
+\usepackage[utf8]{inputenc}
+\usepackage[
+  main=spanish
+]{babel}
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+
+\usepackage[all,cmtip]{xy}
+
+\newcounter{Ejercicio}
+%\newcounter{Ejemplo}
+
+%\newtheorem{Theorem}{Teorema}[section]
+%\newtheorem{Lemma}[Theorem]{Lema}
+%\newtheorem{Corollary}[Theorem]{Corolario}
+%\newtheorem{Ejercicio}[Theorem]{Ejercicio}
+%
+%
+\newtheorem{Ejercicio}[theorem]{Ejercicio}%[count-ejercicio]
+
+\newtheorem{Ejemplo}{Ejemplo}
+
+%\newtheorem{Proposition}[Theorem]{Proposici\'on}
+%\newtheorem{Conjecture}[Theorem]{Conjecture}
+%\newtheorem{Definition}[Theorem]{Definici\'on}
+%\newtheorem{Example}[Theorem]{Ejemplo}
+%\newtheorem{Observation}[Theorem]{Observation}
+%\newtheorem{Remark}[Theorem]{Remark}
+
+\def \rk{{\mbox {rk}}\,}
+\def \dim{{\mbox {dim}}\,}
+\def \ex{\mbox{\rm ex}}
+\def\df{\buildrel \rm def \over =}
+\def\ind{{\mbox {ind}}\,}
+\def\Vol{\mbox{Vol}}
+\def\V{\mbox{Var}}
+\newcommand{\comp}{\mbox{\tiny{o}}}
+\newcommand{\QED}{{\hfill$\Box$\medskip}}
+
+
+\def\Z{{\bf Z}}
+\def\R\re
+\def\V{\bf V}
+\def\W{\bf W}
+\def\f{\tilde{f}_{k}}
+\def \e{\varepsilon}
+\def \la{\lambda}
+\def \vr{\varphi}
+\def \R{{\bf R}}
+\def \L{{\mathcal L}}
+
+\def \re{{\mathbb R}}
+\def \Q{{\mathbb Q}}
+\def \cp{{\mathbb CP}}
+\def \T{{\mathbb T}}
+\def \C{{\bf C}}
+\def \M{{\widetilde{M}}}
+\def \I{{\mathbb I}}
+\def \H{{\mathbb H}}
+\def \lv{\left\vert}
+\def \rv{\right\vert}
+\def \ov{\overline}
+\def \tx{{\widehat{x}}}
+\def \0{\lambda_{0}}
+\def \la{\lambda}
+\def \ga{\gamma}
+\def \de{\delta}
+\def \x{\widetilde{x}}
+\def \E{\mathbb{E}}
+\def \y{\widetilde{y}}
+\def \A{{\mathcal A}}
+\def\h{{\rm h}_{\rm top}(g)}
+\def\en{{\rm h}_{\rm top}}
+\def\F{{\mathcal F}}
+\def\co{\colon\thinspace}
+
+\usepackage{ragged2e}  % `\justifying` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}       % `\url`s
+\usepackage{listings}  % Code listings
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+\usepackage{xfrac}
+
+
+\title{Geometria Persistente 2024-I}
+\subtitle{Clase 1: Modulos de Persistencia y Homomorfismos} %% that will be typeset on the
+\author{Dr. Pablo Suarez Serrato}
+\logo{
+%\includegraphics[width=2cm]{logo-IMUNAM.png}
+\includegraphics[width=3cm]{LogoIMUNAM_Bco.png}
+}
+
+\begin{document}
+
+\frenchspacing
+
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+  \frame{\maketitle}
+
+  \AtBeginSection[]{% Print an outline at the beginning of sections
+    \begin{frame}<beamer>
+      \frametitle{Contenidos}
+      \tableofcontents[currentsection]
+    \end{frame}}
+
+    \section{Una pequeña introducción}
+%
+%    \subsection{Motivación}
+    \begin{frame}{Introducción}
+
+El origen del análisis topológico de datos (TDA) se remonta a algunos años atrás cuando algunos investigadores comenzaron a preguntarse si la "forma" de datos recolectados en situaciones "reales" pueden decirnos alguna información subyacente sobre los datos. 
+ \pause
+
+La teoría que sustenta el TDA nace con la creación de los módulos de persistencia, introducidos por  G. Carlsson y A. Zamorodian en 2005.
+ \pause
+ 
+En los últimos años esta teoría ha ido encontrando su utilidad no sólo en el TDA, sino que también en campos de interés teórico como son la teoría de las funciones y en geometría simpléctica.
+
+\end{frame}
+    
+%    
+%        \begin{block}{Objetivo}
+%            Comparar dos distribuciones de probabilidad considerando todas las formas de transformar, \textit{transportar} o remodelar con \alert{el menor costo} posible.
+%        \end{block}
+%       \pause
+%       \begin{figure}
+%            \centering
+%            \includegraphics[scale = 0.5]{resources/opttransport1-en.png}
+%            \caption{\tiny Tomado de \hyperlink{}{https://www.fv-berlin.de/en/research/research-highlight/von-a-nach-b-oder-doch-besser-nach-c-en}\par}
+%        \end{figure}
+    
+\begin{frame}{¿Qué significa la persistencia?}
+
+Considere el siguiente (clásico) ejemplo:
+
+\includegraphics[width=10cm]{Ejemplo1.png}
+\pause
+
+En este ejemplo se muestra la evolución de un espacio topológico en función de un parámetro de radio $r>0$. 
+
+\pause
+
+De cierta manera, el radio cambia la escala con la que vemos algunas propiedades que se manteninen o persisten en el tiempo.
+
+\end{frame}
+
+\begin{frame}{¿Qué significa la persistencia?}
+
+Considere el siguiente (clásico) ejemplo:
+
+\includegraphics[width=9cm]{Ejemplo1.jpg}
+
+\end{frame}
+
+\section{Módulos de persistencia}
+
+\begin{frame}{Primeras definiciones}
+
+\begin{block}{\textbf{Definición}}
+Un módulo de persistencia es una pareja $(V, \pi)$, donde $V$ es una colección $\{V_t\}, t\in\R$, de espacios vectoriales de dimensión finita sobre un campo $\mathbf{F}$, y $\pi$ es una colección de transformaciones lineales $\pi_{s,t}:V_s \rightarrow V_t$ para cada $s\leq t$ en $\R$ tales que se cumplen las siguientes condiciones:
+
+\pause
+
+\begin{itemize}
+    \item[i)] (Persistencia) Para cualesquiera $s\leq t\leq r$ se cumple $\pi_{s,r}=\pi_{t,r}\pi_{s,t}$, es decir, conmuta el siguiente diagrama:
+    
+\end{itemize}
+    
+\end{block}
+
+\centerline{
+    \xymatrix{V_s \ar[r]^{\pi_{s,r}}  \ar@/^1.5pc/[rr]^{\pi_{s,r}} &V_t \ar[r]^{\pi_{t,r}} &V_r}
+}
+    
+\end{frame}
+
+\begin{frame}{Primeras definiciones}
+
+\begin{block}{\textbf{Definición}}
+
+\begin{itemize}
+    \item[ii)] '(Finitud)' Para cada $t\in\R$ salvo una cantidad finita de puntos, existe una vecindad $U$ de $t$, tal que para cualquier par de elementos $s<r$ en $U$ se tiene que $\pi_{s,r}$ es un isomorfismo (lineal).
+\pause
+    \item[iii)]  (Semicontinuidad) Para cada $t\in \R$ y para $s\leq t$ lo suficientemente cerca de $t$, $\pi_{s,t}$ es un isomorfismo.
+\pause
+    \item[iv)] '(Finitud)' Existe un elemento $s_-\in\R$ tal que $V_s=0$ para todo $s\leq s_-$.
+    
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Primeras definiciones}
+
+ \begin{block}{Notas:}
+ \begin{itemize}
+\item[i)] se encarga de ir capturando la información entre espacios, al mismo tiempo que nos permite ver como va evolucionando y cuál de esta persiste. 
+\pause
+\vfill
+
+ \item[ii)] nos dice que existe una cantidad finita de momentos (puntos) en el que realmente existe un cambio en la información que nos ofrecen los espacios.
+ \vfill
+
+ \pause
+ 
+ \item[iii)] es superflua, ya que es consecuencia de la segunda propiedad. Sin embargo, será de utilidad más adelante para preservar una propiedad de unicidad.
+\vfill
+
+\pause
+
+\item[iv)] nos establece un 'origen' a partir del cual se puede empezar a analizar la información.
+ 
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Primeras definiciones}
+\begin{block}{Observaciones:}
+    \begin{itemize}
+        \item De i) se tiene que $\pi_{t,t}=\pi_{t,t}\pi_{t,t}$, pero por iii) (o ii)) $\pi_{t,t}$ es un isomorfismo, así, se deduce que, para cada $t\in\R$, $\pi_{t,t}=1_{V_t}=id_{V_t}$. 
+        \vfill
+
+        \pause
+
+        En vista de esta observación, a este tipo de colecciones se conocen como sistemas dirigidos en teoría de categorías.
+
+        \vfill
+        \pause
+
+        \item De ii) podemos observar que eventualmente el módulo se estabiliza: existe un punto $s_+\in\R$ tal que para cualesquiera $t\geq s\geq s_+$ se tiene que $\pi_{s,t}$ es un isomorfismo.
+        
+        \pause
+        En este caso, tendremos que todo espacio vectorial $V_t$ es isomorfo a $V_{s_+}$ para $t$ suficientemente grande, así, podemos declarar $V_{\infty}:=V_{s_+}$, al cual nos referiremos como el espacio vectorial "terminal". (En categorías, este espacio es el límite del sistema $(V,\pi)$)
+        
+    \end{itemize}
+ 
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Primeras definiciones}
+
+Para la demostración de este último hecho se puede proceder como sigue:
+
+\pause
+
+La finitud de ii) garantiza la existencia de un elemento máximo que no cumple la condición de la vecindad, así tomemos $s_+\in\R$ mayor que este elemento máximo, así, todo elemento mayor a $s_+$ posee la propiedad de ii).
+
+\pause
+
+Usando la conexidad del espacio $[s_+,\infty)$ y el conjunto 
+$$X:=\{t\in[s_+,\infty)| t\geq s\geq s_{+} \text{ implica que } \pi_{s,t} \text{ es iso.}\},$$ se completa la demostración.
+    
+\end{frame}
+
+\begin{frame}{Primeras definiciones}
+
+    \begin{block}{\textbf{Definición}}
+    Sea $(V,\pi)$ un módulo de persistencia. A la colección de los espacios $P_{s,t}:=\text{im }\pi_{s,t}$ la denominaremos homología persistente de $V$.
+    \end{block}
+    
+    \pause
+    
+    \begin{block}{Observaciones:}
+        \begin{itemize}
+            \item Como se comentó en las notas iniciales, basta revisar la información que nos ofrece una cantidad finita de espacios $P_{s,t}$.
+            \vfill
+            \pause
+            
+            \item Será importante ver durante cuanto tiempo se mantiene esta información, más adelante revisaremos cómo lograr esto.
+            
+        \end{itemize}
+    \end{block}
+    
+\end{frame}
+
+\begin{frame}{Ejemplos: Teoría de Morse}
+Sea $X$ una variedad cerrada (suave, compacta y sin frontera) y sea $f:X\rightarrow \R$ una función de Morse (suave sin puntos criticos no degenerados). 
+
+Definiremos nuestro módulo de persistencia de la siguiente manera:
+
+Fijemos un entero $k\geq 0$. Para cada $t\in\R$ defina $V_t:=H_k(\{f<t\})$, y para $s\leq t$, considere las inclusiones naturales $\xymatrix{ \{f<s\}\ar@{^(->}[r]^{\iota_{s,t}} &  \{f<t\}}$, de donde obtenemos morfismos inducidos en homología $\pi_{s,t}:=(\iota_{s,t})_k:V_s \rightarrow V_t$.    
+\end{frame}
+
+\begin{frame}{Ejemplos: Teoría de Morse}
+\begin{figure}
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=2cm]{Morse1.png}
+  \caption{Toro (superficie cerrada)}
+  \label{fig:sub1}
+\end{minipage}%
+
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=6cm]{Morse2.png}
+  \caption{Conjuntos de subnivel del Toro}
+  \label{fig:sub2}
+\end{minipage}
+\caption{Modulos de Morse}
+\label{fig:test}
+\end{figure}
+    
+\end{frame}
+
+\begin{frame}{Ejemplo: Teoría de Morse}
+
+Veamos que, en efecto, el par $(V,\pi)$ forma un módulo de persitencia:
+
+\begin{itemize}
+    \item[i)] La persistencia se sigue de la funtorialidad de la homología.
+    \pause
+    \item[iv)] Como la superficie es compacta, la función alcanza su mínimo en algún punto, así, tomando cualquier valor por debajo de este mínimo, el subconjunto de subnivel es vacío, luego la homología es trivial.
+    \pause
+    \item[iii)] Se sigue de ii).
+    
+\end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Ejemplo: Teoría de Morse}
+
+Para demostrar requerimos de un par de lemas y teoremas técnicos:
+\pause
+\begin{block}{Corolario al Lema de Morse}
+Todo punto crítico no degenerado es aislado.
+\end{block}
+\pause
+\begin{block}{Teorema de Morse 1}
+Sea $f$ una función de Morse en una variedad $X$, suponga que $s<t$, $\{s\leq f\leq t\}$ es compacto y no existen valores críticos entre $s$ y $t$, entonces $\{f<s\}$ es difeomorfo a $\{f<t\}$, de hecho, $\{f<s\}$ es un rectracto por deformación de $\{f<t\}$.
+\end{block}
+    
+\end{frame}
+
+\begin{frame}{Ejemplo: Teoría de Morse}
+
+\begin{itemize}
+    \item[ii)] Utilizando la compacidad junto con el hecho de que los puntos críticos no degenerados son aislados, se puede ver que sólo existe una cantidad finita de éstos. Así, sólo existe una cantidad finita de valores críticos.
+
+    \pause
+
+    Luego, los valores críticos están bien separados, digamos, $c_1 < c_2 < ... < c_r$, así para cada valor no crítico $t$ siempre se puede encontrar una vecindad $U$ suficientemente pequeña contenida entre dos valores críticos consecutivos, luego, por el Teorema de Morse 1, se sigue que los mapeos $\pi_{r,s}$ son isomorfismos para $s<r$ en $U$.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Ejemplo: Complejo de Rips}
+    
+    Sea $(X,d)$ un espacio métrico finito. 
+    Para cada $0<\alpha\in\R$, definimos el complejo simplicial $R_\alpha(X)$, conocido como complejo de Rips, como sigue:
+\pause
+    \begin{itemize}
+        \item Los vértices del complejo son los puntos de $X$.
+
+        \item Cada conjunto de $k+1$ puntos en $X$ determinan un $k-$simplejo $\sigma=[x_0, ..., x_k]$ sii $d(x_i, x_j)<\alpha$ para cualesquiera $i,j$.
+        
+    \end{itemize}
+\pause
+
+    Así, definimos el módulo de Rips como sigue: 
+    
+    Para cada $\alpha>0$, definimos $V_\alpha := H_*(R_\alpha(X))$ y $\pi_{\alpha,\beta}:=(\iota_{\alpha,\beta})_*$, donde $\iota_{\alpha, \beta}:R_{\alpha}(X)\rightarrow R_\beta(X)$, es la inclusión canónica. 
+    
+\end{frame}
+    
+\begin{frame}{Ejemplo: Complejo de Rips}
+
+    \centerline{
+    \includegraphics[width=9cm]{Rips1.png}}
+    
+\end{frame}
+
+\begin{frame}{Ejemplo: Complejo de Rips}
+    
+    \begin{block}{Observaciones:}
+        \begin{itemize}
+        \item Este complejo es un complejo bandera, es decir, un complejo en el que para cualquier subconjunto de vértices $S$ de $X$, $S$ visto como simplejo se encuentra en $R_\alpha(X)$ si $[x,y]\in R_\alpha(X)$ para todo $x,y\in S$.
+        \pause
+        \item Si $0<\alpha< \min\{d(x_i,x_j)| i\neq j\}$, entonces $R_\alpha(X)$ consiste únicamente de los vértices. 
+        \pause
+        \item Si $\alpha> \text{diam}(X)$, entonces $R_\alpha(X)$ es un simplejo de dimensión $\#(X)+1$.
+        
+        \end{itemize}
+    \end{block}
+    
+\end{frame}
+
+\section{Homomorfismos de módulos}
+\begin{frame}{Homomorfismos de módulos}
+
+Sean $(V,\pi)$, $(V',\pi')$ dos módulos de persistencia.
+
+\begin{block}{\textbf{Definición}}
+Un morfismos $A:(V,\pi)\rightarrow (V',\pi')$ es una familia de transformaciones lineales $A_t:V_t\rightarrow V'_t$, tales que el siguiente diagrama conmuta:
+\centerline{
+\xymatrix{
+V_s  \ar[d]^{A_s} \ar[r]^{\pi_{s,t}} &V_t \ar[d]^{A_t}\\
+V'_s \ar[r]^{\pi'_{s,t}} &V'_t
+}}
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Homomorfismos de módulos}
+
+
+\begin{block}{Observaciones}
+\begin{itemize}
+    \item Obtenemos, así, la categoría de módulos de persistencia, con objetos los módulos y con flechas los morfismos que acabamos de definir. 
+    \pause
+    \item El morfismo identidad de un módulo de persistencia $(V,\pi)$ es la colección de identidades sobre cada espacio vectorial $1_V:=\{1_{V_t}\}$.
+    \pause
+    \item En este sentido, decimos que dos módulos de persistencia $(V,\pi), (V',\pi')$ son isomorfos si existen morfismos $A:V\rightarrow V'$ y $B:V'\rightarrow V$, cuyas composiones nos dan el morfismo identidad sobre cada módulo.
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Ejemplo: Morfismo de corrimiento (desplazamiento)}
+
+Sean $(V,\pi)$ un módulo de persistencia y, dado $\delta\in\R$, definimos el módulo de persistencia siguiente $(V[\delta], \pi[\delta])$ tomando $(V[\delta])_t:=V_{t+\delta}$ y $(\pi[\delta])_{s,t}:=\pi_{s+\delta,t+\delta}$. A este módulo lo denominaremos $\delta-$desplazamiento de $V$.
+
+\pause
+\begin{block}{Observaciones:}
+\begin{itemize}
+    \item La propiedad de persistencia se verifica fácilmente, ya que podemos sustituir $r\geq t\geq s$ por $r+\delta \geq t+\delta \geq s+\delta$ en las transformaciones originales.
+\pause
+    \item Si $s_+$ funciona como origen en el módulo $(V, \pi)$, entonces en el $\delta-$desplazamiento funciona $s_++\delta$.
+\pause
+    \item La propiedad ii) se sigue de la continuidad de la función traslación $t\mapsto t+\delta$.
+\end{itemize}
+    
+\end{block}
+
+\end{frame}
+
+
+\begin{frame}{Ejemplo: Morfismo de corrimiento}
+
+Ahora, para cada $\delta>0$, definimos el mapeo $\Phi^\delta:(V, \pi)\rightarrow (V[\delta], \pi[\delta])$ como $\Phi^{\delta}_t:=\pi_{t,t+\delta}$. \pause Observe que este mapeo es, de hecho, un morfismo de módulos:
+
+\centerline{
+\xymatrixcolsep{5pc}
+\xymatrixrowsep{5pc}
+\xymatrix{
+V_s  \ar[d]^{\Phi^\delta_s=\pi_{s,s+\delta}} \ar[r]^{\pi_{s,t}} \ar[dr]^{\pi_{s,t+\delta}} &V_t \ar[d]^{\Phi^\delta_t=\pi_{t,t+\delta}}\\
+V_{s+\delta} \ar[r]^{\pi_{s+\delta,t+\delta}} &V_{t+\delta}
+}}
+
+\pause
+
+Este morfismo será llamado, morfismo de $\delta-$desplazamiento y, en general, dado un morfismo de módulos $F:V\rightarrow W$, denotaremos por $F[\delta]:V[\delta]\rightarrow W[\delta]$ el correspondiente morfismo entre los $\delta-$desplazamientos de los módulos.
+
+\end{frame}
+
+
+\begin{frame}{Submódulos de persistencia}
+
+\begin{block}{Definición}
+Sea $(V, \pi)$ un módulo de persistencia. Un submódulo de persistencia $(W,\overline{\pi})$ de $V$ es una colección de subespacios $W_s\subset V_s$ para cada $s\in\R$, tales que los mapeos $\overline{\pi}_{s,t}|_W:W_s\rightarrow W_t$ están bien definidos para $s\leq t$ y hacen que la pareja $(W,\overline{\pi})$ sea un módulo de persistencia.
+    
+\end{block}
+    
+\end{frame}
+
+
+\begin{frame}{Ejemplos: Submódulos kernel e imagen}
+
+Sea $\Phi:V\rightarrow V'$ un morfismo entre dos módulos de persitencia $(V,\pi)$ y $(V,\pi')$. Definimos el kernel y la imagen de $\Phi$ como sigue: 
+\pause
+
+\begin{itemize}
+    \item El kernel $(\text{ker} \Phi, \pi^{\text{ker} \Phi})$ es la colección de espacios vectoriales $\{\text{ker }\Phi_t\}, t\in\R$ equipado con la colección de transformaciones lineales $\pi_{s,t}|_{\text{ker }\Phi_s}$ para $s\leq t$.
+\pause
+    \item El kernel $(\text{im} \Phi, \pi^{\text{im} \Phi})$ es la colección de espacios vectoriales $\{\text{im }\Phi_t\}, t\in\R$ equipado con la colección de transformaciones lineales $\pi_{s,t}|_{\text{im }\Phi_s}$ para $s\leq t$.
+\end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Ejemplos: Módulos de intervalos}
+
+Para un intervalo $(a,b]$ (con $b\leq \infty$), definimos un módulo de persistencia $\mathbf{F}(a,b]$ como sigue:
+
+$$\mathbf{F}(a,b]_t=\begin{cases}
+\mathbf{F}, t\in (a,b]\\
+0, t\notin (a,b]
+\end{cases}, \;\;
+\pi_{s,t}=\begin{cases}
+\mathbf{1}, t\in (a,b]\\
+0, t\notin (a,b]
+\end{cases}$$
+
+Estos son llamados módulos de intervalos. 
+\pause
+
+\begin{block}{Notas:}
+    Para demostrar que estos en efecto son módulos de persistencia, se requiere trabajar por casos, la propiedad de persistencia sobre los valores $r\geq t\geq s$.
+    
+    La propiedad de finitud iv) se tiene en $s_+=a$, mientras que la propiedad de finitud ii) se tiene para cada punto $t$ distinto de $a, b$.
+    
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Ejemplos: Módulos de intervalos}
+
+\centerline{
+\includegraphics[width=10cm]{IntervalModule1.png}
+}
+\pause
+
+\begin{block}{Observación:}
+Sean $(a,b]$ y $(c,d]$ dos intervalos con intersección no vacía. Entonces existe un morfismo no cero $\mathbf{F}(a,b]\rightarrow\mathbf{F}(c,d]$ sii $c\leq a$ y $a<d\leq b$. 
+\end{block}
+    
+\end{frame}
+
+\begin{frame}{Ejemplo: Módulos de intervalos}
+Considere $\mathbf{F}(0,1]$ y $\delta=1/3$. Entonces $V[\delta]=\mathbf{F}(-1/3,2/3]$, pero $\text{im} \Phi^{\delta}=\mathbf{F}(0,2/3]$.
+
+\pause
+\centerline{
+\includegraphics[width=10cm]{IntervalModule2.png}
+}
+
+\end{frame}
+
+\begin{frame}{Suma directa de módulos}
+
+\begin{block}{Definición}
+Sean $(V,\pi)$ y $(V',\pi')$ dos módulos de persistencia.
+Su suma directa $\text{sum }(W,\theta)$ es un módulo de persistencia cuyos espacios subyacentes son $W_t:=V_t\oplus V'_t$ (suma directa de espacios vectoriales) y, correspondientemente, $\theta_{s,t}=\pi_{s,t}\oplus \pi'_{s,t}$.
+    
+\end{block}
+    
+\end{frame}
+
+
+
+\end{document}
