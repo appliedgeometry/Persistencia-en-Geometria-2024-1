@@ -1,0 +1,401 @@
+\documentclass{beamer}
+\setbeamertemplate{theorems}[numbered]
+\usecolortheme{dracula}
+\usepackage[utf8]{inputenc}
+\usepackage[
+  main=spanish
+]{babel}
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+
+\newcounter{Ejercicio}
+%\newcounter{Ejemplo}
+
+%\newtheorem{Theorem}{Teorema}[section]
+%\newtheorem{Lemma}[Theorem]{Lema}
+%\newtheorem{Corollary}[Theorem]{Corolario}
+%\newtheorem{Ejercicio}[Theorem]{Ejercicio}
+%
+%
+\newtheorem{Ejercicio}[theorem]{Ejercicio}%[count-ejercicio]
+
+\newtheorem{Ejemplo}{Ejemplo}
+
+%\newtheorem{Proposition}[Theorem]{Proposici\'on}
+%\newtheorem{Conjecture}[Theorem]{Conjecture}
+%\newtheorem{Definition}[Theorem]{Definici\'on}
+%\newtheorem{Example}[Theorem]{Ejemplo}
+%\newtheorem{Observation}[Theorem]{Observation}
+%\newtheorem{Remark}[Theorem]{Remark}
+
+%% Definiciones del libro:
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\rk}{rank} \DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\supp}{supp} \DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\cl}{cl}
+\DeclareMathOperator{\dv}{div} \DeclareMathOperator{\ind}{ind}
+\DeclareMathOperator{\dist}{dist} \DeclareMathOperator{\res}{res}
+\DeclareMathOperator{\codim}{codim} \DeclareMathOperator{\lk}{lk}
+\DeclareMathOperator{\intr}{int} \DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Hom}{Hom} \DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\End}{End} \DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Ind}{Ind} \DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\Var}{Var} \DeclareMathOperator{\Vol}{Vol}
+\DeclareMathOperator{\grph}{graph}
+\DeclareMathOperator{\Crit}{Crit}
+\DeclareMathOperator{\length}{length}
+\DeclareMathOperator{\Sp}{Sp} \DeclareMathOperator{\Cal}{Cal}
+\DeclareMathOperator{\rot}{rot} \DeclareMathOperator{\PSL}{PSL}
+\renewcommand{\sp}{\mathfrak{sp}} \DeclareMathOperator{\Area}{Area}
+\DeclareMathOperator{\CovDim}{CovDim} \DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\closure}{Closure}\DeclareMathOperator{\pb}{pb}
+\DeclareMathOperator{\CZ}{CZ} \DeclareMathOperator{\GW}{GW}
+\DeclareMathOperator{\Iamge}{Image}
+\DeclareMathOperator{\proj}{proj}
+\DeclareMathOperator{\spec}{spec}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\dis}{dis}
+\DeclareMathOperator{\Totaldim}{Totaldim}
+\DeclareMathOperator{\coim}{coim}
+\newcommand{\tit}{\textit}
+\newcommand{\trm}{\textrm}
+\newcommand{\tbf}{\textbf}
+\newcommand{\trmk}[1]{\textcolor{red}{#1}}  
+\newcommand{\mbf}{\mathbf}
+\newcommand{\mbb}{\mathbb}
+\newcommand{\mbbm}{\mathbbm}
+\newcommand{\mcal}{\mathcal}
+\newcommand{\mrm}{\mathrm}
+\newcommand{\msc}{\mathscr}
+\newcommand{\mitl}{\mathit}
+\newcommand{\mfrak}{\mathfrak}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\calA}{{\mathcal{A}}}
+\newcommand{\calB}{{\mathcal{B}}}
+\newcommand{\calC}{{\mathcal{C}}}
+\newcommand{\calD}{{\mathcal{D}}}
+\newcommand{\calE}{{\mathcal{E}}}
+\newcommand{\calF}{{\mathcal{F}}}
+\newcommand{\calG}{{\mathcal{G}}}
+\newcommand{\calH}{{\mathcal{H}}}
+\newcommand{\calI}{{\mathcal{I}}}
+\newcommand{\calJ}{{\mathcal{J}}}
+\newcommand{\calK}{{\mathcal{K}}}
+\newcommand{\calL}{{\mathcal{L}}}
+\newcommand{\calM}{{\mathcal{M}}}
+\newcommand{\calN}{{\mathcal{N}}}
+\newcommand{\calP}{{\mathcal{P}}}
+\newcommand{\calQ}{{\mathcal{Q}}}
+\newcommand{\calR}{{\mathcal{R}}}
+\newcommand{\calS}{{\mathcal{S}}}
+\newcommand{\calT}{{\mathcal{T}}}
+\newcommand{\calU}{{\mathcal{U}}}
+\newcommand{\calV}{{\mathcal{V}}}
+\newcommand{\calW}{{\mathcal{W}}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\Ga}{\Gamma}
+\newcommand{\del}{\delta}
+\newcommand{\Del}{\Delta}
+\renewcommand{\th}{\theta}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\epsi}{\varepsilon}
+\newcommand{\et}{\eta}
+\newcommand{\ka}{\kappa}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ro}{\rho}
+\newcommand{\sig}{\sigma}
+\newcommand{\Sig}{\Sigma}
+\newcommand{\si}{\sigma}
+\newcommand{\Si}{\Sigma}
+\newcommand{\ph}{\varphi}
+\newcommand{\vphi}{\varphi}
+\newcommand{\om}{\omega}
+\newcommand{\Om}{\Omega}
+\newcommand{\na}{\nabla}
+\newcommand{\ze}{\zeta}
+\newcommand{\tPsi}{{\widetilde{\Psi}}}
+\newcommand{\tilPhi}{\til{\Phi}}
+\newcommand{\T}{\mathbb T}
+\newcommand{\bH}{\mathbb{H} }
+\newcommand{\eset}{\emptyset}
+\newcommand{\sub}{\subset}
+\newcommand{\setm}{\setminus}
+\newcommand{\nin}{\notin}
+\newcommand{\bcup}{\bigcup}
+\newcommand{\bcap}{\bigcap}
+\newcommand{\union}[2]{\overset{#2}{\underset{#1}{\bigcup}}}
+\newcommand{\inter}[2]{\overset{#2}{\underset{#1}{\bigcap}}}
+\newcommand{\id}{\mathbbm 1}               
+\newcommand{\rest}[2]{#1\bigr\vert_{#2}}   
+\newcommand{\Lin}{\mathcal L}
+\newcommand{\ip}[1]{\langle {#1}\rangle}     
+\newcommand{\ten}{\otimes}              
+\newcommand{\pa}{\partial}
+\newcommand{\de}{\partial}
+\newcommand{\pd}[2]{\frac{\pa #1}{\pa #2}} 
+\renewcommand{\d}{d}
+\newcommand{\dx}{\d x}
+\newcommand{\dt}{\d t}
+\newcommand{\du}{\d u}
+\newcommand{\ds}{\d s}
+\newcommand{\ddt}{\frac{\d}{ \dt} }
+\newcommand{\ddtat}[1]{\left.\ddt \right|_{t=#1}}
+\newcommand{\at}[1]{\biggl. \biggr|_{#1} } % Evaluate at
+%\newcommand{\conv}{\longrightarrow}        % Limit %
+\newcommand{\xconv}{\xrightarrow}
+\newcommand{\convas}[1]{\xrightarrow[#1]{} }
+\newcommand{\nconv}{\nrightarrow}
+\newcommand{\const}{\equiv}
+\newcommand{\nconst}{\not \equiv}
+\newcommand{\we}{\wedge}
+\newcommand{\rv}{\mathrm{v}} % vector field
+
+\newcommand{\restr}{\big|}  % restricted to %
+
+% Limits %
+\newcommand{\limn}{\displaystyle \lim_{n \to \infty}}
+\newcommand{\limk}{\displaystyle \lim_{k \to \infty}}
+\newcommand{\convn}{\xrightarrow[n \to \infty]{}}
+\newcommand{\convk}{\xrightarrow[k \to \infty]{}}
+\newcommand{\convi}{\xrightarrow[i \to \infty]{}}
+\newcommand{\limx}[1]{\displaystyle\lim_{x \to #1}}
+\newcommand{\limt}[1]{\displaystyle \lim_{t \to #1}}
+\newcommand{\convx}[1]{\displaystyle \xrightarrow[x \to #1]{}}
+\newcommand{\convt}[1]{\displaystyle \xrightarrow[t \to #1]{}}
+
+% Convergence in norms %
+\newcommand{\Lpto}{\displaystyle \xrightarrow[L_p]{}}
+\newcommand{\Czto}{\displaystyle \xrightarrow[C_0]{}}
+
+
+% Symplectic stuff %
+\newcommand{\pois}[1]{\{#1\}} % Poisson brackets %
+\DeclareMathOperator{\sgrad}{sgrad}
+%\newcommand{\Ham}{\mrm{Ham}}
+\newcommand{\Symp}{\mrm{Symp}}
+\newcommand{\tCal}{\widetilde{\Cal}}
+\newcommand{\tHam}{\widetilde{\Ham}}
+
+
+\newcommand{\poisnm}[1]{\|\{#1\}\|} % Poisson bracket norm (not specified norm), not really in use.. %
+
+
+% Persistence stuff %
+\DeclareMathOperator{\Rips}{Rips}
+
+
+% Misc %
+\newcommand{\ol}{\overline}
+\newcommand{\til}{\tilde}
+\newcommand{\wtil}{\widetilde}
+\newcommand{\ul}{\underline}
+\newcommand{\imp}{\Rightarrow}
+\newcommand{\limp}{\Leftarrow}
+\newcommand{\disp}{\displaystyle}
+\newcommand{\spc}{\,,\,}
+\newcommand{\Spc}{\,,\,}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\trans}{\pitchfork}
+
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\Vect}{Vect}
+
+
+
+\def\ep{\epsilon}
+\def\k{{\bf k}}
+\def\d{d_{\rm Hofer}}
+\def\f{{\mathfrak{f}}}
+\def\g{{\mathfrak{g}}}
+\def\R{\mathbb{R}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+\def\F {\mathbb{F}} 
+\def\G{\mathcal{G}}
+\def\K{\mathcal{K}}
+\def\I{\mathbb{I}}
+\def\V{\mathbb{V}}
+\def\W{\mathbb{W}}
+\def\S{\mathcal{S}}
+\def\p{\mathfrak{p}}
+\def\ev{\mathbf{ev}}
+\def\CF{{\rm CF}}
+\def\HF{{\rm HF}}
+\def\SH{{\rm SH}}
+\def\HM{{\rm HM}}
+\def\Ham{{\rm Ham}}
+\def\SBM{{\rm SBM}}
+\def\RBM{{\rm RBM}}
+\def\CBM{{\rm CBM}}
+\def\sign{{\rm sign}}
+\def\Diff{{\rm Diff}}
+\def\Cont{{\rm Cont}}
+\def\coker{{\rm coker}}
+\def\Im{{\rm Im}}
+\newcommand{\Osc}{{\rm Osc}}
+
+
+%%%
+
+
+
+ \def \rk{{\mbox {rk}}\,}
+ \def \dim{{\mbox {dim}}\,}
+ \def \ex{\mbox{\rm ex}}
+ \def\df{\buildrel \rm def \over =}
+ \def\ind{{\mbox {ind}}\,}
+ \def\Vol{\mbox{Vol}}
+ \def\V{\mbox{Var}}
+ \newcommand{\comp}{\mbox{\tiny{o}}}
+ \newcommand{\QED}{{\hfill$\Box$\medskip}}
+
+
+% \def\Z{{\bf Z}}
+% \def\R\re
+% \def\V{\bf V}
+% \def\W{\bf W}
+% \def\f{\tilde{f}_{k}}
+% \def \e{\varepsilon}
+% \def \la{\lambda}
+% \def \vr{\varphi}
+% \def \R{{\bf R}}
+% \def \L{{\mathcal L}}
+
+% \def \re{{\mathbb R}}
+% \def \Q{{\mathbb Q}}
+% \def \cp{{\mathbb CP}}
+% \def \T{{\mathbb T}}
+% \def \C{{\bf C}}
+% \def \M{{\widetilde{M}}}
+% \def \I{{\mathbb I}}
+% \def \H{{\mathbb H}}
+% \def \lv{\left\vert}
+% \def \rv{\right\vert}
+% \def \ov{\overline}
+% \def \tx{{\widehat{x}}}
+% \def \0{\lambda_{0}}
+% \def \la{\lambda}
+% \def \ga{\gamma}
+% \def \de{\delta}
+% \def \x{\widetilde{x}}
+% \def \E{\mathbb{E}}
+% \def \y{\widetilde{y}}
+% \def \A{{\mathcal A}}
+% \def\h{{\rm h}_{\rm top}(g)}
+% \def\en{{\rm h}_{\rm top}}
+% \def\F{{\mathcal F}}
+\def\co{\colon\thinspace}
+
+\usepackage{ragged2e}  % `\justifying` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}       % `\url`s
+\usepackage{listings}  % Code listings
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+\usepackage{xfrac}
+
+
+\title{Caítulo 2: Códigos de Barras}
+\subtitle{Distancia del cuello de botella y Teorema de Isometría} %% that will be typeset on the
+\author{Haydeé Peruyero}
+\logo{
+%\includegraphics[width=2cm]{logo-IMUNAM.png}
+\includegraphics[width=2cm]{LOGO CCM-BLANCO.png}
+}
+
+\begin{document}
+
+\frenchspacing
+
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+  \frame{\maketitle}
+
+   \AtBeginSection[]{% Print an outline at the beginning of sections
+     \begin{frame}<beamer>
+       \frametitle{Contenidos}
+       \tableofcontents[currentsection]
+     \end{frame}}
+
+ %   \section{Motivación dinámica}
+%
+%    \subsection{Motivación}
+
+
+\begin{frame}{Definiciones}
+
+Dado un intervalo $I = (a,b]$, denotemos por $I^{-\delta} = (a-\delta, b+\delta]$ el intervalo obtenido de $I$ al expandirlo por $\delta$ en ambos lados. \\[0.2cm] \pause
+
+Sea $\calB$ un código de barras. Para $\epsi > 0$, denotemos por ${\calB}_\epsi$ el conjunto de todas las barras de $\calB$ de longitud mayor que $\epsi$. Estamos forzando a no considerar las barras pequeñas. \\[0.2cm] \pause
+
+Un {\color{green}\emph{emparejamiento (match)}} entre dos multi-conjuntos finitos $X,Y$ es una biyección $\mu : X' \to Y'$, donde $X' \subset X,\ Y' \subset Y$. En este caso, $X' = \coim \mu,\ Y' = \im \mu$, y decimos que los elementos de $X'$ y $Y'$ están {\color{green}\emph{emparejados (matched)}}. \pause 
+
+Si un elemento aparece en un multi-conjunto varias veces, debemos tratar sus copias diferentes por separado ya que solo algunas de estas podrían estar emparejadas. 
+
+\end{frame}
+
+
+\begin{frame}{\emph{$\delta$-emparejamiento} entre códigos de barras}
+    \textbf{Definición 2.2.1:} Un {\color{green}\emph{$\delta$-emparejamiento}} entre dos códigos de barras $\calB$ y $\calC$ es un emparejamiento $\mu : {\calB}\to {\calC}$, tal que:
+	\begin{enumerate}
+		\item
+			${\calB}_{2\delta} \subset \coim \mu$,
+		\item
+			${\calC}_{2\delta} \subset \im \mu$ ,
+		\item
+			Si $\mu (I) = J$, entonces $I \subset J^{-\delta},\ J \subset I^{-\delta}$. \\[0.4cm] \pause
+	\end{enumerate}
+
+ \textbf{Ejercicio 2.2.2} Si $\calB, \calC$ son \emph{$\delta$-emparejados} y si $\calC, \calD$ son $\gamma$-emparejados, entonces $\calB, \calD$ son $(\delta+\gamma)$-emparejados.
+\end{frame}
+
+\begin{frame}{Distancia de cuello de botella}
+    \textbf{Definición 2.2.3:} La {\color{green}\emph{distancia de cuello de botella}}, $d_{bot} (\calB, \calC)$, entre dos códigos de barras $\calB, \calC$ está definida como el ínfimo sobre todas las $\delta$ para los cuales existe un $\delta$-emparejamiento entre $\calB$ y $\calC$. \\[0.4cm] \pause
+
+    \textbf{Ejercicio 2.2.4:} Dos códigos de barras $\calB$ y $\calC$ están $\delta$-emparejados con un $\delta$ finito si y sólo si tienen el mismo número de rayos infinitos. \\[0.4cm] \pause
+
+    \textbf{Corolario 2.2.5:} La distancia de cuello de botella $d_{bot}$ es una distancia en el espacio de códigos de barras con la misma cantidad de rayos infinitos.
+
+\end{frame}
+
+\begin{frame}{Ejemplo}
+    Consideremos los módulos de persistencia $\F(a,b] \text{ y } \F(c,d]$ de los intervalos ($a,b,c,d\in \R$) y sus códigos de barras correspondientes $\calB =\{ (a,b] \}$ y $\calC = \{ (c,d] \}$. \\ \pause
+    
+	Entonces existe ya sea un $\delta$-emparejamiento vacío entre ellos para $\delta = \max \big( \frac{b-a}{2}, \frac{d-c}{2} \big)$ ( ya que entonces las longitudes de ambos intervalos no exceden $2\delta$), o un $\delta-$emparejamiento $(a,b] \to (c,d]$  para $\delta = \max (|a-c|, |b-d|)$. \\ \pause
+ 
+ Así, $d_{bot} (\calB, \calC ) \leq \min \Big( \max \big( \frac{b-a}{2}, \frac{d-c}{2} \big), \max (|a-c|, |b-d|) \Big)$.
+\end{frame}
+
+\begin{frame}{Teorema de Isometría}
+
+    \textbf{{\color{green}Teorema 2.2.8:}} La función $V \mapsto \calB (V)$ es una isometría, i.e.\ para cualquiera dos módulos de persistencia $V, W$, tenemos que:
+	$$
+		d_{int} (V,W) = d_{bot} (\calB (V), \calB(W)) \.
+	$$
+
+\pause 
+
+\textbf{Nota:} En el caso de que ambos $\calB (V)$ y $\calB (W)$ no tengan el mismo número de barras infinitas, entonces ambas distancias $d_{int} (V,W)$ y $d_{bot} (\calB, \calC )$ son infinitas por definición.\\[0.2cm] \pause
+
+\textbf{Ejercicio 2.2.10:} Probar que para cualesquiera dos códigos de barras $\calB$ y  $\calC$ tenemos que $d_{bot} (\calB, \calC) = 0$ si y sólo si $\calB = \calC$.\\
+Deducir que $d_{int} (V,W) = 0$ si y sólo si $V = W$.
+
+\end{frame}
+
+\end{document}
+

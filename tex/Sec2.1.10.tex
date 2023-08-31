@@ -1,0 +1,599 @@
+\documentclass{beamer}
+\setbeamertemplate{theorems}[numbered]
+\usecolortheme{dracula}
+\usepackage[utf8]{inputenc}
+\usepackage[
+  main=spanish
+]{babel}
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+
+\newcounter{Ejercicio}
+%\newcounter{Ejemplo}
+
+%\newtheorem{Theorem}{Teorema}[section]
+%\newtheorem{Lemma}[Theorem]{Lema}
+%\newtheorem{Corollary}[Theorem]{Corolario}
+%\newtheorem{Ejercicio}[Theorem]{Ejercicio}
+%
+%
+\newtheorem{Ejercicio}[theorem]{Ejercicio}%[count-ejercicio]
+
+\newtheorem{Ejemplo}{Ejemplo}
+
+%\newtheorem{Proposition}[Theorem]{Proposici\'on}
+%\newtheorem{Conjecture}[Theorem]{Conjecture}
+%\newtheorem{Definition}[Theorem]{Definici\'on}
+%\newtheorem{Example}[Theorem]{Ejemplo}
+%\newtheorem{Observation}[Theorem]{Observation}
+%\newtheorem{Remark}[Theorem]{Remark}
+
+%% Definiciones del libro:
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\rk}{rank} \DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\supp}{supp} \DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\cl}{cl}
+\DeclareMathOperator{\dv}{div} \DeclareMathOperator{\ind}{ind}
+\DeclareMathOperator{\dist}{dist} \DeclareMathOperator{\res}{res}
+\DeclareMathOperator{\codim}{codim} \DeclareMathOperator{\lk}{lk}
+\DeclareMathOperator{\intr}{int} \DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Hom}{Hom} \DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\End}{End} \DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Ind}{Ind} \DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\Var}{Var} \DeclareMathOperator{\Vol}{Vol}
+\DeclareMathOperator{\grph}{graph}
+\DeclareMathOperator{\Crit}{Crit}
+\DeclareMathOperator{\length}{length}
+\DeclareMathOperator{\Sp}{Sp} \DeclareMathOperator{\Cal}{Cal}
+\DeclareMathOperator{\rot}{rot} \DeclareMathOperator{\PSL}{PSL}
+\renewcommand{\sp}{\mathfrak{sp}} \DeclareMathOperator{\Area}{Area}
+\DeclareMathOperator{\CovDim}{CovDim} \DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\closure}{Closure}\DeclareMathOperator{\pb}{pb}
+\DeclareMathOperator{\CZ}{CZ} \DeclareMathOperator{\GW}{GW}
+\DeclareMathOperator{\Iamge}{Image}
+\DeclareMathOperator{\proj}{proj}
+\DeclareMathOperator{\spec}{spec}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\dis}{dis}
+\DeclareMathOperator{\Totaldim}{Totaldim}
+\DeclareMathOperator{\coim}{coim}
+\newcommand{\tit}{\textit}
+\newcommand{\trm}{\textrm}
+\newcommand{\tbf}{\textbf}
+\newcommand{\trmk}[1]{\textcolor{red}{#1}}  
+\newcommand{\mbf}{\mathbf}
+\newcommand{\mbb}{\mathbb}
+\newcommand{\mbbm}{\mathbbm}
+\newcommand{\mcal}{\mathcal}
+\newcommand{\mrm}{\mathrm}
+\newcommand{\msc}{\mathscr}
+\newcommand{\mitl}{\mathit}
+\newcommand{\mfrak}{\mathfrak}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\calA}{{\mathcal{A}}}
+\newcommand{\calB}{{\mathcal{B}}}
+\newcommand{\calC}{{\mathcal{C}}}
+\newcommand{\calD}{{\mathcal{D}}}
+\newcommand{\calE}{{\mathcal{E}}}
+\newcommand{\calF}{{\mathcal{F}}}
+\newcommand{\calG}{{\mathcal{G}}}
+\newcommand{\calH}{{\mathcal{H}}}
+\newcommand{\calI}{{\mathcal{I}}}
+\newcommand{\calJ}{{\mathcal{J}}}
+\newcommand{\calK}{{\mathcal{K}}}
+\newcommand{\calL}{{\mathcal{L}}}
+\newcommand{\calM}{{\mathcal{M}}}
+\newcommand{\calN}{{\mathcal{N}}}
+\newcommand{\calP}{{\mathcal{P}}}
+\newcommand{\calQ}{{\mathcal{Q}}}
+\newcommand{\calR}{{\mathcal{R}}}
+\newcommand{\calS}{{\mathcal{S}}}
+\newcommand{\calT}{{\mathcal{T}}}
+\newcommand{\calU}{{\mathcal{U}}}
+\newcommand{\calV}{{\mathcal{V}}}
+\newcommand{\calW}{{\mathcal{W}}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\Ga}{\Gamma}
+\newcommand{\del}{\delta}
+\newcommand{\Del}{\Delta}
+\renewcommand{\th}{\theta}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\epsi}{\varepsilon}
+\newcommand{\et}{\eta}
+\newcommand{\ka}{\kappa}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ro}{\rho}
+\newcommand{\sig}{\sigma}
+\newcommand{\Sig}{\Sigma}
+\newcommand{\si}{\sigma}
+\newcommand{\Si}{\Sigma}
+\newcommand{\ph}{\varphi}
+\newcommand{\vphi}{\varphi}
+\newcommand{\om}{\omega}
+\newcommand{\Om}{\Omega}
+\newcommand{\na}{\nabla}
+\newcommand{\ze}{\zeta}
+\newcommand{\tPsi}{{\widetilde{\Psi}}}
+\newcommand{\tilPhi}{\til{\Phi}}
+\newcommand{\T}{\mathbb T}
+\newcommand{\bH}{\mathbb{H} }
+\newcommand{\eset}{\emptyset}
+\newcommand{\sub}{\subset}
+\newcommand{\setm}{\setminus}
+\newcommand{\nin}{\notin}
+\newcommand{\bcup}{\bigcup}
+\newcommand{\bcap}{\bigcap}
+\newcommand{\union}[2]{\overset{#2}{\underset{#1}{\bigcup}}}
+\newcommand{\inter}[2]{\overset{#2}{\underset{#1}{\bigcap}}}
+\newcommand{\id}{\mathbbm 1}               
+\newcommand{\rest}[2]{#1\bigr\vert_{#2}}   
+\newcommand{\Lin}{\mathcal L}
+\newcommand{\ip}[1]{\langle {#1}\rangle}     
+\newcommand{\ten}{\otimes}              
+\newcommand{\pa}{\partial}
+\newcommand{\de}{\partial}
+\newcommand{\pd}[2]{\frac{\pa #1}{\pa #2}} 
+\renewcommand{\d}{d}
+\newcommand{\dx}{\d x}
+\newcommand{\dt}{\d t}
+\newcommand{\du}{\d u}
+\newcommand{\ds}{\d s}
+\newcommand{\ddt}{\frac{\d}{ \dt} }
+\newcommand{\ddtat}[1]{\left.\ddt \right|_{t=#1}}
+\newcommand{\at}[1]{\biggl. \biggr|_{#1} } % Evaluate at
+%\newcommand{\conv}{\longrightarrow}        % Limit %
+\newcommand{\xconv}{\xrightarrow}
+\newcommand{\convas}[1]{\xrightarrow[#1]{} }
+\newcommand{\nconv}{\nrightarrow}
+\newcommand{\const}{\equiv}
+\newcommand{\nconst}{\not \equiv}
+\newcommand{\we}{\wedge}
+\newcommand{\rv}{\mathrm{v}} % vector field
+
+\newcommand{\restr}{\big|}  % restricted to %
+
+% Limits %
+\newcommand{\limn}{\displaystyle \lim_{n \to \infty}}
+\newcommand{\limk}{\displaystyle \lim_{k \to \infty}}
+\newcommand{\convn}{\xrightarrow[n \to \infty]{}}
+\newcommand{\convk}{\xrightarrow[k \to \infty]{}}
+\newcommand{\convi}{\xrightarrow[i \to \infty]{}}
+\newcommand{\limx}[1]{\displaystyle\lim_{x \to #1}}
+\newcommand{\limt}[1]{\displaystyle \lim_{t \to #1}}
+\newcommand{\convx}[1]{\displaystyle \xrightarrow[x \to #1]{}}
+\newcommand{\convt}[1]{\displaystyle \xrightarrow[t \to #1]{}}
+
+% Convergence in norms %
+\newcommand{\Lpto}{\displaystyle \xrightarrow[L_p]{}}
+\newcommand{\Czto}{\displaystyle \xrightarrow[C_0]{}}
+
+
+% Symplectic stuff %
+\newcommand{\pois}[1]{\{#1\}} % Poisson brackets %
+\DeclareMathOperator{\sgrad}{sgrad}
+%\newcommand{\Ham}{\mrm{Ham}}
+\newcommand{\Symp}{\mrm{Symp}}
+\newcommand{\tCal}{\widetilde{\Cal}}
+\newcommand{\tHam}{\widetilde{\Ham}}
+
+
+\newcommand{\poisnm}[1]{\|\{#1\}\|} % Poisson bracket norm (not specified norm), not really in use.. %
+
+
+% Persistence stuff %
+\DeclareMathOperator{\Rips}{Rips}
+
+
+% Misc %
+\newcommand{\ol}{\overline}
+\newcommand{\til}{\tilde}
+\newcommand{\wtil}{\widetilde}
+\newcommand{\ul}{\underline}
+\newcommand{\imp}{\Rightarrow}
+\newcommand{\limp}{\Leftarrow}
+\newcommand{\disp}{\displaystyle}
+\newcommand{\spc}{\,,\,}
+\newcommand{\Spc}{\,,\,}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\trans}{\pitchfork}
+
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\Vect}{Vect}
+
+
+
+\def\ep{\epsilon}
+\def\k{{\bf k}}
+\def\d{d_{\rm Hofer}}
+\def\f{{\mathfrak{f}}}
+\def\g{{\mathfrak{g}}}
+\def\R{\mathbb{R}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+\def\F {\mathbb{F}} 
+\def\G{\mathcal{G}}
+\def\K{\mathcal{K}}
+\def\I{\mathbb{I}}
+\def\V{\mathbb{V}}
+\def\W{\mathbb{W}}
+\def\S{\mathcal{S}}
+\def\p{\mathfrak{p}}
+\def\ev{\mathbf{ev}}
+\def\CF{{\rm CF}}
+\def\HF{{\rm HF}}
+\def\SH{{\rm SH}}
+\def\HM{{\rm HM}}
+\def\Ham{{\rm Ham}}
+\def\SBM{{\rm SBM}}
+\def\RBM{{\rm RBM}}
+\def\CBM{{\rm CBM}}
+\def\sign{{\rm sign}}
+\def\Diff{{\rm Diff}}
+\def\Cont{{\rm Cont}}
+\def\coker{{\rm coker}}
+\def\Im{{\rm Im}}
+\newcommand{\Osc}{{\rm Osc}}
+
+
+%%%
+
+
+
+ \def \rk{{\mbox {rk}}\,}
+ \def \dim{{\mbox {dim}}\,}
+ \def \ex{\mbox{\rm ex}}
+ \def\df{\buildrel \rm def \over =}
+ \def\ind{{\mbox {ind}}\,}
+ \def\Vol{\mbox{Vol}}
+ \def\V{\mbox{Var}}
+ \newcommand{\comp}{\mbox{\tiny{o}}}
+ \newcommand{\QED}{{\hfill$\Box$\medskip}}
+
+
+% \def\Z{{\bf Z}}
+% \def\R\re
+% \def\V{\bf V}
+% \def\W{\bf W}
+% \def\f{\tilde{f}_{k}}
+% \def \e{\varepsilon}
+% \def \la{\lambda}
+% \def \vr{\varphi}
+% \def \R{{\bf R}}
+% \def \L{{\mathcal L}}
+
+% \def \re{{\mathbb R}}
+% \def \Q{{\mathbb Q}}
+% \def \cp{{\mathbb CP}}
+% \def \T{{\mathbb T}}
+% \def \C{{\bf C}}
+% \def \M{{\widetilde{M}}}
+% \def \I{{\mathbb I}}
+% \def \H{{\mathbb H}}
+% \def \lv{\left\vert}
+% \def \rv{\right\vert}
+% \def \ov{\overline}
+% \def \tx{{\widehat{x}}}
+% \def \0{\lambda_{0}}
+% \def \la{\lambda}
+% \def \ga{\gamma}
+% \def \de{\delta}
+% \def \x{\widetilde{x}}
+% \def \E{\mathbb{E}}
+% \def \y{\widetilde{y}}
+% \def \A{{\mathcal A}}
+% \def\h{{\rm h}_{\rm top}(g)}
+% \def\en{{\rm h}_{\rm top}}
+% \def\F{{\mathcal F}}
+\def\co{\colon\thinspace}
+
+\usepackage{ragged2e}  % `\justifying` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}       % `\url`s
+\usepackage{listings}  % Code listings
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+\usepackage{xfrac}
+
+
+\title{Caítulo 2: Códigos de Barras}
+\subtitle{Teorema de la Forma Normal} %% that will be typeset on the
+\author{Haydeé Peruyero}
+\logo{
+%\includegraphics[width=2cm]{logo-IMUNAM.png}
+\includegraphics[width=2cm]{LOGO CCM-BLANCO.png}
+}
+
+\begin{document}
+
+\frenchspacing
+
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+  \frame{\maketitle}
+
+   \AtBeginSection[]{% Print an outline at the beginning of sections
+     \begin{frame}<beamer>
+       \frametitle{Contenidos}
+       \tableofcontents[currentsection]
+     \end{frame}}
+
+ %   \section{Motivación dinámica}
+%
+%    \subsection{Motivación}
+
+
+\begin{frame}{Submódulos Semi-sobreyectivos}
+\textbf{{\color{green}Lema 2.1.10.}} Sea $W \subsetneq V$ un submódulo semi-sobreyetivo. Entonces existe un submódulo semi-sobreyectivo $W_{\sharp} \subset V$, tal que $W_\sharp \cong W\oplus \F(I)$, donde $I = (a,b]$ con $a,b\in \Spec V$.
+\pause
+\\[0.5cm]
+\textbf{Demostración:}
+
+Como $W \subseteq V$ es un submódulo semi-sobreyectivo, entonces por definición $W_t=V_t$ para $t\leq r$ hasta algún $r$, \pause además también $W^i = V^i$ hasta algún índice. \pause
+
+Tomemos el mínimo $i$ para el cual $W^i \subsetneq V^i$ y sea $z^i \in V^i \setm W^i$.
+
+\end{frame}
+
+
+\begin{frame}
+Si nos fijamos en los representantes en los módulos de persistencia, entonces el menor valor de $t$ para el cual $W_t \subsetneq V_t$ es $a_{i-1}$.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[scale=0.9]{img/SpecV_W-1.png}
+	\label{fig: spec_V_W}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Demostración}
+    Definamos $z^k = p_{i,k} (z^i) \in V^k$ para $k>i$. \pause Existen dos casos:
+\begin{enumerate}
+	\item
+		Para todo $k>i$, $z^k\notin W^k$. (Corresponde a tener un intervalo infinito $I$ que comienza en $a_{i-1}$.) \pause
+	\item
+		Existe algún $k>i$ para el cual $z^k$ cae en $W^k$.
+		(Corresponde a añadir el intervalo finito $I$.)\\[0.5cm]
+\end{enumerate}
+\pause 
+
+
+\textbf{Dem. Segundo caso:}
+Escojamos el mínimo $j > i$ para el cual $z^j \in W^j$.
+Como $p_{i,j} : W^i \to W^{j}$ es sobre, entonces existe $x^i \in W^i$ tal que 
+$p_{i,j} (z^i) = z^j = p_{i,j} (x^i)$. \pause 
+
+Definamos $y^i = z^i - x^i$. Vamos a usar $y^i$ en lugar de $z^i$:
+
+\end{frame}
+
+\begin{frame}{Dem. Segundo caso:}
+ 
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.6]{img/diagrama-lema2-10.png}
+    \label{fig:diagram-lema-210}
+\end{figure}
+
+Notemos que $p_{i,k}(y^i) \notin W^k$ para todo $i<k<j$ ( ya que como $j$ es el índice minimal después de $i$ para el cual $z^j$ está en $W^j$). \pause
+
+También, $p_{i,j} (y^i) = 0$, por linealidad de $p_{i,j}$, y así $p_{i,k} (y^i) = (p_{j,k} \circ p_{i,j}) (y^i) = 0$ para todo $k\geq j$). \pause Es decir, $y^j$ está donde $p_{i,j} (y^i)$ se desvanece por primera vez (y después de lo cual permanece siempre cero).
+
+
+\end{frame}
+
+
+\begin{frame}{Dem. Segundo caso:}
+    Denotemos $y^k = p_{i,k} (y^i)$.
+Vamos a construir el submódulo $P$ de $V$ con los siguientes datos: \pause para el elemento $y^k \in V^k$, el cual es una clase de equivalencia, tomaremos sus representantes $(y^k)_s \in V_s$ para $s\in  (a_{k-1}, a_{k}]$,  y construimos:
+$$
+P_s = \left\{
+	\begin{array}{ll}
+		\spn_{\F}((y^k)_s) 	& s \in (a_{k-1}, a_{k}] \subseteq (a_{i-1},a_{j-1}],\ k=i, \ldots, j-1 \\
+  		0  					& s \notin (a_{i-1}, a_{j-1}] 
+	\end{array}
+		\right. \;,
+$$
+\pause donde el morfismo de persistencia es inducido por los morfismos  $\pi^V_{s,t}$ de $V$, i.e.
+$$
+\pi^P_{s,t} = \left\{
+\begin{array}{ll}
+	\pi^V_{s,t}  	& s, t \in (a_{i-1}, a_{j-1}]  \\
+	0 				& \text{en caso contrario}
+\end{array}
+\right. \;.
+$$
+
+Entonces, $P = \{P_s\}$ es un submódulo de $V$ isomorfo a $\F (a_{i-1}, a_{j-1}]$.
+
+\end{frame}
+
+
+\begin{frame}{Dem. Segundo caso:}
+    \textbf{Afirmación 2.1.11:} 
+	Tomemos $W_{\sharp} = W + P$. Entonces:
+\begin{enumerate}
+	\item
+		$W_{\sharp} = W \oplus P$,
+	\item
+		$W_{\sharp}$ es un submódulo sobreyectivo de $V$.
+\end{enumerate}
+
+Esto concluye el segundo caso.
+
+\end{frame}
+
+\begin{frame}{Dem. Af. 2.1.11 (1):}
+PD: para cada $s\in \R$, $W_s \cap P_s = \{0\}$. \\[0.2cm ]\pause
+
+Notemos que si $s \notin (a_{i-1}, a_{j-1}]$, entonces $P_s = \{0\}$, y así $W_s \cap P_s = \{0\}$.\\[0.2cm] \pause
+
+Ahora, sea $s\in (a_{k-1}, a_{k}] \subset (a_{i-1}, a_{j-1}]$. \\
+
+PD: $V_s \ni (y^k)_s \notin W_s$.\\[0.2cm] \pause
+
+Por contradicción, supongamos que $(y^k)_s \in W_s$. \pause
+
+Tomemos $r = \sup \{ t\ :\ W_s=V_s \ \forall s\leq t \}$, como en la definición de semi-sobreyectivo de $W$ (notar: $r=a_{i-1}$). \pause
+
+Entonces para cada $r \leq a_{k-1} < t < s$ existe un elemento  $w_t \in W_t$ el cual satisface $\pi_{t,s} (w_t)=(y^k)_s$. \pause
+
+\end{frame}
+
+\begin{frame}{Dem. Af. 2.1.11 (1):}
+Considerar el elemento $\til w \in W^k$ cuyos representantes en cada $W_t$ son:
+$$
+	(\til w)_t = \left\{
+	\begin{array}{ll}
+	w_t  					& a_{k-1} < t < s  \\
+	(y^k)_s 	& t=s \\
+	\pi_{st} ((y^k)_s) & s < t \leq a_{k}
+	\end{array}
+	\right. \;.
+$$
+
+Notemos que $\tilde{w}$ está bien definido. En realidad, $\til w = y^k$, y así $y^k \in W^k$. \pause
+
+Pero esto nos contradice la minimalidad de $j$. Así, $(y^k)_s \notin W_s$ para todo $s\in (a_{i-1}, a_{j-1}]$.
+\end{frame}
+
+\begin{frame}{Dem. Af. 2.1.11 (2):}
+
+Notemos primero que $W_\sharp$ es un submódulo de $V$, ya que es una suma directa de dos submódulos de $V$. \\[0.2cm]\pause
+
+Denotemos por $\pi_{s,t}^{P}$ al morfismo de persistencia del módulo de persistencia $P = \F(a_i, a_j]$.\\[0.2cm]\pause
+
+Sea $r$ como en el inciso (1). Entonces por definición y usando el Ejercicio 2.1.9, para cualquier $t\leq r$ tenemos que $W_t = V_t$. \\ \pause
+
+Ya que para $t<r=a_{i-1}$ por construcción $P_t=0$, y además $(W_\sharp)_t=V_t$ para todo $t\leq r$.\\[0.2cm] \pause
+
+Después, notemos que los morfismos de persistencia de $W_{\sharp}$ se obtienen al tomar las sumas directas de los morfismos de $W$ y de $P$: $\pi_{s,t}^{W} \oplus \pi_{s,t}^{P}$. \pause
+
+Ambos morfismos son sobres para cualquier $t>s>r$, y por lo tanto sus sumas directas son sobres.    
+
+\end{frame}
+
+\begin{frame}{Dem. Primer caso:}
+\textbf{Primer caso: }$z^j \notin W^j$ para todo $j > i$:\\ \pause
+
+Debemos construir un submódulo $P$ usando $z^i$. \\
+\pause
+Vamos a tomar un submódulo $P$ que corresponda a $I = (a_{i-1}, +\infty)$  de la siguiente forma: 
+$$
+P_s = \left\{
+\begin{array}{ll}
+0  					& s \leq a_{i-1}  \\
+\spn_{\F}((z^k)_s) 	& s \in (a_{k-1}, a_{k}] \subseteq (a_{i-1}, +\infty),\ k= i, i+1, \ldots
+\end{array}
+\right. \;.
+$$
+
+\pause
+Entonces $W_{\sharp} = W \oplus P$ es un submódulo sobreyectivo de $V$ y $P = \{P_s\}$ es isomorfo a $\F (a_{i-1}, +\infty)$. 
+\end{frame}
+
+
+\begin{frame}{Teorema de la Forma Normal}
+    Sea $(V,\pi)$ un módulo de persistencia. Entonces existe una colección finita $\{ (I_i, m_i) \}_{i=1}^N$ de intervalos $I_i$ con sus multiplicidades $m_i$, donde $I_i=(a_i,b_i]$ o $I_i = (a_i, \infty)$, $m_i \in \N$, $I_i \neq I_j$ para $i\neq j$,
+	tal que
+	$$
+		V = \bigoplus_{i=1}^N \F(I_i)^{m_i} \;.
+	$$
+	\noindent
+
+La igualdad se refiere a son isomorfos como módulos de persistencia. 
+\noindent
+
+Más aún, estos datos son únicos hasta permutación, i.e., para cualquier módulo de persistencia le corresponde un único código de barras $\calB (V)$, que consiste de los intervalos $I_i$ con multiplicidad $m_i$. Este código de barras se llama \emph{el código de barras de $V$}.
+\end{frame}
+
+\begin{frame}{Demostración TFN: Existencia}
+Primero, la existencia se sigue del lema 2.1.10. \\[0.2cm] \pause
+    
+De echo, si tomamos $W(0)=\{0\}$ y construimos inductivamente una sucesión $W(i)$ de submódulos semi-sobreyectivos al tomar $W(i+1)=W(i)_{\sharp}$ como en el lema 2.1.10. En cada paso, la dimensión de $W(i)$ incrementa al menos por 1, y por lo tanto el proceso termina cuando se alcanza $\Totaldim V$.\\[0.2cm]
+	
+\end{frame}
+
+\begin{frame}{Demostración TFN: Unicidad}
+
+Por el ejercicio 2.1.5, tenemos que el espectro de un módulo de persistencia es un invariante bajo isomorfismo, entonces dado un módulo $V$, el conjunto $\Spec(V)$ determina los puntos finales de los intervalos $I$ que aparecen en su descomposición de la Forma Normal. \\[0.2cm] \pause
+
+Solo falta mostrar que dado $V$ es posible reconstruir las multiplicidades de los intervalos en la descomposición de forma única. \\[0.2cm] \pause
+
+Sea $\calB = \{ (I_i, m_i) \}$ un código de barras que satisface el Teorema 2.1.2 para $V$, es decir, $V = \bigoplus_i \F(I_i)^{m_i}$.\\[0.2cm] \pause
+	
+Consideremos todos sus puntos finales $a_1 < a_2 <\ldots < a_N < a_{N+1}=+\infty$ y notemos que $a_1, \ldots, a_{N+1}$ forma el espectro de $V$.
+\end{frame}
+
+\begin{frame}{Demostración TFN: Unicidad}
+Denotemos por $\hat \calB$ a la colección de todos los intervalos de la forma $I_{ij}=(a_i, a_j]$ para $1\leq i<j\leq N+1$, con multiplicidades $\hat m_{ij}$, donde $\hat m_{ij} = m_{ij}$ si $I_{ij}$ está presente en $\calB$ y es $0$ en caso contrario. \\[0.2cm] \pause
+
+Debemos recuperar las multiplicidades $m_{ij}$ que corresponden a $V$ para probar la unicidad. Consideremos el límite del módulo de persistencia ${V^i}$ con el morfismo natural $p_{i,j}: V^i \to V^j$.\\[0.2cm] \pause 
+
+Denotemos por $b_{ij} = \rk p_{i,j}$, y asumamos que $p_{i,j} = 0$ si $i\leq0$ o $j>N+1$.
+\end{frame}
+
+
+\begin{frame}{}
+Cada intervalo $I_{\alpha \beta}$ en $\hat \calB$ que comienza después de $a_i$ y termina antes o en $a_j$ contribuye $m_{\alpha \beta}$ a $b_{i,j}$, \pause así tenemos que 
+\begin{equation} \label{eq: b_ij_formula}
+    b_{ij} = \sum_{\alpha < i,\ \beta \geq j} m_{\alpha \beta} = \sum_{\alpha \leq i-1,\ \beta \geq j} m_{\alpha \beta} \;.
+\end{equation}
+\pause
+De esta expresión, obtenemos lo siguiente: para $m_{ij}$,
+	\begin{equation} \label{eq: m_ij_formula_from_ranks}
+		m_{ij} = b_{i+1,j} + b_{i,j+1} - b_{i,j} - b_{i+1,j+1} \;,
+	\end{equation}
+\pause
+Reconstruyendo así las multiplicidades a partir de los datos encapsulados en la colección $\{V^i\}$ que corresponden a $V$.
+\end{frame}
+
+\begin{frame}{Ejemplo de la Ecuación \ref{eq: m_ij_formula_from_ranks}}
+    Consideremos el módulo de persistencia $\F(a_1, +\infty)$. \pause 
+    
+    Entonces $\Spec \left( \F(a_1, +\infty) \right) = \{a_1, a_2=+\infty\} $, $V^1 = {0}$, $V^2 = \F$, y además tenemos 
+	$$
+		m_{12} = b_{22} + b_{13} - b_{23} - b_{12} = 1 \;.
+	$$
+ \pause
+Notar que solamente $b_{22} = 1$ es no cero en las expresiones de la forma $m_{12}$. 
+    \begin{figure}[!ht]
+		\centering
+		\includegraphics[scale=1]{img/infinite_bar_1-1.png}
+		\label{fig: one_infinite_bar_spec}
+	\end{figure}
+
+
+\end{frame}
+
+
+\begin{frame}{Ejercicios/Observaciones}
+    \begin{enumerate}
+        \item Sea $I$ un intervalo y consideremos el módulo $\F(I)$. Entonces el endomorfismo de anillos es isomorfo a $F$.
+        \pause 
+        \item Los módulos de intervalo son idecomposables, es decir, no se pueden presentar no trivialmente como una suma directa de dos diagramas de persistencia.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Prueba alternativa del TFN}
+    
+\end{frame}
+
+\end{document}
+
