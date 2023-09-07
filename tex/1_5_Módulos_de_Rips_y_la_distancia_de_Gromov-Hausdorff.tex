@@ -1,0 +1,542 @@
+\documentclass{beamer}
+\setbeamertemplate{theorems}[numbered]
+\usecolortheme{dracula}
+\usepackage[utf8]{inputenc}
+\usepackage[
+  main=spanish
+]{babel}
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+
+\newcounter{Ejercicio}
+%\newcounter{Ejemplo}
+
+%\newtheorem{Theorem}{Teorema}[section]
+%\newtheorem{Lemma}[Theorem]{Lema}
+%\newtheorem{Corollary}[Theorem]{Corolario}
+%\newtheorem{Ejercicio}[Theorem]{Ejercicio}
+%
+%
+\newtheorem{Ejercicio}[theorem]{Ejercicio}%[count-ejercicio]
+
+\newtheorem{Ejemplo}{Ejemplo}
+
+%\newtheorem{Proposition}[Theorem]{Proposici\'on}
+%\newtheorem{Conjecture}[Theorem]{Conjecture}
+%\newtheorem{Definition}[Theorem]{Definici\'on}
+%\newtheorem{Example}[Theorem]{Ejemplo}
+%\newtheorem{Observation}[Theorem]{Observation}
+%\newtheorem{Remark}[Theorem]{Remark}
+
+\def \rk{{\mbox {rk}}\,}
+\def \dim{{\mbox {dim}}\,}
+\def \ex{\mbox{\rm ex}}
+\def\df{\buildrel \rm def \over =}
+\def\ind{{\mbox {ind}}\,}
+\def\Vol{\mbox{Vol}}
+\def\V{\mbox{Var}}
+\newcommand{\comp}{\mbox{\tiny{o}}}
+\newcommand{\QED}{{\hfill$\Box$\medskip}}
+
+
+\def\Z{{\bf Z}}
+\def\R\re
+\def\V{\bf V}
+\def\W{\bf W}
+\def\f{\tilde{f}_{k}}
+\def \e{\varepsilon}
+\def \la{\lambda}
+\def \vr{\varphi}
+\def \R{{\bf R}}
+\def \L{{\mathcal L}}
+
+\def \re{{\mathbb R}}
+\def \Q{{\mathbb Q}}
+\def \cp{{\mathbb CP}}
+\def \T{{\mathbb T}}
+\def \C{{\bf C}}
+\def \M{{\widetilde{M}}}
+\def \I{{\mathbb I}}
+\def \H{{\mathbb H}}
+\def \lv{\left\vert}
+\def \rv{\right\vert}
+\def \ov{\overline}
+\def \tx{{\widehat{x}}}
+\def \0{\lambda_{0}}
+\def \la{\lambda}
+\def \ga{\gamma}
+\def \de{\delta}
+\def \x{\widetilde{x}}
+\def \E{\mathbb{E}}
+\def \y{\widetilde{y}}
+\def \A{{\mathcal A}}
+\def\h{{\rm h}_{\rm top}(g)}
+\def\en{{\rm h}_{\rm top}}
+\def\F{{\mathcal F}}
+\def\co{\colon\thinspace}
+
+\usepackage{ragged2e}  % `\justifying` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}       % `\url`s
+\usepackage{listings}  % Code listings
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+\usepackage{xfrac}
+
+
+\title{Seminario de Persistencia en Geometría 2024-1}
+\subtitle{1.5 Módulos de Rips y la distancia de Gromov-Hausdorff \\ 2.1 Teorema de la forma normal} %% that will be typeset on the
+\author{Miguel Evangelista}
+\logo{
+%\includegraphics[width=2cm]{logo-IMUNAM.png}
+\includegraphics[width=2cm]{LogoIMUNAM_Bco.png}
+}
+
+\begin{document}
+
+\frenchspacing
+
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+  \frame{\maketitle}
+
+  \AtBeginSection[]{% Print an outline at the beginning of sections
+    \begin{frame}<beamer>
+      \frametitle{Contenidos}
+      \tableofcontents[currentsection]
+    \end{frame}
+}
+
+\section{Módulos de Rips}
+% \section{La distancia de Gromov-Hausdorff}
+%
+%    \subsection{Motivación}
+
+\begin{frame}{Correspondencia Suprayectiva}
+
+    Consideremos a $X$ e $Y$ como conjuntos finitos
+    
+    \begin{block}{Definición:}
+        Una \textit{correspondencia suprayectiva} $C: X \rightrightarrows Y $ es un conjunto $C \subset X \times Y$ tal que $proy_{x}(C) = X$ y $proy_{y}(C) = Y$.
+    \end{block}
+    \pause
+
+    \begin{block}{Definición:}
+        La \textit{correspondencia inversa} $C^{T}: Y \rightrightarrows X$ es definida por el conjunto $C^{T}:=\{(y,x)\in Y \times X | (x,y) \in C \}$.
+    \end{block}
+    \pause
+
+    \begin{block}{Obs.}
+        $C$ es una correspondencia suprayectiva $\Leftrightarrow$ existen $f:X\to Y$ y $g:Y\to X$ tal que $graf(f) \subset C$ y $graf(g) \subset C^{T}$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Distorsión}
+    Sean $(X, \rho)$ y $(Y, r)$ espacios métricos finitos.
+    \begin{block}{Definición:}
+        La distorsión de una correspondencia suprayectiva $C: X \rightrightarrows Y$, está dada como 
+        $$dis(C) = max_{(x,y), (x^{'}, y^{'}) \in C}| \rho(x,x^{'}) - r(y, y^{'})|$$ 
+    \end{block}
+\end{frame}
+
+\begin{frame}{Distorsión}
+    Dada una función $f:X\to Y$, consideramos 
+    $$\hat{C}=\{(x, f(x))| x\in X\}\subset X\times Y.$$
+    \pause
+    
+    La distorsión de $\hat{C}$ está dada por: 
+    $$dis(C) = max_{x, x^{'} \in X} | \rho(x,x^{'}) - r(f(x), f(x^{'}))|$$ 
+    \pause
+
+    \begin{block}{Obs.}
+        $dis(C)=0$ $\Leftrightarrow$ $f$ es una isometría.
+    \end{block}    
+\end{frame}
+
+\begin{frame}{Distorsión}
+    La noción de distorsión nos permite introducir la siguiente noción de distancia.
+    \pause 
+
+    \begin{block}{Definición:}
+        La \textit{distancia de Gromov-Hausdorff} entre dos espacios métricos \textit{finitos} $(X, \rho)$ y $(Y, r)$ se define como
+
+        $$ d_{GH}((X, \rho), (Y, r)) = \frac{1}{2}min_{C}dis(C)$$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Complejo de Rips}
+    Consideramos un espacio métrico finito $(X, d)$. 
+
+    Se define el complejo simplicial $R_{\alpha}(X)$ de la siguiente manera: 
+    \begin{itemize}
+        \item los vértices de $R_{\alpha}(X)$ son los puntos del conjunto $X$, y  
+        \pause
+        \item los $k+1$ puntos en X determinan un $k-$ simplejo $\sigma = [x_{0},...,x_{k}]$ si $d(x_{i}, x_{j})< \alpha \qquad \forall i, j$
+    \end{itemize}
+    para $0 < \alpha\in \mathbf{R}$  
+\end{frame}
+
+\begin{frame}{Módulo de Rips}
+    \begin{block}{Obs.}
+        \begin{itemize}
+            \item El complejo de Rips está completamente determinado por su $1-$esqueleto, es de hecho, un complejo de bandera.
+
+            \pause
+            \item Para $0<\alpha\leq min_{x, y\in X, x\neq y}d(x, y)$ el complejo $R_{\alpha}(X)$ es una colección finita de puntos.
+        \end{itemize}
+        
+        %, mientras que para $\alpha > diam(X)$, $R_{\alpha}(X)$ es un complejo de dimensión  $|X|-1$. 
+    \end{block}
+\end{frame}
+
+\begin{frame}{Complejo de Rips}
+    Esta construcción se ilustra en la siguiente figura 
+    
+    \includegraphics[width=10cm]{rips_white}
+    
+\end{frame}
+
+\begin{frame}{Módulo de Rips}
+    Para $\alpha \neq \beta$ existe una función  simplicial \textit{natural}
+    $$i_{\alpha, \beta}: R_{\alpha}(X) \to R_{\beta}(X).$$ 
+    \pause
+    
+    Tomando $V_{\alpha}(X) = H_{\ast}(R_{\alpha}(X))$ y $\pi_{\alpha,\beta} = (i_{\alpha,\beta})_{\ast}$, obtenemos un módulo de persistencia, que denominamos módulo de Rips.
+    \pause
+    
+    \begin{block}{Obs.}
+        Los complejos de Rips fueron introducidos por primera vez por Vietoris.
+    \end{block}
+
+\end{frame}
+
+\begin{frame}{Módulo de Rips}
+    Para un espacio métrico finito $(X, \rho)$, consideremos su complejo de Rips $R_{t}(X)$ y el módulo de persistencia $H_{\ast}(R_{t}(X))$.
+    \pause
+
+    \begin{block}{Teo. 1.5.4}
+        $d_{GH}((X, \rho), (Y, r)) \geq \frac{1}{2} d_{int}(V(X, \rho), V(Y, r))$
+    \end{block}
+    \pause
+
+    \begin{block}{Bosquejo de la Dem.}
+        Tomemos una correspondencia suprayectiva $C: X \rightrightarrows Y$ y cualquier $\delta > dis(C)$.
+        \pause
+
+        Necesitamos mostrar que $V(X)$ y $V(Y)$ son $\delta$-entrelazados.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Módulo de Rips}
+    Escojemos $f: X \to Y$ tal que $graf(f)\subset C$
+    \newline
+    \pause
+    
+    Dado que $\delta \geq dis(C)$  se cumple $r(f(x), f(x')) < \rho(x, x')$, entonces $f$ induce una función simplicial $F: R_{t}(X) \to R_{t+\delta}(Y)$.
+    \newline
+    \pause
+    
+    Sea $F_{*}: V_{t}(X) \to V_{t+\delta}(Y)= (V(Y)[\delta])_{t}$ la función inducida sobre la homología. 
+\end{frame}
+
+\begin{frame}{Módulo de Rips}
+    De forma similar elegimos $g: Y \to X$ tal que $graf(g)\subset C^{T}$
+    \newline
+    \pause
+    
+    Obtenemos una función $G: R_{t}(Y) \to R_{t+\delta}(X)$.
+    \newline
+    \pause
+    
+    Que induce una función sobre la homología $G_{*}: V_{t}(Y) \to V_{t+\delta}(X)= (V(X)[\delta])_{t}$. 
+\end{frame}
+
+\begin{frame}{Módulo de Rips}
+    Afirmamos que $F_{*}$ y $G_{*}$ son $\delta$-entrelazados.
+    \newline
+
+    Para demostrar lo anterior debemos mostrar que el siguiemte diagrama conmuta
+
+     \includegraphics[width=8cm]{imagen_2.png}
+     
+    donde $i_{*}:R_{t}(X) \to R_{t+2\delta}(X)$ es la inclusión natural.
+\end{frame}
+
+\begin{frame}{Módulo de Rips}
+    Antes seguir con la demostración, necesitamos la siguiente definición:   
+    \newline 
+    
+    \begin{block}{Definición.}
+        Dos funciones simpliciales $H,H':K\to L$ con $K, L$ complejos simpliciales se dicen \textit{contiguos} si para caulquier simplejo $\sigma \in K$ se tiene que $H(\sigma) \cup H'(\sigma)$ es un simplejo en $L$.  
+    \end{block}
+    \pause 
+
+    \begin{block}{Obs. de la definción anterior}
+        Para dos mapas contiguos $H$ y $H'$ se tiene    que $H_{*} = H^{'}_{*}$ 
+        
+        Este resultado se puede consultar en \textit{James R. Munkres, Elements of algebraic topology (Teo 12.5).}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Módulo de Rips}
+    Queremos mostrar que $G\circ  F$ e $i$ son contiguas con funciones $R_{t}(X) \to R_{t + 2\delta}(Y)$.
+    \newline
+    \pause
+
+    Sea $[x_{0},...,x_{k}]\in R_{t}(X)$ un simplejo. 
+    \newline
+    \pause
+    
+    Se quiere mostrar que $[gf(x_{0}), ..., gf(x_{k}), x_{0},..., x_{k}]\in R_{t+2\delta}(X)$ es un simplejo.
+\end{frame}
+
+\begin{frame}{Módulo de Rips}
+    Por definición de distorción de $C$ tenemos que para cualquier $x,x' \in X$ e $y,y'\in Y$ que cumplan con que $(x,y)$ y $(x',y') \in C$ se tiene que 
+    \pause
+
+    $$|\rho(x, x') - r(y,y')| \leq dist(C) < \delta$$
+    \pause
+    
+    Entonces para todo $0\leq i, j \leq k$
+    \pause
+    
+    \begin{align*}
+    \rho(gf(x_{i}), x_{j}) & < r(f(x_{i}), f(x_{j})) + \delta\\
+    & < \rho(x, x') + 2\delta\\
+    & < t + 2\delta
+    \end{align*}
+\end{frame}
+
+\begin{frame}{Módulo de Rips}
+    La desigualdad $\rho(gf(x_{i}), x_{j}) < r(f(x_{i}), f(x_{j})) + \delta$ se cumple, ya que $(gf(x_{i}), f(x_{i}))$ y $(x_{j}, f(x_{j}))$ están en $C$ para todo $i,j$.
+    \newline
+    \pause
+    
+    La desigualdad $r(f(x_{i}), f(x_{j})) + \delta < \rho(x, x') + 2\delta$, se debe del mismo modo que la anterior a que  $(x_{i}, f(x_{i}))$ y $(x_{j}, f(x_{j})) \in C$ para toda $i,j$.
+    \newline
+    \pause
+
+    Por último, la desigualdad $\rho(x, x') + 2\delta < t + 2\delta$, se deduce de la definición de $R_{t}(X)$. 
+\end{frame}
+
+\begin{frame}{Módulo de Rips}
+    De una forma análoga, se tiene que 
+    \pause
+    
+    \begin{align*}
+    \rho(gf(x_{i}), gf(x_{j})) & < r(f(x_{i}), f(x_{j})) + \delta\\
+    & < t + 2\delta
+    \end{align*}
+    \pause
+
+    Por lo cual, se concluye que $G\circ F$ e $i$ con contiguas. De esto mismo se deduce que $f_{*}$ y $G_{*}$ son $\delta$-entrelazados como se quería probar desde el principio.
+    \hfill $\blacksquare$ \par \bigskip
+\end{frame}
+
+\begin{frame}{Módulo de Rips}    
+    La demostración completa se puede consultar en
+    \newline
+    \pause
+    
+    \textit{Frédéric Chazal, Vin de Silva, and Steve Y. Oudot, Persistence stability for geometric complexes, Geom. Dedicata 173 (2014), 193–214, DOI 10.1007/s10711-013-9937-z. MR3275299} 
+\end{frame}
+
+\section{Códigos de barras}
+\begin{frame}{Códigos de barras}
+    A lo largo del capítulo 2, lo más destacado es el \textit{Teorema de la Forma Normal}, que permite a clasificar los módulos de persistencia mediante objetos combinatorios llamados \textit{códigos de barras}.
+\end{frame}
+
+\begin{frame}{Códigos de barras}
+    \begin{block}{Definición}
+        Un código de barras de tipo finito $\textyen$ es un multiconjunto finito de intervalos, es decir, es una colección finita $\{(I_{i} , m_{i})\}_{i\in I}$ de intervalos $I_i$ con multiplicidades $m_i\in N$. 
+    \end{block}
+    \pause
+    
+    \begin{block}{Obs.}
+    A lo largo de este seminario, consideramos los intervalos $I_i$ de la forma $(a, b]$ o de la forma $(a, \infty)$. Los intervalos de un código de barras se denominan barras.
+    \end{block}
+    
+\end{frame}
+
+\section{Teorema de la forma normal}
+\begin{frame}{Teorema de la forma normal}
+    Sea $(V, \pi)$ un módulo de persistencia.
+    
+    \begin{block}{Teo. (De la forma normal)}
+         Existe una colección finita $\{(I_{i} , m_{i})\}_{i\in I}$ de intervalos $I_{i}$ con multiplicidades $m_{i} \in \mathbb{N}$, donde $I_{i}\neq I_{j}$ para $i \neq j$ tales que 
+         $$V = \bigoplus_{i=1}^{N} \mathbb{F}(I_i)^{m_i}$$
+    \end{block}
+    \pause
+    
+    \begin{itemize}
+        \item Por igualdad, se entiende que son isomorfos como módulos de persistencia. Además, estos datos son únicos salvo permutaciones.
+        \pause
+        
+        \item A cualquier módulo de persistencia le corresponde un código de barras único $\textyen(V)$. Este código de barras se llamará código de barras de $V$.
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Teorema de la forma normal}
+    Breve reseña histórica acerca del Teorema de la forma normal.
+
+    \begin{itemize}
+        \item En 1994 el teorema fue demostrado por 
+        S. Barannikov en el trabajo \textit{The framed Morse complex and its invariants, Singularities and bifurcations}.
+        \pause
+
+        \item En el mismo trabajo mencionado en el punto anterior, fueron introducidos los diagramas de \textit{nacimiento-muerte}. (Este teme se abordará a detalle en la sección 6.2)
+         
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Teorema de la forma normal}
+    
+    \begin{itemize}    
+        \item Zomorodian y Carlsson en 2005 en su trabajo \textit{Computing persistent homology}. Dan un enfoque diferente a los módulos de persistencia.
+        \pause
+        
+        \item En dicho trabajo, los módulos de persistencia sobre $F$ se parametrizan mediante $\mathbb{Z}_{\geq 0}$, es decir, $V=\bigoplus_{i\geq 0}V_{i}$ y los mapas de estructura son composiciones consecutivas de los datos iniciales $\{\phi_{i}:V_{i}\to V_{i+1}\}_{i\geq 0}$.
+        \pause
+
+        \item Debido a un teorema de correspondencia (Teorema 3.1 en \textit{Computing persistent homology}), cualquier módulo de persistencia $V$ (de tipo finito) puede identificarse con un módulo finitamente generado sobre $\mathbb{F}[t]$, donde $t\cdot (v_0 , v_1 ,.. .) = (0, \phi_{0}(v_0), \phi_{1}(v1 ),.. .)$.
+        
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Teorema de la forma normal}
+    \begin{block}{Definición}
+        Un punto $t\in\mathbb{R}$ se llama espectral para un módulo de persistencia $(V, \pi)$, si para cualquier vecindad $t\in U$, existe $s < r$ en $U$, tal que $\pi_{s,r}: V_s\to V_r$ no es un isomorfismo. 
+    \end{block}
+    \pause 
+
+    Denotamos por $Spec(V) = Spec(V, \pi)$ al conjunto de puntos espectrales de $(V, \pi)$.
+    %junto con $+\infty (a\~{n}adido de forma intencial).
+    A este conjunto lo llamaremos espectro de $V$. Omitiremos $\pi$ salvo ambig\"uedad.
+    \pause
+
+    \begin{block}{Obs}
+        Por la condición (2) de la definición 1.1.1 (Módulo de \\
+        persistencia de tipo finito), $Spec(V)$ es un \\ conjunto finito.
+     \end{block}
+     
+\end{frame}
+
+\begin{frame}{Teorema de la forma normal}
+    Sea $(V, \pi)$ un módulo de persistencia y $Spec(V)= \{a_{1},...,a_{N} \}\cup\{+\infty\}$ su espectro, donde $a_1 < ... < a_N < a_{N+1} = +\infty$. También establecemos $a_{0} = -\infty$ para tener notaciones más agradables.
+    % pero advertimos al lector que no se considera un punto espectral.
+    \pause 
+    
+    \includegraphics[width=10cm]{bar_code}
+
+\end{frame}
+
+\begin{frame}{Teorema de la forma normal}
+
+    Denotemos por $Q_{i} = (a_{i-1}, a_{i}]$ para $1 \leq i \leq N$ y $Q_{N+1} = (a_{N}, + \infty)$ los intervalos definidos por $a_{i}$ adyacentes.
+    \pause
+     
+     Para cualquier $i\in \{1,..., N+1 \}$, definimos el espacio vectorial límite $V^{i}$ considerando el límite directo de $\{ V_{s} \}$ para $s \in Q_{i}$.
+     \pause
+
+     $$V^{i}= \coprod_{s\in Q_{i}} V_{s}/\sim$$
+    \pause
+
+     donde $V_{s} \ni v_{s} \sim v_{t} \in V_{t}$ para todo $s < t$ si $\pi_{s,t}(v_{s})=v_{t}$.
+\end{frame}
+
+\begin{frame}{Teorema de la forma normal}
+
+    Observe que $V^{i}$ es isomorfo a $V_{a_{i}}$, ya que $\pi_{s,t}$ son isomorfismos para cualquier $s,t \in Q_{i}$. 
+    \pause
+
+    Dotamos la colección $\{V^{i}\}$ con los morfismos $p_{i,j}:V^{i}\to V^{j}$ para $i\leq j$ inducidos por $\pi_{s,t}$.
+    \pause
+
+    Denotamos $$TotalDim(V) = \Sigma_{i} dim(V_{i}).$$
+
+\end{frame}
+
+\begin{frame}{Teorema de la forma normal}
+    Sea $W \subset V$ un submódulo de persistencia (como en la Definición 1.2.4)
+    \pause 
+
+    \begin{block}{Definición}
+        Diremos que un submódulo $W$ de $V$ es semi suprayectivo si existe $r\in\mathbb{R}$ tal que
+        \begin{itemize}
+            \item (a) $W_t = V_t$ para todo $t \leq r$, 
+             \item (b) $\pi_{s,t} : W_s \to W_t$ es sobre  si $r < s < t$.
+        \end{itemize}
+    \end{block}
+    \pause 
+
+     \begin{block}{Ejemplo}
+        $\mathbb{F}(0, \infty)$ es un submódulo semi suprayectivo de \\
+        $\mathbb{F}(0, \infty) \oplus \mathbb{F}(1, 2]$.
+    \end{block}
+    \pause 
+    
+\end{frame}
+
+\begin{frame}{Teorema de la forma normal}
+    Codificamos los submódulos semisuprayectivos $W$ de $V$ por los datos $W^i \subset V^i$ , con $i = 1,...,N + 1$ según los intervalos $Q_i$ (que se asociaron al espectro de $V$). 
+    \pause
+
+    \begin{block}{Obs.}
+    Notemos que como $a_i$ no necesita ser un punto espectral de $W$, por tal razón $p_{i,i+1} : W_i \to W_{i+1}$ puede ser un isomorfismo.
+    \end{block}
+
+\end{frame}
+
+
+\begin{frame}{Teorema de la forma normal}
+    \begin{block}{Ejemplo.}
+    En la siguiente figura, el $i$ más pequeño para el que $W^{i} \nsubseteq V^{i}$ es $i = 5$ y $r=a_{4}$
+    \end{block}
+    \pause
+
+    \includegraphics[width=10cm]{bar_code_2.png}
+
+\end{frame}
+
+\section{Ejercicios}
+\begin{frame}{Ejercicios}
+    \begin{itemize}
+        \item (Ejercicio 1.5.3) Demostrar que $d_{GH}$ es una distancia entre clases de isometría de espacios métricos finitos.
+        
+        \item (Ejercicio 2.1.4) Supongamos que $s,t$ pertenecen a la misma componente conexa de $\mathbb{R} Spec(V)$. Demostrar que $\pi_{s,t} : V_{s} \to V_{t}$ es un isomorfismo.
+        \pause 
+
+        \item (Ejercicio 2.1.5) Demuestre que $Spec(V)$ es un isomorfismo invariante de módulos de persistencia.
+        \pause 
+
+        
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Ejercicios}
+    \begin{itemize}
+        \item (Ejercicio 2.1.6) Hallar el espectro de la suma directa $\bigoplus_{i=1}^{N} \mathbb{F}(I_i)^{m_i}$, donde $(I_{i} , m_{i})$ están definidos como en el Teorema 2.1.2.
+        \pause
+        
+        \item (Ejercicio 2.1.9) Sea $W \subset V$ un submódulo semisurjetivo. Demuestre que 
+            \begin{itemize}
+                \item $Spec(W) \subset Spec(V)$ y $TotalDim(W) \leq TotalDim(V)$,
+
+                \item $r:=sup\{t : W_s = V_s \forall s \leq t \} \in Spec(V)$. Dicha $r$ satisface las condiciones de la definición 2.1.7.
+            \end{itemize} 
+    \end{itemize}
+
+\end{frame}
+
+\end{document}
+ 
