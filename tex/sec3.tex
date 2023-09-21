@@ -1,0 +1,336 @@
+\documentclass{beamer}
+\setbeamertemplate{theorems}[numbered]
+\usecolortheme{dracula}
+\usepackage[utf8]{inputenc}
+\usepackage[
+  main=spanish
+]{babel}
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{bm}
+\usepackage{graphicx}
+
+\newcounter{Ejercicio}
+%\newcounter{Ejemplo}
+
+%\newtheorem{Theorem}{Teorema}[section]
+%\newtheorem{Lemma}[Theorem]{Lema}
+%\newtheorem{Corollary}[Theorem]{Corolario}
+%\newtheorem{Ejercicio}[Theorem]{Ejercicio}
+%
+%
+\newtheorem{Ejercicio}[theorem]{Ejercicio}%[count-ejercicio]
+
+\newtheorem{Ejemplo}{Ejemplo}
+
+%\newtheorem{Proposition}[Theorem]{Proposici\'on}
+%\newtheorem{Conjecture}[Theorem]{Conjecture}
+%\newtheorem{Definition}[Theorem]{Definici\'on}
+%\newtheorem{Example}[Theorem]{Ejemplo}
+%\newtheorem{Observation}[Theorem]{Observation}
+%\newtheorem{Remark}[Theorem]{Remark}
+
+\def \rk{{\mbox {rk}}\,}
+\def \dim{{\mbox {dim}}\,}
+\def \ex{\mbox{\rm ex}}
+\def\df{\buildrel \rm def \over =}
+\def\ind{{\mbox {ind}}\,}
+\def\Vol{\mbox{Vol}}
+\def\V{\mbox{Var}}
+\newcommand{\comp}{\mbox{\tiny{o}}}
+\newcommand{\QED}{{\hfill$\Box$\medskip}}
+\newcommand\norm[1]{\lVert#1\rVert}
+\newcommand{\calB}{{\mathcal{B}}}
+\newcommand{\calC}{{\mathcal{C}}}
+\DeclareMathOperator{\coim}{coim}
+\DeclareMathOperator{\im}{im}
+\newcommand{\restr}{\big|}  % restricted to %
+
+
+\def\dint{\operatorname{d}_{\operatorname{int}}}
+\def\dbot{\operatorname{d}_{\operatorname{bot}}}
+\def\Z{{\bf Z}}
+\def\R\re
+\def\V{\bf V}
+\def\W{\bf W}
+\def\f{\tilde{f}_{k}}
+\def \e{\varepsilon}
+\def \la{\lambda}
+\def \vr{\varphi}
+\def \R{{\bf R}}
+\def \L{{\mathcal L}}
+
+\def \FF{{\mathbb F}}
+\def \re{{\mathbb R}}
+\def \Q{{\mathbb Q}}
+\def \cp{{\mathbb CP}}
+\def \T{{\mathbb T}}
+\def \C{{\bf C}}
+\def \M{{\widetilde{M}}}
+\def \I{{\mathbb I}}
+\def \H{{\mathbb H}}
+\def \lv{\left\vert}
+\def \rv{\right\vert}
+\def \ov{\overline}
+\def \tx{{\widehat{x}}}
+\def \0{\lambda_{0}}
+\def \la{\lambda}
+\def \ga{\gamma}
+\def \de{\delta}
+\def \x{\widetilde{x}}
+\def \E{\mathbb{E}}
+\def \y{\widetilde{y}}
+\def \A{{\mathcal A}}
+\def\h{{\rm h}_{\rm top}(g)}
+\def\en{{\rm h}_{\rm top}}
+\def\F{{\mathcal F}}
+\def\co{\colon\thinspace}
+
+\usepackage{ragged2e}  % `\justifying` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}       % `\url`s
+\usepackage{listings}  % Code listings
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+\usepackage{xfrac}
+\usepackage{tikz-cd}
+
+
+\title{Seminario Persistencia en Geometría 2024-I}
+\subtitle{Secciones 3.2.4-3.2.11} 
+\author{Miguel Ángel Maurin García de la Vega}
+\logo{
+\includegraphics[width=1cm]{LogoIMUNAM_Bco.png}
+}
+
+\begin{document}
+
+\frenchspacing
+
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+  \frame{\maketitle}
+
+  \AtBeginSection[]{% Print an outline at the beginning of sections
+    \begin{frame}<beamer>
+      \frametitle{Contenidos}
+      \tableofcontents[currentsection]
+    \end{frame}}
+
+    \section{Recapitulación}
+
+    \begin{frame}{Teorema de Isometría}
+
+En el espacio de módulos de persistencia definimos la distancia de $\delta$-entrelazamiento.
+\pause
+Luego, el Teorema de la Forma Normal (2.1.2) nos permitió asociar a cualquier módulo de persistencia un código de barras. 
+\pause
+En el espacio de códigos de barras definimos la distancia cuello de botella.
+\pause
+El teorema de la Isometría establece una relación entre todos estos conceptos:
+ 
+\begin{block}{Teorema 2.2.8:}
+El mapa \(V \mapsto \mathcal{B}(V)\) es una isometría:
+
+\[\dint(V,W) = \dbot(\mathcal{B}(V),\mathcal{B}(W))\]
+\end{block}
+\end{frame}
+    
+\begin{frame}{Estrategia Demostración Isometría}
+
+El objetivo de la Sección 3 es demostrar este teorema. Al tratarse de una igualdad, hay que demostrar dos desigualdades: 
+\pause
+
+\begin{enumerate}
+  \item \(\dint(V,W) \leq \dbot(\mathcal{B}(V),\mathcal{B}(W))\)
+  \pause
+  \item \(\dint(V,W) \geq \dbot(\mathcal{B}(V),\mathcal{B}(W))\)
+\end{enumerate}
+\pause
+La primera desigualdad (Teorema 3.1.1) es consecuencia del Teorema de la forma Normal y del hecho que si dos intervalos están $\delta$-emparejados, entonces, sus módulos de persistencia están $\delta$-entrelazados. (Ejercicio 2.2.7)
+\pause
+Queremos probar la segunda desigualdad (Teorema 3.1.2) llamada también Teorema de Estabilidad Algebraica.
+\end{frame}
+
+
+\begin{frame}{Estrategia Demostración Estabilidad Algebraica}
+De manera análoga a la primera demostración, queremos probar que dados dos módulos de persistencia $\delta$-entrelazados, es posible construir un $\delta$-emparejamiento entre sus códigos de barras.
+\pause
+Haremos esto en dos pasos: Primero, hay que encontrar una manera de asociar un emparejamiento a cualquier morfismo entre módulos de persistencia. Es decir, inducir emparejamientos. 
+\pause
+Segundo, veremos que tal construcción al ser aplicada a morfismos de $\delta$-entrelazamiento produce $\delta$-emparejamientos.\\ 
+\pause
+El resto de esta presentación está centrado en la construcción del primer paso. 
+\end{frame}
+
+\section{3.2.2 Construcción de Emparejamientos Inducidos}
+\begin{frame}{Proposición 3.2.1}
+
+En lo siguiente, consideramos \((V,\pi)\) y \((W,\theta)\) módulos de persistencia, con correspondientes códigos de barras \(\mathcal{B}\) y \(\mathcal{C}\).
+\pause
+
+Antes de empezar la construcción, recordemos un resultado que obtuvimos anteriormente. 
+\pause
+
+Si \(\mathcal{B}\) es un código de barras e \(I=(b,d]\) un intervalo, denotamos por \(\mathcal{B}^-_I\subset\mathcal{B}\) a la colección de barras \((a,d]\in\mathcal{B}\) con \(a\leq b\). Así:
+
+\begin{block}{Proposición 3.2.1:}
+Si \(\iota:(V,\pi)\to(W,\theta)\) es injectivo, entonces, \(\#\mathcal{B}^-_I\leq\#\mathcal{C}^-_I\)
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Emparejamiento para morfismos inyectivos}
+
+Primero, construiremos emparejamientos inducidos por morfismos para los casos particulares de morfismos inyectivos y suprayectivos. Después, combinaremos estos resultados para morfismos en general.
+\pause
+Para el caso de morfismos inyectivos tenemos:
+\pause
+
+\begin{block}{Definición 3.2.4}
+Supongamos que $\iota: V \to W$ es \textbf{inyectivo}.
+	Definimos el \emph{emparejamiento inducido} $\mu_{inj} : \calB \to \calC$ de la siguiente manera: Para cada $d\in \R \cup \{\infty\}$, ordenamos la barras de $\calB$ de la forma $(\cdot, d]$ siguiendo el orden de ``más largas primero":
+	$$
+	(b_1, d] \supset (b_2, d] \supset \ldots \supset (b_k, d] \ \text{ en $\calB$, con } b_1\leq b_2 \leq \ldots \leq b_k \;,
+	$$
+ \pause
+	de manera similar para $\calC$:
+	$$
+	(c_1, d] \supset (c_2, d] \supset \ldots \supset (c_l, d] \ \text{ en $\calC$, con } c_1\leq c_2 \leq \ldots \leq c_l \;.
+	$$	
+ \pause
+ Notamos que por (3.2.1) debe ser $k\leq l$.
+ \end{block}
+ \end{frame}
+	\begin{frame}{Emparejamiento para morfismos inyectivos}
+	    
+	\begin{block}{Cont. Def. 3.2.4}
+	Ahora, emparejamos las barras siguiendo el orden de ``más largas primero". Es decir, en cada paso, tomamos el intervalo más largo de la primera lista y lo emparejamos con el más largo de la segunda.
+ \pause
+	Repetimos para toda $d \in \R \cup \{\infty\}$ y obtenemos un emparejamiento $\mu_{inj} : \calB \to \calC$.
+\end{block}
+\end{frame}
+
+\begin{frame}{Emparejamiento para morfismos inyectivos}
+\begin{block}{Proposición 3.2.5}
+		Si hay un morfismo inyectivo de $(V, \pi)$ a $(W, \theta)$, entonces, el emparejamiento inducido $\mu_{inj}: \calB \to \calC$ cumple:
+	\begin{enumerate}[(1)]
+		\item
+			$\coim \mu_{inj} = \calB$,
+   \pause
+		\item
+			Para todo $(b,d] \in \calB$, $\mu_{inj} (b,d] = (c,d]$ con $c\leq b$.
+	\end{enumerate}	
+\end{block}
+\pause
+\begin{block}{Observación 3.2.6}
+    El emparejamiento inducido no depende del morfismo $\iota$, solo del supuesto de existencia de un morfismo inyectivo. 
+\end{block}
+\end{frame}
+
+\begin{frame}{Emparejamiento para morfismos inyectivos}
+\begin{block}{Demostración}
+Ambas propiedades son consecuencia de la proposición 3.2.1
+\pause
+\begin{enumerate}[(1)]
+		\item
+			Como emparejamos ``más largas primero", tenemos que $\mu (b_i,d] = (c_i, d]$. Para el intervalo $(b_k,d]$, sabemos que $k\leq l$, por lo que todas las barras de $\cal B$ están emparejadas.
+   \pause
+		\item
+			 Para los intervalos $(b_i, d]$, aplicando inductivamente la proposición, tenemos que $b_i \leq c_i$ para cada $1\leq i\leq k$.
+	\end{enumerate}
+		
+\end{block}
+\end{frame}
+\begin{frame}{Emparejamiento para morfismos suprayectivos}
+
+Ahora, consideraremos el caso de un morfismo suprayectivo. Tenemos una construcción y propiedades análogas.
+\pause
+
+
+\begin{block}{Definición 3.2.7}
+Supongamos que $\sigma: V \to W$ es \textbf{suprayectivo}.
+	Definimos el \emph{emparejamiento inducido} $\mu_{sur}: \calB \to \calC$ como sigue:
+	Para cada $b\in \R$, ordenamos los intervalos $(b, \cdot] \in \calB$ de manera decreciente:
+	$$
+	(b, d_1] \supset (b, d_2] \supset \ldots \supset (b, d_k] \ \text{ en $\calB$, con } d_1\geq d_2 \geq \ldots \geq d_k \;,
+	$$
+	
+ \pause
+	de manera similar para $\calC$:
+	$$
+	(b, e_1] \supset (b, e_2] \supset \ldots \supset (b, e_l] \ \text{ en $\calC$, con } e_1\geq e_2 \geq \ldots \geq e_l \;.
+	$$
+\pause
+Los emparejamos siguiendo el principio de ``más largas primero'' y ensamblamos estos emparejamientos para toda $b$.
+
+ \end{block}
+ \end{frame}
+
+
+\begin{frame}{Emparejamiento para morfismos suprayectivos}
+\begin{block}{Proposición 3.2.8}
+		Si hay un morfismo suprayectivo de $(V, \pi)$ a $(W, \theta)$, entonces, el emparejamiento inducido $\mu_{sur}: \calB \to \calC$ cumple:
+	\begin{enumerate}[(1)]
+		\item
+			$\im \mu_{sur} = \calC$,
+   \pause
+		\item
+			$\mu_{inj} (b,d] = (b,e]$ con $d\geq e$.
+	\end{enumerate}	
+\end{block}
+\pause
+La demostración es análoga a la anterior considerando ahora la proposición 3.2.3 (\(\#\mathcal{B}^+_I\geq\#\mathcal{C}^+_I\))
+\end{frame}
+
+\begin{frame}{Emparejamiento para morfismo general}
+Para cualquier morfismo \(f: V \to W\) podemos considerar la siguiente descomposición: 
+\begin{center}
+\includegraphics[scale=0.65]{index.png}
+\end{center}
+\pause
+Usando las proposiciones 3.2.8 y 3.2.5 al tener estos morfismos podemos construir los emparejamientos inducidos $\mu_{sur}: \calB(V) \to \calB(\im f)$ y
+	$\mu_{inj}: \calB(\im f)\to \calB(W)$. Los cuales nos permiten dar la siguiente definición:
+ \pause
+ \begin{block}{Definición 3.2.9}
+Para un morfismo general $f$, definimos el \emph{emparejamiento inducido} $\mu(f) : \calB (V) \to \calB (W)$ como la composición
+	$\mu(f) = \mu_{inj} \circ \mu_{sur}$,
+ la cual esta definida ya que $\im \mu_{sur} = \calB (\im f) = \coim (\mu_{inj})$.
+ \end{block}
+
+\end{frame}
+
+
+
+\section{Ejemplo 3.2.11}
+\begin{frame}{Ejemplo 3.2.11}
+
+Consideramos $V = \F (1,3] \oplus \F (1,2]$ y $W = \F (3,4] \oplus \F (0,2]$, sea $f: V \to W$ un morfismo definido como
+	$f\restr_{\F(1,3]} = 0$ y
+	$f \restr_{\F(1,2]} : \F(1,2] \to \F(0,2]$ (multiplicación por 1)
+	
+	Entonces, $\im f = 0 \oplus \F(1,2] \subset \F(3,4] \oplus \F(0,2]$. 
+ \pause
+ \begin{center}
+\includegraphics[scale=0.35]{ej3211.png}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Ejemplo 3.2.11}
+
+Así, $\mu_{sur} : (1,3] \mapsto (1,2]$, $\mu_{inj} (1,2] \mapsto (0,2]$.
+	Entonces, el emparejamiento inducido $\mu(f): \calB(V) \to \calB(W)$ lleva a $\mu (f) : (1,3] \mapsto (0,2]$, apesar que $f \restr_{\F(1,3]} = 0$.
+\end{frame}
+
+
+
+\end{document}
+
