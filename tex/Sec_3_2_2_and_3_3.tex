@@ -1,0 +1,379 @@
+\documentclass{beamer}
+\setbeamertemplate{theorems}[numbered]
+\usecolortheme{dracula}
+\usepackage[utf8]{inputenc}
+\usepackage[
+  main=spanish
+]{babel}
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+
+\newcounter{Ejercicio}
+%\newcounter{Ejemplo}
+
+%\newtheorem{Theorem}{Teorema}[section]
+%\newtheorem{Lemma}[Theorem]{Lema}
+%\newtheorem{Corollary}[Theorem]{Corolario}
+%\newtheorem{Ejercicio}[Theorem]{Ejercicio}
+%
+%
+\newtheorem{Ejercicio}[theorem]{Ejercicio}%[count-ejercicio]
+
+\newtheorem{Ejemplo}{Ejemplo}
+
+%\newtheorem{Proposition}[Theorem]{Proposici\'on}
+%\newtheorem{Conjecture}[Theorem]{Conjecture}
+%\newtheorem{Definition}[Theorem]{Definici\'on}
+%\newtheorem{Example}[Theorem]{Ejemplo}
+%\newtheorem{Observation}[Theorem]{Observation}
+%\newtheorem{Remark}[Theorem]{Remark}
+
+\def \rk{{\mbox {rk}}\,}
+\def \dim{{\mbox {dim}}\,}
+\def \ex{\mbox{\rm ex}}
+\def\df{\buildrel \rm def \over =}
+\def\ind{{\mbox {ind}}\,}
+\def\Vol{\mbox{Vol}}
+\def\V{\mbox{Var}}
+\newcommand{\comp}{\mbox{\tiny{o}}}
+\newcommand{\QED}{{\hfill$\Box$\medskip}}
+
+
+\def\Z{{\bf Z}}
+\def\R\re
+\def\V{\bf V}
+\def\W{\bf W}
+\def\f{\tilde{f}_{k}}
+\def \e{\varepsilon}
+\def \la{\lambda}
+\def \vr{\varphi}
+\def \R{{\bf R}}
+\def \L{{\mathcal L}}
+
+\def \re{{\mathbb R}}
+\def \Q{{\mathbb Q}}
+\def \cp{{\mathbb CP}}
+\def \T{{\mathbb T}}
+\def \C{{\bf C}}
+\def \M{{\widetilde{M}}}
+\def \I{{\mathbb I}}
+\def \H{{\mathbb H}}
+\def \lv{\left\vert}
+\def \rv{\right\vert}
+\def \ov{\overline}
+\def \tx{{\widehat{x}}}
+\def \0{\lambda_{0}}
+\def \la{\lambda}
+\def \ga{\gamma}
+\def \de{\delta}
+\def \x{\widetilde{x}}
+\def \E{\mathbb{E}}
+\def \y{\widetilde{y}}
+\def \A{{\mathcal A}}
+\def\h{{\rm h}_{\rm top}(g)}
+\def\en{{\rm h}_{\rm top}}
+\def\F{{\mathcal F}}
+\def\co{\colon\thinspace}
+
+\usepackage{ragged2e}  % `\justifying` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}       % `\url`s
+\usepackage{listings}  % Code listings
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+\usepackage{xfrac}
+
+
+\title{Seminario de Persistencia en Geometría 2024-1}
+\subtitle{3.2.2. Construcción de emparejamientos inducidos. \\ 3.3. Principales lemas y demostración del teorema.} %% that will be typeset on the
+\author{Miguel Evangelista}
+\logo{
+%\includegraphics[width=2cm]{logo-IMUNAM.png}
+\includegraphics[width=2cm]{LogoIMUNAM_Bco.png}
+}
+
+\begin{document}
+
+\frenchspacing
+
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+  \frame{\maketitle}
+
+  \AtBeginSection[]{% Print an outline at the beginning of sections
+    \begin{frame}<beamer>
+      \frametitle{Contenidos}
+      \tableofcontents[currentsection]
+    \end{frame}
+}
+
+\section{Construcción de emparejamientos inducidos (Continuación)}
+
+% \section{La distancia de Gromov-Hausdorff}
+%
+%    \subsection{Motivación}
+
+\begin{frame}{Correspondencia Suprayectiva}
+    Consideremos la categoría de los códigos de barras con las correspondencias como morfismos.
+    \newline
+    \pause
+    
+    Anteriormente, se estableció una correspondencia entre los objetos de la categoría de módulos de persistencia y los de la categoría de códigos de barras.
+    
+    %Es decir, un módulo de persistencia se corresponde con su código de barras, V ( V ). 
+
+\end{frame}
+
+\begin{frame}{Correspondencia Suprayectiva}    
+    Sean $V$ y $W$ dos modulos de persistencia.
+    \newline
+    \pause
+    
+    Dado un morfismo $f:V\to W$, se tiene que existe  una correspondencia $\mu(f)$ entre $\mathcal{B}(V)$ y $\mathcal{B}(W)$. 
+    \newline 
+    \pause
+    
+    Surge la siguiente duda: ¿El mapeo $\mu(f)$ da un functor entre las dos categorías?
+
+\end{frame}
+
+\subsection{Ejemplo}
+\begin{frame}{Ejemplo}
+    Consideremos el siguiente ejemplo:
+    \begin{block}{Ejemplo}
+        Sea $I$ un intervalo y consideremos los siguientes módulos de persistencia
+        $$U = V = \mathbb{F}(I) \otimes \mathbb{F}(I), \textit{   } W = \mathbb{F}(I),$$
+
+        y dos morfismos $f:U\to V$ y $g:V \to W$ dados por $f(s, t)=(s, 0)$ y $g(s, t) = t$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Ejemplo}
+    Notemos lo siguiente:
+    \begin{itemize}
+        \item $\mu(f)$ empareja una copia de $I$ con una copia de $I$ en $\mathcal{B}(V)$ y la segunda copia permanece sin emparejar.
+        \item $\mu(g)$ empareja una copia de $I$ con $I$ en $\mathcal{B}(W)$
+    \end{itemize}
+    \pause
+
+    Entonces, $\mu(g)\circ \mu(f)$ empareja una copia de $I$ con $I$ en $\mathcal{B}(W)$ y la segunda queda sin emparejar. 
+    \newline
+    \pause
+
+    Por otro lado también se tiene que $g\circ f=0$.
+\end{frame}
+
+\begin{frame}{Ejemplo}
+    Ahora notemos lo siguiente:
+    \newline
+    \pause 
+
+    Si restringimos los morfismos entre módulos de persistencia de tal manera que sólo estemos en el caso inyectivo o supreyectivo.  
+    \newline
+    \pause
+    
+    El mapeo que lleva un módulo de persistencia $V$ a su código de barras $\mathcal{B}(V)$ y un morfismo $f:V\to W$ a la correspondencia inducida ($\mu_{inj}$ ó $\mu_{sur}$) es un functor, tal y como se indica en la afirmación 3.2.13.
+    
+\end{frame}
+
+\subsection{Afirmación 3.2.13}
+\begin{frame}{Afirmación 3.2.13}
+    \begin{block}{Afirmación 3.2.13}
+        Consideremos el siguiente diagrama conmutativo en la categoría de módulos de persistencia con sólo el caso inyectivo o suprayectivo. 
+    \end{block}
+    \pause
+    
+    \includegraphics[width=7cm]{image_6}
+    \pause
+    
+    Entonces el diagrama correspondiente a nivel de códigos de barras también conmuta:
+    \pause
+
+    \includegraphics[width=7cm]{image_9}
+    \pause
+    
+    donde $\mu_{q}$ denota $\mu_{inj}$ o $\mu_{sur}$, respectivamente.
+\end{frame}
+
+
+\begin{frame}{Afirmación 3.2.13}
+    Demostramos la functorialidad en el caso de inyectividad
+    \newline
+    \pause 
+    
+    Para comenzar la demostración debemos recordar la definición 3.2.4 y la proposición 3.2.1. 
+    \newline
+    \pause
+    
+    \begin{block}{Dem (de la Afirmación 3.2.13)}
+        Para cualquier $d \in \mathbb{R}\cup \{+\infty\}$, los códigos de barras correspondientes a $U, V, W$ consisten en las siguientes barras que terminan en $d$:
+    \end{block}
+\end{frame}
+
+\begin{frame}{Afirmación 3.2.13}
+    \begin{align*} 
+        \mathcal{B}(U) &: (a_{1},d] \supseteq \ldots \supseteq (a_{k},d]\\
+        \mathcal{B}(V) &: (b_{1},d] \supseteq \ldots \supseteq (b_{k},d] \supseteq \ldots \supseteq (b_{l},d]\\
+        \mathcal{B}(W) &: (c_{1},d] \supseteq \ldots \supseteq (c_{k},d] \supseteq \ldots \supseteq (c_{l},d] \supseteq \ldots \supseteq (c_{q},d]\\
+    \end{align*}
+    donde $k \leq l \leq q$. 
+\end{frame}
+
+\begin{frame}{Afirmación 3.2.13}
+    Además, $\mu_{inj}(f)(a_{i},d]=(b_{i},d]$, $\mu_{inj}(g)(b_{i},d]=(c_{i},d]$ y $\mu_{inj}(h)(a_{i},d]=(c_{i},d]$ para cualquier $1\leq  i \leq k$.
+    \newline
+    \pause
+
+    Esto es válido para cualquier $d$, por lo que la diagrama en el nivel de los códigos de barras conmuta.
+\end{frame}
+
+\section{Principales lemas y demostración del teorema.}
+\subsection{Introducción}
+\begin{frame}{Introducción}
+    Supongamos que $(V,\pi^{V})$ y $(W,\pi^{W})$ son $\delta-$ intercalados.
+    \newline
+    \pause
+    
+    Lo anterior quiere decir, que existen dos morfismos $f:V \to W [\delta]$ y $g : W \to V [\delta]$, tales que $g[\delta] \circ f = \Phi^{ 2\delta}_{V}$ y $f[\delta] \circ g = \Phi^{2\delta}_{W}$, donde $\Phi^{2\delta}_{V} = \pi^{V}_{t,t+2\delta}$ y $\Phi_{W}^{2\delta}=\pi^{W}_{t,t+2\delta}$. 
+    \newline 
+    \pause
+    
+    El objetivo principal es construir una $\delta$-correspondencia entre $\mathcal{B}(V)$ y $\mathcal{B}(W)$.
+    \newline
+    \pause
+
+    Recordemos la notación $\mathcal{B}_{\epsilon}$ indica la colección de barras de longitud $> \epsilon$ en un código de barras $\mathcal{B}$.
+    
+\end{frame}
+
+\subsection{Lema 3.3.1}
+\begin{frame}{Lema 3.3.1}
+    \begin{block}{Lema 3.3.1}
+        Supongamos que tenemos dos módulos de persistencia $\delta-$entrelazados $(V, \pi^V)$ y $(W, \pi^W)$, es decir, existen morfismos $f:V \to W[\delta]$ y $g : W \to V[\delta]$. 
+        \newline
+        \pause
+
+        Consideremos un mapeo suprayectivo $f:V\to im(f)$  y el emparejamiento inducido $\mu_{sur}:\mathcal{B}(V) \to \mathcal{B}(im (f))$\footnote{Recordemos la Definición 3.2.7}, Entonces:
+        \newline
+        \pause
+
+        \begin{itemize}
+            \item $coim \mu_{sur} \supseteq \mathcal{B}(V)_{2\delta}$
+            \item $im \mu_{sur} = \mathcal{B}(im(f))$, y
+            \item $\mu_{sur}$ lleva $(b, d] \in coim \mu_{sur}$ a $(b,d']$, \\
+            con $d' \in [d - 2\delta, d]$.
+        \end{itemize}
+    \end{block}
+
+\end{frame}
+
+\subsection{Lema 3.3.2}
+\begin{frame}{Lema 3.3.2}
+    \begin{block}{Lema 3.3.2}
+        Supongamos que tenemos dos módulos de persistencia $\delta-$entrelazados $(V, \pi^V)$ y $(W, \pi^W)$, es decir, existen morfismos $f:V \to W[\delta]$ y $g : W \to V[\delta]$. 
+        \newline
+        \pause
+
+        Consideremos el apeo inyectivo $im(f)\to W[\delta]$ y el emparejamiento inducido $\mu_{inj}:\mathcal{B}(im (f)) \to \mathcal{B}(W[\delta])$\footnote{Recordemos la Definición 3.2.4}, Entonces:
+        \newline
+        \pause
+
+        \begin{itemize}
+            \item $coim \mu_{inj} = \mathcal{B}(im (f))$
+            \item $im \mu_{inj} \supseteq \mathcal{B}(W[\delta])_{2\delta}$, y
+            \item $\mu_{inj}$ lleva $(b, d'] \in coim \mu_{inj}$ a $(b',d']$, \\
+            con $b' \in [b - 2\delta, b]$.
+        \end{itemize}
+    \end{block}
+
+    Los lemas 3.3.1 y 3.3.2 se prueban en la sección 3.4. 
+\end{frame}
+
+\subsection{Teo 3.1.2}
+\begin{frame}{Teo 3.1.2}
+    \begin{block}{Teo 3.1.2}
+        Sean $V$ y $W$ dos módulos de persistencia y sus respectivos códigos de barras $\mathcal{B}(V)$ y $\mathcal{B}(V)$. Entonces $$d_{int}(V,W) \geq d_{bot}(B(V),B(W)).$$ 
+
+    \end{block}
+\end{frame}
+
+\subsection{Demo del Teo 3.1.2}
+\begin{frame}{Demostración del Teo 3.1.2}
+    \begin{block}{Demostración del Teo 3.1.2}
+        Consideremos:
+        \begin{itemize}
+            \item El emparejamiento inducido $\mu(f) = \mu_{inj}\circ\mu_{sur}$, y
+            \pause
+            
+            \item la función $\Psi_{\delta}: \mathcal{B}(W[\delta])\to \mathcal{B}(W)$ definido para todas las barras como $(a, b]\to(a+\delta,b+\delta]$.
+        \end{itemize}
+        \pause
+        
+        Notemos que $\Psi_{\delta}$ desplaza cada barra a la derecha en $\delta$ 
+        \pause
+        
+        Afirmamos que $\Psi_{\delta}\circ\mu(f)$ es un $\delta-$entrelazamiento entre $\mathcal{B}(V)$ y $\mathcal{B}(W)$. 
+
+    \end{block}
+\end{frame}
+
+\begin{frame}{Demostración del Teo 3.1.2}
+    \begin{block}{Demostración del Teo 3.1.2}
+        Utilizando el Lema 3.3.1 y Lema 3.3.2, obtenemos el siguiente diagrama: 
+        \pause
+        
+        \includegraphics[width=9cm]{image_10}
+        
+        
+    \end{block}
+\end{frame}
+
+\begin{frame}{Demostración del Teo 3.1.2}
+    \begin{block}{Demostración del Teo 3.1.2}
+        Por el Lema $3.3.2$, se tiene que una barra $(b, d] \in \mathcal{B}(V)_{2\delta}$ se lleva a $\mu_{sur}(b, d]=(b, d']\in \mathcal{B}(im (f))$, donde $d - 2\delta \leq d' \leq d$. 
+        \newline
+        \pause
+        
+        Entonces, dicha barra se lleva a $\mu_{inj} (b, d'] = (b',d'] \in \mathcal{B}(W[\delta])_{2\delta}$, donde $b - 2\delta \leq b' \leq b$, por el Lema $3.3.1$. 
+        \newline 
+        \pause
+        
+        Por último, $(b', d']$ se desplaza a la derecha en $\delta$, es decir, se lleva a $(b + \delta, d' + \delta]$ mediante $\Psi_{\delta}$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Demostración del Teo 3.1.2}
+    \begin{block}{Demostración del Teo 3.1.2}
+        En particular, se tiene que toda barra en $\mathcal{B}(V)_{2\delta}$ 
+        % (es decir, una barra "suficientemente larga") 
+        es de hecho emparejada por $\mu(f)$.
+        \newline
+        \pause
+        
+        De una forma análoga, se puede comprobar que toda barra en $\mathcal{B}(W)_{2\delta}$ coincide.
+    \end{block}
+\end{frame}
+
+
+\begin{frame}{Demostración del Teo 3.1.2}
+    \begin{block}{Demostración del Teo 3.1.2}
+        Además, a partir de la información sobre $b'$ y $d'$ obtenemos lo siguiente:
+        \newline
+        \pause
+        \includegraphics[width=9cm]{image_13}
+        \pause
+        Por lo que $\Psi_{\delta}\circ\mu(f)$ es una $\delta-$emparejamiento entre $\mathcal{B}(V)$ y $\mathcal{B}(W)$. Por lo tanto, 
+        \newline 
+        \pause
+        $$d_{bot}(\mathcal{B}(V), \mathcal{B}(W)) \leq d_{int}(V, W ).$$
+        $\hfill\square$
+    \end{block}
+\end{frame}
+\end{document}
+ 
