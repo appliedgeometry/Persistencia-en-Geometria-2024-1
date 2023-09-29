@@ -1,0 +1,383 @@
+\documentclass{beamer}
+\setbeamertemplate{theorems}[numbered]
+\usecolortheme{dracula}
+\usepackage[utf8]{inputenc}
+\usepackage[
+  main=spanish
+]{babel}
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+%\usefonttheme[onlymath]{serif}
+
+\newcounter{Ejercicio}
+%\newcounter{Ejemplo}
+
+%\newtheorem{Theorem}{Teorema}[section]
+%\newtheorem{Lemma}[Theorem]{Lema}
+%\newtheorem{Corollary}[Theorem]{Corolario}
+%\newtheorem{Ejercicio}[Theorem]{Ejercicio}
+%
+%
+\newtheorem{Ejercicio}[theorem]{Ejercicio}%[count-ejercicio]
+
+\newtheorem{Ejemplo}{Ejemplo}
+
+%\newtheorem{Proposition}[Theorem]{Proposici\'on}
+%\newtheorem{Conjecture}[Theorem]{Conjecture}
+%\newtheorem{Definition}[Theorem]{Definici\'on}
+%\newtheorem{Example}[Theorem]{Ejemplo}
+%\newtheorem{Observation}[Theorem]{Observation}
+%\newtheorem{Remark}[Theorem]{Remark}
+\def\matching{apareamiento}
+\def\matched{apareados}
+
+\def \rk{{\mbox {rk}}\,}
+\def \dim{{\mbox {dim}}\,}
+\def \ex{\mbox{\rm ex}}
+\def\df{\buildrel \rm def \over =}
+\def\ind{{\mbox {ind}}\,}
+\def\Vol{\mbox{Vol}}
+\def\V{\mbox{Var}}
+\newcommand{\comp}{\mbox{\tiny{o}}}
+\newcommand{\QED}{{\hfill$\Box$\medskip}}
+
+
+\def\Z{{\bf Z}}
+\def\R\re
+\def\V{\bf V}
+\def\W{\bf W}
+\def\f{\tilde{f}_{k}}
+\def \e{\varepsilon}
+\def \la{\lambda}
+\def \vr{\varphi}
+\def \R{{\bf R}}
+\def \L{{\mathcal L}}
+
+\def \re{{\mathbb R}}
+\def \Q{{\mathbb Q}}
+\def \cp{{\mathbb CP}}
+\def \T{{\mathbb T}}
+\def \C{{\bf C}}
+\def \M{{\widetilde{M}}}
+\def \I{{\mathbb I}}
+\def \H{{\mathbb H}}
+\def \lv{\left\vert}
+\def \rv{\right\vert}
+\def \ov{\overline}
+\def \tx{{\widehat{x}}}
+\def \0{\lambda_{0}}
+\def \la{\lambda}
+\def \ga{\gamma}
+\def \de{\delta}
+\def \x{\widetilde{x}}
+\def \E{\mathbb{E}}
+\def \y{\widetilde{y}}
+\def \A{{\mathcal A}}
+\def\h{{\rm h}_{\rm top}(g)}
+\def\en{{\rm h}_{\rm top}}
+\def\F{{\mathcal F}}
+\def\co{\colon\thinspace}
+
+\usepackage{ragged2e}  % `\justifying` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}       % `\url`s
+\usepackage{listings}  % Code listings
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+\usepackage{xfrac}
+
+
+\title{Parte I: Cap\'itulo 2}
+\subtitle{2.2 Distancia de Cuello de Botella y Teorema de Isometr\'ia \scalebox{0.6}{\emph{(Bottleneck distance and the Isometry Theorem)}}\\ 2.3 Corolario: Teoremas de Estabilidad\\ \scalebox{0.6}{\emph{(Corolary: Stability Theorems)}}\\ 2.4 M\'odulos de Persistencia de tipo localmente finito\\ \scalebox{0.6}{\emph{(Persistence modules of locally finite type)}}} 
+\author{Eduardo Vel\'azquez}
+\logo{
+%\includegraphics[width=2cm]{logo-IMUNAM.png}
+\includegraphics[scale=0.1]{cimat-logo-w.png}
+}
+
+\begin{document}
+
+\frenchspacing
+
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+  \frame{\maketitle}
+
+  %\AtBeginSection[]{% Print an outline at the beginning of sections
+    %\begin{frame}<beamer>
+    %  \frametitle{Contenidos}
+    %  \tableofcontents[currentsection]
+    %\end{frame}}
+
+    %\section{Motivación dinámica}
+%
+%    \subsection{Motivación}
+
+\begin{frame}{2.2 Distancia de Cuello de Botella y Teorema de Isometr\'ia}
+\centering
+\begin{minipage}{0.2\textwidth}
+Motivaci\'on:
+\end{minipage}\begin{minipage}{0.7\textwidth}
+Definir una distancia entre c\'odigos de barras.
+\end{minipage}\\
+\vspace{1em}
+\begin{itemize}
+\item Sea $I=(a,b]$ y $\delta>0$, denotaremos
+\begin{gather*}
+I^{-\delta}:=(a-\delta,b+\delta]\,.
+\end{gather*} 
+\item Sea $\mathcal{B}$ un c\'odigo de barras y $\varepsilon>0$,
+\begin{gather*}
+\mathcal{B}_{\varepsilon}\, :\, \mbox{el conjunto de barras de longitud mayor a}\,\,\varepsilon\,.
+\end{gather*}
+\item Sean $X,\,Y$ multiconjuntos, y $X^\prime\subset X,\, Y^\prime\subset Y\,$. Un {\bfseries \matching} es una biyecci\'on $\mu:X^\prime \rightarrow Y^\prime$ y decimos que $X^\prime$ y $Y^\prime$ est\'an {\bfseries \matched}.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\begin{block}{\textbf{Definici\'on 2.2.1}}
+Un $\delta-${\bfseries \matching}~ entre dos c\'odigos de barras $\mathcal{B}$ y $\mathcal{C}$ es un \matching~ $\mu:\mathcal{B}\rightarrow\mathcal{C}$ tal que:
+\begin{itemize}
+\item $\mathcal{B}_{2\delta}\subset \mbox{coim}\,\mu\,$,
+\item $\mathcal{C}_{2\delta}\subset \mbox{im}\,\mu\,$,
+\item Si $\mu\left(I\right)\Rightarrow I\subset J^{-\delta}$ y $J\subset I^{-\delta}\,$.
+\end{itemize}
+\end{block}
+\vspace{1em}
+\centering
+\begin{minipage}{0.7\textwidth}
+Ejercicio 2.2.2\\
+Sean $\mathcal{B}$, $\mathcal{C}$, $\mathcal{D}$ c\'odigos de barras tales que $\mathcal{B}$ y $\mathcal{C}$ est\'an $\delta-$\matched~ y, $\mathcal{C}$ y $\mathcal{D}$ est\'an $\gamma-$\matched. Entonces, $\mathcal{B}$ y $\mathcal{D}$ est\'an $(\delta+\gamma)-$\matched.
+\end{minipage}
+\end{frame}
+
+
+
+\begin{frame}
+\begin{block}{\textbf{Definici\'on 2.2.3}}
+La distancia \emph{cuello de botella}, $d_{bot}\left( \mathcal{B},\mathcal{C}\right)$, entre dos c\'odigos de barras $\mathcal{B}$ y $\mathcal{C}$, se define como el m\'inimo entre todas las $\delta$ para las que existe un $\delta-$\matching~ entre $\mathcal{B}$ y $\mathcal{C}$.
+\end{block}
+\end{frame}
+
+
+\begin{frame}
+\centering
+\begin{minipage}{0.7\textwidth}
+Ejercicio 2.2.4\\
+Sean $\mathcal{B}$, $\mathcal{C}$, $\mathcal{D}$ c\'odigos de barras $\delta-$\matched~ con $\delta$ finita $\Leftrightarrow$ tienen el mismo n\'umero de barras infinitas.
+\end{minipage}\\
+
+\vspace{2em}
+\begin{block}{\textbf{Corolario 2.2.5}}
+$d_{bot}$ es una distancia en el espacio de c\'odigos de barras con el mismo n\'umero de barras infinitas.
+\end{block}
+\end{frame}
+
+\begin{frame}{Ejemplo 2.2.6}
+Considere los m\'odulos de persistencia $\mathbb{F}(a,b]$ y $\mathbb{F}(c,d]$, y los correspondientes c\'odigos de barras $\mathcal{B}\{(a,b]\}$ y $\mathcal{C}\{(c,d]\}$. Entonces, existe
+\begin{itemize}
+\item[$\circ$] Un $\delta_1-$\matching~ vac\'io entre ellos con $\delta_1=\mbox{m\'ax}\left(\frac{b-a}{2},\frac{d-c}{2}\right)\,\,\,$ (las longitudes de los intervalos $<2\delta_1$),\\
+\item[] $\,$\hspace{10em}\scalebox{1.2}{\'o existe}\hspace{10em} $\,$\\
+\item[$\circ$] Un $\delta_2-$\matching~ con $\delta_2=\mbox{m\'ax}\left( |a-c|,|b-d|\right)$.
+\end{itemize}
+\vspace{1em}
+Entonces, $d_{bot}\left( \mathcal{B},\mathcal{C}\right)=min\left(\delta_1,\delta_2 \right)\,.$
+\end{frame}
+
+\begin{frame}{Teorema de Isometr\'ia}
+\begin{block}{\textbf{Teorema 2.2.8}}
+Sean $V$ y $W$ m\'odulos de persistencia, el mapeo $V\mapsto \mathcal{B}(V)$ es una isometr\'ia, es decir,
+\begin{gather*}
+d_{int}\left( V,W \right) =d_{bot}\left( \mathcal{B}(V),\mathcal{B}(W)\right)\,.
+\end{gather*}
+\scalebox{0.7}{(Demostraci\'on en el Cap\'itulo 3).}
+\end{block}
+\vspace{1em}
+\hfill\begin{minipage}{0.8\textwidth}
+\textbf{Observaci\'on: }En caso de que $\mathcal{B(V)}$ y $\mathcal{B}(W)$ no tengan el mismo n\'umero de barras infinitas, tanto $d_{int}(V,W)$ y $d_{bot}(\mathcal{B}(V),\mathcal{B}(W))$ son infinitas por definici\'on.
+\end{minipage}
+\end{frame}
+
+\begin{frame}{Ejercicios finales de Sec. 2.2}
+\centering
+\begin{minipage}{0.7\textwidth}
+Ejercicio 2.2.7\\
+Sean $I$ y $J$ dos intervalos $\delta-$\matched. Muestre que los correspondientes m\'odulos $\mathbb{F}(I)$ y $\mathbb{F}(J)$ est\'an $\delta-$entrelazados.
+\end{minipage}\\
+
+\vspace{21em}
+
+\begin{minipage}{0.7\textwidth}
+Ejercicio 2.2.10\\
+Demuestre que para cualesquiera dos c\'odigos de barras $\mathcal{B}$ y $\mathcal{C}$, se tiene que $d_{bot}\left(\mathcal{B},\mathcal{C}\right)=0\,\,\, \Leftrightarrow \,\,\, \mathcal{B}=\mathcal{C}$.\\
+\vspace{1em}
+Deduzca que $d_{int}\left( V,W\right)=0\,\,\,\Leftrightarrow\,\,\, V=W\,.$
+\end{minipage}
+\end{frame}
+
+
+\begin{frame}{2.3 Corolarios de Estabilidad (del \emph{Teorema de Isometr\'ias})}
+    \begin{minipage}{0.45\textwidth}
+   $\,$\hfill \scalebox{0.7}{Teorema de Isometr\'ias:$\,\,\,\,\,\,$}
+    \end{minipage} \begin{minipage}{0.45\textwidth}
+    \scalebox{0.9}{$d_{int}\left( V,W \right) =d_{bot}\left( \mathcal{B}(V),\mathcal{B}(W)\right)$.}\end{minipage}\\
+    \vspace{1em}
+    \centering
+    \begin{minipage}{0.45\textwidth}
+    \scalebox{0.9}{$d_{int}\left( V(f),V(g)\right)\leq ||f-g||$.}
+    \end{minipage}
+
+    \vspace{3em}
+    %\vfill
+    \begin{block}{\textbf{Teorema 2.3.1}}
+    Sean $f,\,g$ dos funciones de Morse en una variedad cerrada. Entonces
+    \begin{gather*}
+    d_{bot}\left(\mathcal{B}(f),\mathcal{B}(g) \right)\leq ||f-g||\,.
+    \end{gather*}
+    \end{block}
+\end{frame}
+
+
+\begin{frame}{2.3 Corolarios de Estabilidadl (del \emph{Teorema de Isometr\'ias})}
+    \begin{minipage}{0.45\textwidth}
+   $\,$\hfill \scalebox{0.7}{Teorema de Isometr\'ias:$\,\,\,\,\,\,$}
+    \end{minipage} \begin{minipage}{0.45\textwidth}
+    \scalebox{0.9}{$d_{int}\left( V,W \right) =d_{bot}\left( \mathcal{B}(V),\mathcal{B}(W)\right)$.}\end{minipage}\\
+    \vspace{1em}
+    \centering
+    \begin{minipage}{0.2\textwidth}
+    \scalebox{0.7}{Teorema 1.5.4:}
+    \end{minipage}\begin{minipage}{0.45\textwidth}
+    \scalebox{0.9}{$d_{GH}\left( \left( X,\rho\right),\left( Y,r\right)\right)\geq \frac{1}{2}d_{int}\left( V\left( X,\rho\right),W\left( Y,r\right) \right)\, $.}\end{minipage}\\
+
+    \vspace{3em}
+    %\vfill
+    \begin{block}{\textbf{Teorema 2.3.2}}
+    Sean $\left( X,\rho\right)$ y $\left( Y,r\right)$ dos espacios m\'etricos finitos. Entonces
+    \begin{gather*}
+    d_{bot}\left( \,\left( X,\rho\right)\,,\, \left( Y,r\right) \right)\leq d_{GH}\left(\,\left( X,\rho\right)\,,\, \left( Y,r\right)\,\right)\,.
+    \end{gather*}
+    \end{block}
+\end{frame}
+
+
+\begin{frame}{2.4 M\'odulos de Persistencia de tipo localmente finito}
+\begin{columns}
+\begin{column}{0.65\textwidth}
+   \begin{block}{Definici\'on\\ \emph{M\'odulos de Persistencia} \underline{{\bfseries localmente}} finitos}
+   $\,$\\
+   \begin{minipage}{0.89\textwidth}
+\begin{itemize}
+   \item[\scalebox{0.45}{persistencia (1)}]$\,$\\
+   $\forall\, s\leq t \leq r$, $\pi_{s,r}=\pi_{t,r}\circ\pi_{s,t}\,.$
+   \item[\scalebox{0.45}{semicont.~(3)}]$\,$\\
+   $\forall\, t\in \mathbb{R}$ y cualquier $s\leq t$ suf. cerca, $\pi_{s,t}$ es un isomorfismo.\\
+   \item[\scalebox{0.45}{(2)}]$\,$\\
+   El conjunto de puntos espectrales es un subconjunto de $\mathbb{R}$ cerrado, discreto y acotado por abajo (no necesariamente finito).
+   \end{itemize}
+\end{minipage}
+   
+   \end{block}
+\end{column}
+\hspace{-25pt}
+\vrule 
+\hspace{0.5em}
+\begin{column}{0.35\textwidth}  %%<--- here
+\begin{block}{\small Definici\'on\\ \emph{M\'odulos de Persistencia} finitos\\ $\,$}
+$\,$\hspace{1em}\begin{minipage}{0.7\textwidth}
+\begin{itemize}
+\item[\scalebox{0.5}{(1)}] \scalebox{0.75}{persistencia}$\,$\\
+\item[\scalebox{0.5}{(3)}]\scalebox{0.75}{semicont.}$\,$\\
+\item[\scalebox{0.5}{(2)}] \scalebox{0.75}{$\forall\,t\in\mathbb{R}$ existe una} \scalebox{0.75}{vecindad  $U$ de $t$ tal} \scalebox{0.75}{que $\pi_{s,r}$ es un iso-} \scalebox{0.75}{morfismo $\forall\,s<r\in U$.}
+\item[\scalebox{0.5}{(4)}]$\,$\\
+\scalebox{0.75}{$\exists\, s_{\_}\in \mathbb{R}$, tal que $V_{s}=0$} \scalebox{0.75}{para todo $s_{\_}\leq s$ .}
+\end{itemize}
+\end{minipage}
+\end{block}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{C\'odigos de Barras de tipo \underline{localmente} finito}
+\begin{itemize}
+\item Son una colecci\'on contable de barras de la forma $(a,b],\, -\infty\leq a <b\leq +\infty$ con multiplicidad, tal que:\\
+\vspace{1em}
+\begin{itemize}
+\item $\forall\,c\in\mathbb{R}$ existe una vecindad de $c$ que intersecta s\'olo un n\'umero finito de barras con multiplicidad.
+\vspace{0.5em}
+\item Los puntos reales de las barras forman un subconjunto de $\mathbb{R}$ cerrado, discreto y acotado por abajo.
+\end{itemize}
+\end{itemize}
+\begin{block}{Observaciones:}
+\begin{itemize}
+\item Se permite un n\'umero finito de barras de la forma $(-\infty,+\infty),\, (-\infty,b]$.\\
+\item Los teoremas de \emph{Forma Normal} y de \emph{Isometr\'ia} pueden extenderse a este tipo de barras.
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Ejemplo 2.4.1 - Demuestra el Teorema de Forma Normal para barras de tipo localmente finito} {(sketch)}
+Sean
+\begin{itemize}
+\item $(V,\pi)$ m\'odulo de persistencia de tipo localmente finito.
+\item $i\geq 0$, $a_{i}$ puntos espectrales.
+\item $V^i$ espacio vectorial asociado a $(a_{i-1},a_{i}]$ .
+\item $\mbox{Totaldim}_{k}(V):=\sum_{a_{i}\leq k}\mbox{dim}\,V^{i}$, $k\in \mathbb{N}$ .
+\end{itemize}
+\vspace{1em}
+Definamos $W^0$ un sub\'odulo de $V$ por $W^0_t=im(\pi_{-\infty,t})$ donde $\pi_{-\infty,t}$ es $\pi_{-s,t}$ p.a. $s$ suficientemente grande.\\
+
+Sea $\mathcal{B}^0 $ el c\'odigo de barras de $W^0$ consiste en rayos de la forma $(-\infty,b)$ para alguna $-\infty<b\leq\infty$ .
+\end{frame}
+
+\begin{frame}{Ejemplo 2.4.1}{Cont.}
+\begin{gather*}
+W^0\subset W^{1}\subset \cdots \subset W^{j}\subset \cdots\\
+\\
+\mbox{Usando el Lema 2.1.10},\hspace{20em}\mbox{$\,$}\\
+\,\hfill W^{j}=W^{j-1}\bigoplus \mathbb{F}(c_{j},d_{j}],\hspace{1em}c_{j}>-\infty\,.\hfill\,
+\end{gather*}
+\begin{itemize}
+\item Dada $k\in \mathbb{N}$, $\mbox{Totaldim}_{k}(W^j)$ aumenta conforme $j$ aumente hasta el l\'imite $\mbox{Totaldim}_{k}(V)$.
+\item $W^j$ estabiliza en $(-\infty,k]$ para $j$ suficientemente grande.
+\item Con esta construcci\'on, 
+\begin{gather*}
+\mathcal{B}=\mathcal{B}^{0}\scalebox{.85}{\mbox{$\bigoplus$}}\scalebox{1.5}{\mbox{$\bigoplus_{j}$}}\mathbb{F}(c_{j},d_{j}]\\
+\mbox{por tanto,}\hspace{1em}V=\scalebox{1.5}{\mbox{$\bigoplus_{I\in\mathcal{B}}$}}\mathbb{F}(I)\,.\hfill \qed
+\end{gather*}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Distancia de Cuello de Botella para barras de tipo localmente finito}
+\scalebox{0.75}{(Sin cambio)}
+\begin{itemize}
+\item La distancia \emph{cuello de botella}, $d_{bot}\left( \mathcal{B},\mathcal{C}\right)$, entre dos c\'odigos de barras $\mathcal{B}$ y $\mathcal{C}$ de tipo localmente finito, se define como el m\'inimo entre todas las $\delta$ para las que existe un $\delta-$\matching~ entre $\mathcal{B}$ y $\mathcal{C}$.
+\vspace{2em}
+\item Se dice que dos c\'odigos de barras son \emph{equivalentes} si su distancia cuello de botella entre ellos es finita.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Ejemplo - 2.4.2}
+Sea $(M,g)$ una variedad Riemanniana cerrada, y $a\in\mathbb{R}$. Sea $\Lambda^{a}M$ el espacio de lazos suaves $\gamma : \mathbb{S}^{1}\rightarrow M$ cuya longitud es menor a $\mbox{e}^a$. Para una m\'etrica gen\'erica $g$, la homolog\'ia $H_{\ast}\left(\Lambda^{a}M,\,\mathbb{F} \right)$ con coeficientes en $\mathbb{F}$ forma un m\'odulo de persistencia de tipo localmente finito que denoteremos como $V(M,g)$.\\
+
+Notemos que para cualquier m\'etrica $g^\prime $ en $M$ existe $c$ tal que 
+\begin{gather*}
+c^{-1}g\leq g^{\prime}\leq cg\,,
+\end{gather*}
+y la distancia de entrelazamiento entre los m\'odulos $V(M,g)$ y $V(M,g^\prime)$ es menor o igual a $\frac{1}{2}\log(c)\,$.\\
+\vspace{0.5em}
+Se sigue que la clase de equivalencia de los c\'odigos de barra de $V(M,g)$ es invariante bajo difeomorfismos de la variedad.\\ $\,$\hfill\scalebox{0.65}{(Weinberger, Found. Comput. Math. 19, 2019})
+\end{frame}
+\end{document}
+
+ 

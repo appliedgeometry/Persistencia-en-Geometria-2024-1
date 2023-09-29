@@ -1,0 +1,338 @@
+
+\documentclass{beamer}
+\setbeamertemplate{theorems}[numbered]
+\usecolortheme{dracula}
+\usepackage[utf8]{inputenc}
+\usepackage[
+  main=spanish
+]{babel}
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+%\usefonttheme[onlymath]{serif}
+
+\newcounter{Ejercicio}
+%\newcounter{Ejemplo}
+
+%\newtheorem{Theorem}{Teorema}[section]
+%\newtheorem{Lemma}[Theorem]{Lema}
+%\newtheorem{Corollary}[Theorem]{Corolario}
+%\newtheorem{Ejercicio}[Theorem]{Ejercicio}
+%
+%
+\newtheorem{Ejercicio}[theorem]{Ejercicio}%[count-ejercicio]
+
+\newtheorem{Ejemplo}{Ejemplo}
+
+%\newtheorem{Proposition}[Theorem]{Proposici\'on}
+%\newtheorem{Conjecture}[Theorem]{Conjecture}
+%\newtheorem{Definition}[Theorem]{Definici\'on}
+%\newtheorem{Example}[Theorem]{Ejemplo}
+%\newtheorem{Observation}[Theorem]{Observation}
+%\newtheorem{Remark}[Theorem]{Remark}
+\def\matching{apareamiento}
+\def\matched{apareados}
+
+\def \rk{{\mbox {rk}}\,}
+\def \dim{{\mbox {dim}}\,}
+\def \ex{\mbox{\rm ex}}
+\def\df{\buildrel \rm def \over =}
+\def\ind{{\mbox {ind}}\,}
+\def\Vol{\mbox{Vol}}
+\def\V{\mbox{Var}}
+\newcommand{\comp}{\mbox{\tiny{o}}}
+\newcommand{\QED}{{\hfill$\Box$\medskip}}
+
+
+\def\Z{{\bf Z}}
+\def\R\re
+\def\V{\bf V}
+\def\W{\bf W}
+\def\f{\tilde{f}_{k}}
+\def \e{\varepsilon}
+\def \la{\lambda}
+\def \vr{\varphi}
+\def \R{{\bf R}}
+\def \L{{\mathcal L}}
+
+\def \re{{\mathbb R}}
+\def \Q{{\mathbb Q}}
+\def \cp{{\mathbb CP}}
+\def \T{{\mathbb T}}
+\def \C{{\bf C}}
+\def \M{{\widetilde{M}}}
+\def \I{{\mathbb I}}
+\def \H{{\mathbb H}}
+\def \lv{\left\vert}
+\def \rv{\right\vert}
+\def \ov{\overline}
+\def \tx{{\widehat{x}}}
+\def \0{\lambda_{0}}
+\def \la{\lambda}
+\def \ga{\gamma}
+\def \de{\delta}
+\def \x{\widetilde{x}}
+\def \E{\mathbb{E}}
+\def \y{\widetilde{y}}
+\def \A{{\mathcal A}}
+\def\h{{\rm h}_{\rm top}(g)}
+\def\en{{\rm h}_{\rm top}}
+\def\F{{\mathcal F}}
+\def\co{\colon\thinspace}
+
+\usepackage{ragged2e}  % `\justifying` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}       % `\url`s
+\usepackage{listings}  % Code listings
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+\usepackage{xfrac}
+
+
+\title{Parte I: Cap\'itulo 3}
+\subtitle{3.4 Demostraci\'on de los Lemas 3.3.1 y 3.3.2 \scalebox{0.6}{\emph{(Proofs of Lemma 3.3.1 and Lemma 3.3.2)}}} 
+\author{Eduardo Vel\'azquez}
+\logo{
+%\includegraphics[width=2cm]{logo-IMUNAM.png}
+\includegraphics[scale=0.1]{cimat-logo-w.png}
+}
+
+\begin{document}
+
+\frenchspacing
+
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+  \frame{\maketitle}
+
+  %\AtBeginSection[]{% Print an outline at the beginning of sections
+    %\begin{frame}<beamer>
+    %  \frametitle{Contenidos}
+    %  \tableofcontents[currentsection]
+    %\end{frame}}
+
+    %\section{Motivación dinámica}
+%
+%    \subsection{Motivación}
+\begin{frame}{Recordemos...}
+\begin{itemize}
+\item $(V,\pi^V)$ y $(W,\pi^W)$ son m\'odulos de persistencia.\\
+\vspace{1em}
+\item $\delta >0$, $f:V\rightarrow W[\delta]$ y $g:W\rightarrow V[\delta]$ son morfismos de entrelazamiento, es decir, $g[\delta]\circ f =\Phi_{V}^{2\delta}$ y $f[\delta]\circ g =\Phi_{W}^{2\delta}$\\
+\vspace{1em}
+\item $\Phi_{V}^{2\delta}=\pi^{V}_{t,t+2\delta}$
+\end{itemize}
+
+
+\end{frame}
+
+
+\begin{frame}{Demostraci\'on del Lema 3.3.1}
+\begin{block}{Lema 3.3.1}
+Sean $\left(V,\pi^V \right)$ y  $\left(W,\pi^W \right)$ dos m\'odulos de persistencia $\delta-$entrelazados, y sean 
+\begin{itemize}
+\item[] \hfill$f:V\rightarrow W [\delta]$ \hfill$\,$
+\item[] \hfill y \hfill$\,$
+\item[] \hfill $g:W\rightarrow V [\delta]$\hfill$\,$
+\end{itemize}
+sus morfismos de entrelazamiento. Considere el mapeo suprayectivo
+$f:V\rightarrow \mbox{im}\,f$ y el \matching ~inducido $\mu_{sur}:\mathcal{B}(V)\rightarrow\mathcal{B}(\mbox{im}\,f)$. Entonces 
+\begin{enumerate}
+\item $\mbox{coim} \, \mu_{sur}\supseteq \mathcal{B}(V)_{2\delta}$,
+\item $\mbox{im}\,\mu_{sur}=\mathcal{B}(\mbox{im}\,f)$ ,
+\item $\mu_{sur}$ mapea $(b, d]\in \mbox{coim}\,\mu_{sur}$ a $(b, d^\prime ]$, donde $d^\prime \in [d - 2\delta, d]$.
+\end{enumerate}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{2. Por demostrar: $\mbox{im}\,\mu_{sur}=\mathcal{B}(\mbox{im}\,f)$.}
+%\begin{enumerate}\setcounter{enumi}{1}
+%\item Por demostrar: $\mbox{im}\,\mu_{sur}=\mathcal{B}(\mbox{im}\,f)$.
+%\end{enumerate}
+\begin{proof}
+Se sigue de la Proposici\'on 3.2.8, ya que $\mu_{sur}:\mathcal{B}(V)\rightarrow\mathcal{B}(\mbox{im}\,f)$ y,
+\begin{center}
+\scalebox{0.8}{\begin{minipage}{0.75\textwidth}
+\begin{block}{Proposi\'on 3.2.8}
+Si existe un mapeo suprayectivo del m\'odulo $(V,\pi)$ al m\'odulo $(W,\theta)$, entonces el mapeo inducido
+$\mu:\mathcal{B}\rightarrow \mathcal{C}$ satisface:
+\begin{itemize}
+\item $\mbox{im}\,\mu_{sur}=\mathcal{C}$,
+\item $\mu_{sur}\,(b,d]=(b,e]$ con $d\geq e\,$.
+\end{itemize}
+\end{block}
+\end{minipage}}
+\end{center}
+\end{proof}
+\end{frame}
+
+
+\begin{frame}{1. Por demostrar: $\mbox{coim} \, \mu_{sur}(f)\supseteq \mathcal{B}(V)_{2\delta}$.}
+%\begin{enumerate}\setcounter{enumi}{0}
+%\item Por demostrar: $\mbox{coim} \, \mu_{sur}(f)\supseteq \mathcal{B}(V)_{2\delta}$.
+%\end{enumerate}
+\begin{proof}\renewcommand{\qedsymbol}{}
+El mapeo suprayectivo se construye como $\mu_{sur}: \mathcal{B}(V ) \rightarrow \mathcal{B}(\mbox{im}\, f )$. Por hip\'otesis,
+ \begin{center}
+ \includegraphics[scale=0.24]{./diagrams/1.png}
+ \end{center}
+ y por la Afirmaci\'on 3.2.13,
+  \begin{center}
+ \includegraphics[scale=0.24]{./diagrams/2.png}.
+ \end{center}
+Notemos que por construcci\'on, $\mbox{coim}\,\mu_{sur}(\Phi_{V}^{2\delta})=\mathcal{B}(V)_{2\delta}$
+$\,$, y $\mathcal{B}(V)_{2\delta}$ son las barras de $\mathcal{B}(V)$ de longitud al menos $2\delta$
+\end{proof}
+\end{frame}
+
+
+\begin{frame}
+Las barras de $\mathcal{B}(V)$ y las barras
+\begin{gather*}
+\mathcal{B}(\mbox{im}\, \Phi_{V}^{2\delta})=\{ (b, d -2\delta] :
+(b, d] \in \mathcal{B}(V ), d - b > 2\delta\}
+\end{gather*}
+\vspace{0.5em}
+ est\'an \emph{en correspondencia} (matched) usando el criterio de \lq\lq mayor longitud primero\rq\rq, pero no as\'i las barras de $\mathcal{B}(V)$ de menor longitud a $2\delta$. Esto significa que 
+ \begin{gather*}
+\mbox{ coim}\mu_{sur}(f)\supseteq \mbox{coim}\,\mu_{sur} (\Phi^{2\delta}_{V} )=\mathcal{B}(V)_{2\delta}\,.
+ \end{gather*}
+ $\,\hfill \qed$
+\end{frame}
+
+
+\begin{frame}{3. Por demostrar: $\mu_{sur}$ mapea $(b, d]\in \mbox{coim}\,\mu_{sur}$ a $(b, d^\prime ]$, donde $d^\prime \in [d - 2\delta, d]$.}
+\begin{proof}\renewcommand{\qedsymbol}{}
+Sea $(b, d] \in \mathcal{B}(V )$. Analicemos $\mu_{sur} (f )(b, d]$.
+\begin{itemize}
+\item Caso 1. $d - b > 2\delta$. Por la Afirmaci\'on 3.2.8, 
+\begin{gather*}
+(b, d] \overset{\mu_{sur}(f)}{\mapsto}  (b, d^\prime ]\mbox{, p.a. }d^\prime \leq d\,.
+\end{gather*}
+Y adem\'as,
+\begin{gather*}
+(b, d^{\prime} ] \overset{\mu_{sur}(g[\delta])}{\mapsto}  (b, d^{\prime\prime} ]\mbox{, p.a. }d^{\prime\prime} \leq d^{\prime}\,,
+\end{gather*}
+adem\'as, $(b, d^{\prime\prime} ] = (b, d - 2\delta]$ .
+\end{itemize}
+Por tanto, $d - 2\delta\leq d^{\prime}\leq d$ .
+\end{proof}
+\end{frame}
+
+
+\begin{frame}{3. Por demostrar: $\mu_{sur}$ mapea $(b, d]\in \mbox{coim}\,\mu_{sur}$ a $(b, d^\prime ]$, donde $d^\prime \in [d - 2\delta, d]$.}
+\begin{center}
+\includegraphics[scale=0.2]{./diagrams/3.png}
+\end{center}
+\begin{itemize}
+\item Caso 2. $d - b \leq 2\delta$. El intervalo $(b, d]$ (en la coimagen de $\mu_{sur} (f )$) est\'a \emph{asociado} (matched) a
+$(b, d^{\prime} ]$ con $d \geq d^{\prime}$ . Pero $d^{\prime} > b \geq d - 2\delta$, por tanto, $d^{\prime} \in [d - 2\delta, d]$.\\
+ $\,\hfill \qed$
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Demostraci\'on del Lema 3.3.2}
+\begin{block}{Lema 3.3.2}
+Sean $\left(V,\pi^V \right)$ y  $\left(W,\pi^W \right)$ dos m\'odulos de persistencia $\delta-$entrelazados, y sean 
+\begin{itemize}
+\item[] \hfill$f:V\rightarrow W [\delta]$ \hfill$\,$
+\item[] \hfill y \hfill$\,$
+\item[] \hfill $g:W\rightarrow V [\delta]$\hfill$\,$
+\end{itemize}
+sus morfismos de entrelazamiento. Considere el mapeo inyectivo
+$\mbox{im}\,f \rightarrow W[\delta]$ y el \matching ~inducido $\mu_{inj}:\mathcal{B}(\mbox{im}\,f)\rightarrow\mathcal{B}(W[\delta])$. Entonces 
+\begin{enumerate}
+\item $\mbox{coim}\,\mu_{inj}=\mathcal{B}(\mbox{im}\,f)$ ,
+\item $\mbox{im} \, \mu_{inj}\supseteq \mathcal{B}(W[\delta])_{2\delta}$,
+\item $\mu_{inj}$ mapea $(b, d^{\prime}]\in \mbox{coim}\,\mu_{inj}$ a $(b^{\prime}, d^\prime ]$, donde $b^\prime \in [b - 2\delta, b]$.
+\end{enumerate}
+\end{block}
+\end{frame}
+
+
+
+\begin{frame}{1. Por demostrar: $\mbox{coim}\,\mu_{inj}=\mathcal{B}(\mbox{im}\,f)$.}
+\begin{proof}
+Se sigue de la Proposici\'on 3.2.8,% ya que $\mu_{sur}:\mathcal{B}(V)\rightarrow\mathcal{B}(\mbox{im}\,f)$ y,
+\begin{center}
+\scalebox{0.8}{\begin{minipage}{0.75\textwidth}
+\begin{block}{Proposi\'on 3.2.5}
+Si existe un mapeo inyectivo del m\'odulo $(V,\pi)$ al m\'odulo $(W,\theta)$, entonces el mapeo inducido
+$\mu_{inj}:\mathcal{B}\rightarrow \mathcal{C}$ satisface:
+\begin{itemize}
+\item $\mbox{coim}\,\mu_{inj}=\mathcal{B}$,
+\item $\forall\, (b,d]\in \mathcal{B}$, $(b,d]=(c,d]$ con $c\leq b\,$.
+\end{itemize}
+\end{block}
+\end{minipage}}
+\end{center}
+\end{proof}
+\end{frame}
+
+\begin{frame}{2. Por demostrar: $\mbox{im} \, \mu_{inj}\supseteq \mathcal{B}(W[\delta])_{2\delta}$}
+\begin{proof}\renewcommand{\qedsymbol}{}
+Por hip\'otesis, $f[\delta]\circ g =\Phi_{W}^{2\delta}$, es decir,
+\begin{center}
+\includegraphics[scale=0.2]{./diagrams/4.png}
+\end{center}
+Entonces, $\mbox{im}\,\Phi_{W}^{2\delta}\subseteq\mbox{im}\,f[\delta]\subseteq W[2\delta]$. Es decir, existen mapeos inyectivos $i,\,j,\,k$, tales que
+\begin{center}
+\includegraphics[scale=0.2]{./diagrams/5.png}
+\end{center}
+\end{proof}
+\end{frame}
+
+\begin{frame}{2. Por demostrar: $\mbox{im} \, \mu_{inj}\supseteq \mathcal{B}(W[\delta])_{2\delta}$}
+%\begin{proof}%\renewcommand{\qedsymbol}{}
+Por la afirmaci\'on 3.2.13,
+\begin{center}
+\includegraphics[scale=0.2]{./diagrams/6.png}
+\end{center}
+Podemos ver que, 
+\begin{itemize}
+\item $\mbox{im}\, \mu_{inj} (k) =\mathcal{B}(W [2\delta])_{2\delta}$,
+\item Vimos que $\mbox{im}\,\Phi_{W}^{2\delta}\subseteq\mbox{im}\,f[\delta]\subseteq W[2\delta]$. Notemos que
+\begin{gather*}
+\mathcal{B}(\mbox{im}\,\Phi_{W}^{2\delta})=\left\{ (b,d-2\delta]\,:\,(b,d\in \mathcal{B}(W),\,d-b>2\delta)\right\},\\
+\\
+\mathcal{B}(W[2\delta])=\left\{ (b-2\delta,d-2\delta)\,:\,(b,d]\in\mathcal{B}(W)\right\},
+\end{gather*}
+y $\mu_{inj} (k)(b, d - 2\delta] = (b - 2\delta, d - 2\delta]$,\\
+$\,$\hfill  $\therefore \mbox{im}\, \mu_{inj} (i) \supseteq \mbox{im}\,\mu_{inj} (k) =\mathcal{B}(W [2\delta])_{2\delta}$.\hspace{3em}$\qed$
+\end{itemize}
+
+%\end{proof}
+
+\end{frame}
+
+
+
+\begin{frame}{3. Por demostrar: $\mu_{inj}$ mapea $(b, d^{\prime}]\in \mbox{coim}\,\mu_{inj}$ a $(b^{\prime}, d^\prime ]$, donde $b^\prime \in [b - 2\delta, b]$}
+\begin{proof}
+Sea $(b,d]\in\mathcal{B}(\mbox{im}\,f[\delta])$, y $\mu_{inj}(i)(b,d])=(b^{\prime},d]$ p.a. $b^{\prime}$ tal que $(b^{\prime},d]\in\mathcal{B}(W[2\delta])$. Por la proposici\'on 3.2.5, $b^{\prime}\leq b$.
+\begin{itemize}
+\item Caso $d-b^{\prime}\leq 2\delta$. Se tiene $b^{\prime}\geq d-2\delta > b-2\delta$.
+\item Caso $d-b^{\prime}>2\delta$. Existe un intervalo $(b^{\prime} + 2\delta, d] \in \mathcal{B}(\mbox{im}\, \Phi^{2\delta}_{W})$ tal que
+\begin{gather*}
+\mu_{inj} (k)(b^{\prime} + 2\delta, d] = \mu_{inj} (i)(b, d] = (b^{\prime}, d],
+\end{gather*}
+por lo que $b \leq b^{\prime} + 2\delta$. Por tanto, $b-2\delta \leq b^{\prime} \leq b$ .
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\end{document}
+Por suposici\'on, el siguiente diagrama conmuta
+
+
+
