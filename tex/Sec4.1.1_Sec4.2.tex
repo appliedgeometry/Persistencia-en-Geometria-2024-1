@@ -1,0 +1,647 @@
+\documentclass{beamer}
+\setbeamertemplate{theorems}[numbered]
+\usecolortheme{dracula}
+\usepackage[utf8]{inputenc}
+\usepackage[
+  main=spanish
+]{babel}
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+
+\newcounter{Ejercicio}
+%\newcounter{Ejemplo}
+
+%\newtheorem{Theorem}{Teorema}[section]
+%\newtheorem{Lemma}[Theorem]{Lema}
+%\newtheorem{Corollary}[Theorem]{Corolario}
+%\newtheorem{Ejercicio}[Theorem]{Ejercicio}
+%
+%
+\newtheorem{Ejercicio}[theorem]{Ejercicio}%[count-ejercicio]
+
+\newtheorem{Ejemplo}{Ejemplo}
+
+%\newtheorem{Proposition}[Theorem]{Proposici\'on}
+%\newtheorem{Conjecture}[Theorem]{Conjecture}
+%\newtheorem{Definition}[Theorem]{Definici\'on}
+%\newtheorem{Example}[Theorem]{Ejemplo}
+%\newtheorem{Observation}[Theorem]{Observation}
+%\newtheorem{Remark}[Theorem]{Remark}
+
+%% Definiciones del libro:
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\rk}{rank} \DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\supp}{supp} \DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\cl}{cl}
+\DeclareMathOperator{\dv}{div} \DeclareMathOperator{\ind}{ind}
+\DeclareMathOperator{\dist}{dist} \DeclareMathOperator{\res}{res}
+\DeclareMathOperator{\codim}{codim} \DeclareMathOperator{\lk}{lk}
+\DeclareMathOperator{\intr}{int} \DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Hom}{Hom} \DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\End}{End} \DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Ind}{Ind} \DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\Var}{Var} \DeclareMathOperator{\Vol}{Vol}
+\DeclareMathOperator{\grph}{graph}
+\DeclareMathOperator{\Crit}{Crit}
+\DeclareMathOperator{\length}{length}
+\DeclareMathOperator{\Sp}{Sp} \DeclareMathOperator{\Cal}{Cal}
+\DeclareMathOperator{\rot}{rot} \DeclareMathOperator{\PSL}{PSL}
+\renewcommand{\sp}{\mathfrak{sp}} \DeclareMathOperator{\Area}{Area}
+\DeclareMathOperator{\CovDim}{CovDim} \DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\closure}{Closure}\DeclareMathOperator{\pb}{pb}
+\DeclareMathOperator{\CZ}{CZ} \DeclareMathOperator{\GW}{GW}
+\DeclareMathOperator{\Iamge}{Image}
+\DeclareMathOperator{\proj}{proj}
+\DeclareMathOperator{\spec}{spec}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\dis}{dis}
+\DeclareMathOperator{\Totaldim}{Totaldim}
+\DeclareMathOperator{\coim}{coim}
+\newcommand{\tit}{\textit}
+\newcommand{\trm}{\textrm}
+\newcommand{\tbf}{\textbf}
+\newcommand{\trmk}[1]{\textcolor{red}{#1}}  
+\newcommand{\mbf}{\mathbf}
+\newcommand{\mbb}{\mathbb}
+\newcommand{\mbbm}{\mathbbm}
+\newcommand{\mcal}{\mathcal}
+\newcommand{\mrm}{\mathrm}
+\newcommand{\msc}{\mathscr}
+\newcommand{\mitl}{\mathit}
+\newcommand{\mfrak}{\mathfrak}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\calA}{{\mathcal{A}}}
+\newcommand{\calB}{{\mathcal{B}}}
+\newcommand{\calC}{{\mathcal{C}}}
+\newcommand{\calD}{{\mathcal{D}}}
+\newcommand{\calE}{{\mathcal{E}}}
+\newcommand{\calF}{{\mathcal{F}}}
+\newcommand{\calG}{{\mathcal{G}}}
+\newcommand{\calH}{{\mathcal{H}}}
+\newcommand{\calI}{{\mathcal{I}}}
+\newcommand{\calJ}{{\mathcal{J}}}
+\newcommand{\calK}{{\mathcal{K}}}
+\newcommand{\calL}{{\mathcal{L}}}
+\newcommand{\calM}{{\mathcal{M}}}
+\newcommand{\calN}{{\mathcal{N}}}
+\newcommand{\calP}{{\mathcal{P}}}
+\newcommand{\calQ}{{\mathcal{Q}}}
+\newcommand{\calR}{{\mathcal{R}}}
+\newcommand{\calS}{{\mathcal{S}}}
+\newcommand{\calT}{{\mathcal{T}}}
+\newcommand{\calU}{{\mathcal{U}}}
+\newcommand{\calV}{{\mathcal{V}}}
+\newcommand{\calW}{{\mathcal{W}}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\Ga}{\Gamma}
+\newcommand{\del}{\delta}
+\newcommand{\Del}{\Delta}
+\renewcommand{\th}{\theta}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\epsi}{\varepsilon}
+\newcommand{\et}{\eta}
+\newcommand{\ka}{\kappa}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ro}{\rho}
+\newcommand{\sig}{\sigma}
+\newcommand{\Sig}{\Sigma}
+\newcommand{\si}{\sigma}
+\newcommand{\Si}{\Sigma}
+\newcommand{\ph}{\varphi}
+\newcommand{\vphi}{\varphi}
+\newcommand{\om}{\omega}
+\newcommand{\Om}{\Omega}
+\newcommand{\na}{\nabla}
+\newcommand{\ze}{\zeta}
+\newcommand{\tPsi}{{\widetilde{\Psi}}}
+\newcommand{\tilPhi}{\til{\Phi}}
+\newcommand{\T}{\mathbb T}
+\newcommand{\bH}{\mathbb{H} }
+\newcommand{\eset}{\emptyset}
+\newcommand{\sub}{\subset}
+\newcommand{\setm}{\setminus}
+\newcommand{\nin}{\notin}
+\newcommand{\bcup}{\bigcup}
+\newcommand{\bcap}{\bigcap}
+\newcommand{\union}[2]{\overset{#2}{\underset{#1}{\bigcup}}}
+\newcommand{\inter}[2]{\overset{#2}{\underset{#1}{\bigcap}}}
+\newcommand{\id}{\mathbbm 1}               
+\newcommand{\rest}[2]{#1\bigr\vert_{#2}}   
+\newcommand{\Lin}{\mathcal L}
+\newcommand{\ip}[1]{\langle {#1}\rangle}     
+\newcommand{\ten}{\otimes}              
+\newcommand{\pa}{\partial}
+\newcommand{\de}{\partial}
+\newcommand{\pd}[2]{\frac{\pa #1}{\pa #2}} 
+\renewcommand{\d}{d}
+\newcommand{\dx}{\d x}
+\newcommand{\dt}{\d t}
+\newcommand{\du}{\d u}
+\newcommand{\ds}{\d s}
+\newcommand{\ddt}{\frac{\d}{ \dt} }
+\newcommand{\ddtat}[1]{\left.\ddt \right|_{t=#1}}
+\newcommand{\at}[1]{\biggl. \biggr|_{#1} } % Evaluate at
+%\newcommand{\conv}{\longrightarrow}        % Limit %
+\newcommand{\xconv}{\xrightarrow}
+\newcommand{\convas}[1]{\xrightarrow[#1]{} }
+\newcommand{\nconv}{\nrightarrow}
+\newcommand{\const}{\equiv}
+\newcommand{\nconst}{\not \equiv}
+\newcommand{\we}{\wedge}
+\newcommand{\rv}{\mathrm{v}} % vector field
+
+\newcommand{\restr}{\big|}  % restricted to %
+
+% Limits %
+\newcommand{\limn}{\displaystyle \lim_{n \to \infty}}
+\newcommand{\limk}{\displaystyle \lim_{k \to \infty}}
+\newcommand{\convn}{\xrightarrow[n \to \infty]{}}
+\newcommand{\convk}{\xrightarrow[k \to \infty]{}}
+\newcommand{\convi}{\xrightarrow[i \to \infty]{}}
+\newcommand{\limx}[1]{\displaystyle\lim_{x \to #1}}
+\newcommand{\limt}[1]{\displaystyle \lim_{t \to #1}}
+\newcommand{\convx}[1]{\displaystyle \xrightarrow[x \to #1]{}}
+\newcommand{\convt}[1]{\displaystyle \xrightarrow[t \to #1]{}}
+
+% Convergence in norms %
+\newcommand{\Lpto}{\displaystyle \xrightarrow[L_p]{}}
+\newcommand{\Czto}{\displaystyle \xrightarrow[C_0]{}}
+
+
+% Symplectic stuff %
+\newcommand{\pois}[1]{\{#1\}} % Poisson brackets %
+\DeclareMathOperator{\sgrad}{sgrad}
+%\newcommand{\Ham}{\mrm{Ham}}
+\newcommand{\Symp}{\mrm{Symp}}
+\newcommand{\tCal}{\widetilde{\Cal}}
+\newcommand{\tHam}{\widetilde{\Ham}}
+
+
+\newcommand{\poisnm}[1]{\|\{#1\}\|} % Poisson bracket norm (not specified norm), not really in use.. %
+
+
+% Persistence stuff %
+\DeclareMathOperator{\Rips}{Rips}
+
+
+% Misc %
+\newcommand{\ol}{\overline}
+\newcommand{\til}{\tilde}
+\newcommand{\wtil}{\widetilde}
+\newcommand{\ul}{\underline}
+\newcommand{\imp}{\Rightarrow}
+\newcommand{\limp}{\Leftarrow}
+\newcommand{\disp}{\displaystyle}
+\newcommand{\spc}{\,,\,}
+\newcommand{\Spc}{\,,\,}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\trans}{\pitchfork}
+
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\Vect}{Vect}
+
+
+
+\def\ep{\epsilon}
+\def\k{{\bf k}}
+\def\d{d_{\rm Hofer}}
+\def\f{{\mathfrak{f}}}
+\def\g{{\mathfrak{g}}}
+\def\R{\mathbb{R}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+\def\F {\mathbb{F}} 
+\def\G{\mathcal{G}}
+\def\K{\mathcal{K}}
+\def\I{\mathbb{I}}
+\def\V{\mathbb{V}}
+\def\W{\mathbb{W}}
+\def\S{\mathcal{S}}
+\def\p{\mathfrak{p}}
+\def\ev{\mathbf{ev}}
+\def\CF{{\rm CF}}
+\def\HF{{\rm HF}}
+\def\SH{{\rm SH}}
+\def\HM{{\rm HM}}
+\def\Ham{{\rm Ham}}
+\def\SBM{{\rm SBM}}
+\def\RBM{{\rm RBM}}
+\def\CBM{{\rm CBM}}
+\def\sign{{\rm sign}}
+\def\Diff{{\rm Diff}}
+\def\Cont{{\rm Cont}}
+\def\coker{{\rm coker}}
+\def\Im{{\rm Im}}
+\newcommand{\Osc}{{\rm Osc}}
+
+
+%%%
+
+
+
+ \def \rk{{\mbox {rk}}\,}
+ \def \dim{{\mbox {dim}}\,}
+ \def \ex{\mbox{\rm ex}}
+ \def\df{\buildrel \rm def \over =}
+ \def\ind{{\mbox {ind}}\,}
+ \def\Vol{\mbox{Vol}}
+ \def\V{\mbox{Var}}
+ \newcommand{\comp}{\mbox{\tiny{o}}}
+ \newcommand{\QED}{{\hfill$\Box$\medskip}}
+
+
+% \def\Z{{\bf Z}}
+% \def\R\re
+% \def\V{\bf V}
+% \def\W{\bf W}
+% \def\f{\tilde{f}_{k}}
+% \def \e{\varepsilon}
+% \def \la{\lambda}
+% \def \vr{\varphi}
+% \def \R{{\bf R}}
+% \def \L{{\mathcal L}}
+
+% \def \re{{\mathbb R}}
+% \def \Q{{\mathbb Q}}
+% \def \cp{{\mathbb CP}}
+% \def \T{{\mathbb T}}
+% \def \C{{\bf C}}
+% \def \M{{\widetilde{M}}}
+% \def \I{{\mathbb I}}
+% \def \H{{\mathbb H}}
+% \def \lv{\left\vert}
+% \def \rv{\right\vert}
+% \def \ov{\overline}
+% \def \tx{{\widehat{x}}}
+% \def \0{\lambda_{0}}
+% \def \la{\lambda}
+% \def \ga{\gamma}
+% \def \de{\delta}
+% \def \x{\widetilde{x}}
+% \def \E{\mathbb{E}}
+% \def \y{\widetilde{y}}
+% \def \A{{\mathcal A}}
+% \def\h{{\rm h}_{\rm top}(g)}
+% \def\en{{\rm h}_{\rm top}}
+% \def\F{{\mathcal F}}
+\def\co{\colon\thinspace}
+
+\usepackage{ragged2e}  % `\justifying` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}       % `\url`s
+\usepackage{listings}  % Code listings
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+\usepackage{xfrac}
+
+
+\title{Capítulo 4: ¿Qué podemos leer de un código de barras?}
+\subtitle{4.1.1 Exponentes característicos \\ 4.2 Profundidad y aproximación de la frontera} %% that will be typeset on the
+\author{Haydeé Peruyero}
+\logo{
+%\includegraphics[width=2cm]{logo-IMUNAM.png}
+\includegraphics[width=2cm]{LOGO CCM-BLANCO.png}
+}
+
+\begin{document}
+
+\frenchspacing
+
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+  \frame{\maketitle}
+
+   \AtBeginSection[]{% Print an outline at the beginning of sections
+     \begin{frame}<beamer>
+       \frametitle{Contenidos}
+       \tableofcontents[currentsection]
+     \end{frame}}
+
+ %   \section{Motivación dinámica}
+%
+%    \subsection{Motivación}
+
+\section{4.1.1 Exponentes característicos}
+
+\begin{frame}{Exponente característico}
+Sea $E$ un espacio vectorial de dimensión finito sobre $\F$ con $\dim E = L$. \\[0.3cm]\pause
+
+\textbf{{\color{cyan}Definición 4.1.5}}
+La función $c: E \to \R \cup \{-\infty\}$ es llamada \textbf{{\color{green}exponente característico}} si \pause
+	\begin{enumerate}
+		\item
+			$c(0) = -\infty$, $c(v)\in \R$ para todo $v\neq 0$, \pause
+		\item
+			$c(\lambda v) = c (v)$ para todo $\lambda \in \F \setm \{0\}$, \pause
+		\item
+			$c(v_1 + v_2) \leq \max \{ c(v_1), c(v_2) \}$ para todo $v_1, v_2 \in E$.\\[0.5cm]
+	\end{enumerate} \pause
+
+\textbf{{\color{violet}Ejercicio 4.1.6}}
+Sea $c:E \to \R \cup \{-\infty\}$ el exponente característico. Verificar que para cualquier $\alpha \in \R$, el conjunto $\{ v : c(v) < \alpha \}$ es un subespacio de $E$. Deducir que $c$ admite a lo más $\dim E$ distintos valores reales.
+
+\end{frame}
+
+
+\begin{frame}{}
+ \textbf{{\color{yellow}Observación:}}   Cada exponente característico corresponde a una \textbf{{\color{green}bandera}} de espacios vectoriales
+$$
+	\{0\} = E_0 \subsetneq E_1 \subsetneq E_2 \subsetneq \ldots \subsetneq E_k = E \;,
+$$
+
+donde $\dim E_i = p_i$, y $0= p_0 <p_1 < p_2 <\ldots < p_k = L$, con la propiedad de que existen constantes $\alpha_1 < \alpha_2 < \ldots < \alpha_k$, tales que 
+$c\restr_{E_i\setm E_{i-1}} = \alpha_i$. \\[0.5cm]\pause
+
+El multiconjunto que consiste de cada $\alpha_i$ junto con sus multiplicidades $p_i - p_{i-1}$ se llama el \textbf{{\color{green}espectro de $c$}}, y se denotará por $\spec (c)$.
+
+\end{frame}
+
+\begin{frame}{}
+
+En el contexto de los módulos de persistencia y códigos de barras esta construcción es como sigue: \pause
+
+Dado un módulo de persistencia $(V, \pi)$, podemos definir el mapeo $c: V_{\infty} \to \R$ por
+	$$c(v) = \inf \{ s:\ v\in {\im}(\pi_{s, \infty})\}$$
+donde $V_\infty := V_t$ para $t \gg 0$.\\[0.5cm] \pause
+
+\textbf{{\color{violet}Ejercicio 4.1.7}}
+	\begin{enumerate}
+		\item
+			La función $c$ es un exponente característico.
+		\item
+			El espectro de $c$ consiste de los puntos finales de las barras infinitas en $\calB (V)$ junto con sus multiplicidades.
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Módulos de Morse}
+\begin{itemize}
+    \item Consideremos el módulo de persistencia de Morse $V=V(f)$ asociado a la función de Morse $f : X \to \R$ en una variedad cerrada $X$. \\[0.5cm] \pause
+    \item El espacio vectorial terminal $V_\infty$ es simplemente $H_*(M)$. \pause 
+    \item El exponente característico inducido $c_f \colon H_*(M) \to \R$ es llamado un \textbf{{\color{green}invariante espectral}}. \\[0.5cm]\pause
+    \item El valor $c_f(A)$ para $A \in H_*(M)$ es, intuitivamente, el mínimo valor crítico tal que los subconjuntos de nivel correspondientes contienen un representante (completo) de $A$. \\[0.5cm] \pause 
+    \item El \textbf{{\color{green}espectro}} de $c_f$ consiste en los llamados valores críticos homológicamente esenciales de $f$, los cuales son casos especiales de los valores críticos min-max.
+\end{itemize}
+\end{frame}
+
+\section{S. 4.2 Profundidad y aproximación de la frontera}
+
+\begin{frame}{Profundidad de la frontera}
+    \textbf{{\color{cyan}Definición 4.2.1}} Sea $\calB$ un código de barras. La longitud de la barra finita más larga en $\calB$ se llama la \textbf{{\color{green}profundidad de la frontera}} de $\calB$ y se denota por $\beta(\calB)$. \pause
+    Si un código de barras consiste de solo barras infinitas entonces definimos $\beta$ como cero. 
+\end{frame}
+
+\begin{frame}{}
+    \textbf{{\color{cyan}Teorema 4.2.2}} 
+    Para un código de barras $\calB$ escribamos las barras de longitud finita en orden decreciente:
+	\begin{equation}\label{eq-listbeta}
+	\beta_1 \geq \beta_2 \geq \dots\;
+	\end{equation} 
+ 
+ Siguiendo los resultados de Usher y Zhang, afirmamos que la función $\beta_k$ es  Lipschitz en el espacio de los códigos de barras con constante Lipschitz igual a $2$. Vamos a usar la convención de que si $\calB$ tiene menos de $k$ barras finitas, entonces $\beta_k(\calB)=0$.
+ 
+\end{frame}
+
+\begin{frame}{Demostración}
+\begin{itemize}
+    \item Supongamos que cualesquiera dos códigos de barras $\calB$ y $\calC$ están $\delta$-emparejados. \pause
+    \item Es suficiente probar la desigualdad
+\begin{equation}\label{eq-betak}
+\beta_k(\calB) -\beta_k(\calC) \leq 2\delta\;.
+\end{equation} \pause
+\item Fijemos un $\delta$-emparejamiento. Si $\beta_k(\calB) \leq 2\delta$, la desigualdad \eqref{eq-betak} se cumple. \pause 
+\item Entonces vamos a suponer que 
+\begin{equation}
+\label{eq-betadelta}
+\beta_k(\calB) > 2\delta\;.
+\end{equation}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Demostración}
+Cualquier $\delta$-emparejamiento $\mu$ nos deja en particular lo siguiente:
+\pause
+\begin{itemize}
+    \item Después de remover de ambos códigos de barras algunas de las barras de longitud $< 2\delta$, vamos a emparejar el resto de tal forma que las diferencias de longitudes en cada par sea menor que $2\delta$. \pause 
+    \item Denotemos las longitudes de los intervalos emparejados, en orden decreciente, como 
+	$$b_1 \geq b_2 \geq \dots \geq b_N \;,$$
+	y
+	$$c_1 \geq c_2 \geq \dots\geq c_N\;.$$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Demostración} 
+\begin{itemize}
+    \item Por el  \textbf{{\color{cyan}Lema del Emparejamiento}}, si pensamos en que emparejamos las \textbf{{\color{green}longitudes}} más que las barras, el emparejamiento óptimo es el monótono. \pause
+    \item En particular, 
+	\begin{equation}\label{eq-bc}
+	|b_k-c_k| < 2\delta\;,
+	\end{equation}
+	ya que esta cota en la diferencia de las longitudes es cierta también para $\mu$, la cual podría no ser el emparejamiento óptimo en términos de las longitudes.\pause
+  \item Por \eqref{eq-betadelta}, ninguna barra más larga que la $k$-ésima en la lista \eqref{eq-listbeta} es removida y así $b_k = \beta_k(\calB)$. \pause 
+  \item Por otro lado, $c_k \leq \beta_k(\calC)$ ya que algunas barras más largas que $c_k$ pudieron ser borradas.\pause
+  \item  Por \eqref{eq-bc},
+	$$\beta_k(\calB)-\beta_k(\calC) \leq b_k - c_k \leq 2\delta\;,$$
+	lo cual nos deja \eqref{eq-betak}.
+\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{$\R$-complejo filtrado}
+La noción de profundidad de la frontera fue introducida por M. Usher en el contexto de complejos filtrados. \\[0.3cm] \pause
+
+\textbf{{\color{cyan}Definición 4.2.3}} Un \textbf{{\color{green}$\R$-complejo filtrado}} $(C, \de)$ sobre $\F$ consiste de los siguientes datos:  \pause
+	\begin{itemize}
+		\item
+			Un $\F$-espacio vectorial de dimensión finita $C$ con un mapeo lineal $\de : C \to C$, tal que $\de ^2 = 0$.\\[0.2cm] \pause 
+		\item Para todo $\lambda \in \R$, un subespacio $C^\lambda \subseteq C$, tal que \\[0.2cm]\pause
+			\begin{enumerate}[1.]
+				\item
+					$C^\lambda \subseteq C^\mu$ para cualquier $\lambda < \mu$ en $\R$, \\[0.2cm]\pause
+				\item
+					$\cap_{\lambda \in \R} C^\lambda = \{ 0 \}$, $\cup_{\lambda \in \R} C^\lambda = C$, \\[0.2cm] \pause
+				\item
+					Para cualquier $\lambda \in \R$, $\de C^\lambda \subseteq \cup_{\mu < \lambda} C^\mu $.  \\[0.2cm] \pause
+					
+			\end{enumerate}
+	\end{itemize}
+Notemos que como $C$ es de dimensión finita, existen $\lambda_{-} < \lambda_{+}$ en $\R$, tal que $C^{\lambda}= 0 $ para cualquier $\lambda \leq \lambda_{-}$ y $C^\lambda = C$ para cualquier $\lambda \geq \lambda_{+}$.
+\end{frame}
+
+\begin{frame}{Profundidad de la frontera}
+\textbf{{\color{cyan}Definición 4.2.4}} La \textbf{{\color{green}profundidad de la frontera}} de un complejo filtrado $(C, \de)$ está definida como
+\begin{equation}
+	b(C,\de) = \inf \{ \alpha \geq 0 \ |\  \forall \lambda \in \R, \ (\im \de) \cap C^\lambda \subseteq \de(C^{\lambda+\alpha}) \} \;.
+	\end{equation} 
+ \pause 
+
+En otras palabras, $b (C, \de)$ es el $\alpha \geq 0$ más pequeño con la propiedad de que siempre que tengamos una frontera $x\in C$, podemos encontrar un elemento cuya frontera es $x$ al \textbf{{\color{green}buscar hacia arriba}} en la filtración no más que $\alpha$.\pause 
+
+Notemos que trivialmente $b (C, \de) \leq \lambda_{+} - \lambda_{-}$.
+
+
+\end{frame}
+
+\begin{frame}{}
+
+Entonces podemos conectar está noción en nuestro contexto al notar que $\{ H_{*} (C^\lambda) \}_\lambda$ es un módulo de persistencia. \\[0.5cm] \pause
+
+\textbf{{\color{violet}Ejercicio 4.2.5}} Usando la definición de profundidad de frontera $\beta$ de un código de barras, mostrar que para un $\Z$-graduado $\R$-complejo simplicial $(C, \de)$ se cumple que:
+	$$\beta \Big( \calB \big( \{ H_{*} (C^\lambda) \}_\lambda \big) \Big) = b (C, \de)\;.$$
+    
+\end{frame}
+
+\begin{frame}{Aproximando funciones en  $S^2$}
+\textbf{{\color{cyan}Ejemplo 4.2.6}} Consideremos la función de Morse $f: S^2 \to \R$. \pause Queremos saber que tan bien puede ser aproximada por una función de Morse $g$ en la esfera, la cual tiene exactamente dos puntos críticos, y tal que las dos funciones tienen los mismos máximos y mínimos. \\[0.3cm]\pause 
+La función $f$ es la función altura en la esfera con forma de corazón y la función $g$ es cualquier función de Morse en la esfera con exactamente dos puntos críticos y con los mismos máximos y mínimos que $f$. 
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[scale=0.5]{img/heart_sphere_morse_rsphere-1.png}
+
+	\label{fig: heart_sphere_morse_rsphere}
+\end{figure}
+   
+\end{frame}
+
+\begin{frame}{}
+\begin{itemize}
+    \item Consideremos los módulos de persistencia de la homología de Morse con respecto a esas funciones. \\[0.3cm]\pause
+    \item Para cuantificar que tan bien podemos aproximar $g$ con $f$, vamos a examinar los códigos de barras correspondientes a dichas módulos. \\[0.3cm] \pause 
+    \item Vamos a considerar la homología de Morse con coeficientes en $\Z_2$. \\[0.3cm] \pause
+    \item Sea $x_1 \in S^2$ el punto mínimo, $x_2$ el punto silla, $x_3$ el máximo local y $x_4$ el máximo global de $f$. \\[0.3cm] \pause 
+    \item Los índices de Morse de los puntos críticos de la esfera con forma de corazón son
+$$
+	\ind (x_1) = 0,\ \ind (x_2) = 1,\ \ind(x_3)= \ind (x_4) = 2 \;.
+$$ \pause
+    \item Además, tenemos que módulo 2: $\de x_1 = 0$, $\de x_2 = 2\cdot x_1 = 0$, y $\de x_3 = \de x_4 = x_2$.
+\end{itemize}
+ 
+
+
+
+
+\end{frame}
+
+\begin{frame}{}
+Vamos a calcular la homología de Morse $H (t)$ de los subconjuntos de nivel $\{ f < t\}$: \pause
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[scale=0.5]{img/heart_sphere_morse_rsphere-1.png}
+
+	\label{fig: heart_sphere_morse_rsphere}
+\end{figure}
+\begin{itemize}
+	\item
+		Para $t>a_4$:
+  \begin{itemize}
+      \item $H_2 (t) = \Z_2 \langle x_3 + x_4 \rangle$ (ya que $x_3 - x_4 \in \ker \de$),
+      \item $H_1 (t) = 0$ (ya que $x_2$ es un punto frontera),
+      \item $H_0 (t) = \Z_2 \langle x_1 \rangle$. \\[0.2cm] \pause
+  \end{itemize}
+	\item
+		Para $t\in (a_3, a_4)$:
+  \begin{itemize}
+      \item $H_2 (t) = 0$ (ya que $\de x_3 = x_2$ es no cero),
+      \item $H_1 (t) = 0$ (ya que $\de x_2 = 0$ y $\de x_3 = x_2$),
+      \item $H_0 (t) = \Z_2 \langle x_1 \rangle$.
+  \end{itemize}
+	
+\end{itemize}
+\end{frame}
+
+\begin{frame}{}
+    \begin{figure}[!ht]
+	\centering
+	\includegraphics[scale=0.5]{img/heart_sphere_morse_rsphere-1.png}
+
+	\label{fig: heart_sphere_morse_rsphere}
+\end{figure}
+    \begin{itemize}
+        \item
+		Para $t\in (a_2, a_3)$:
+  \begin{itemize}
+      \item $H_2 (t) = 0$,
+      \item $H_1 (t) = \Z_2 \langle x_2 \rangle$,
+      \item $H_0 (t) = \Z_2 \langle x_1 \rangle$. \\[0.2cm] \pause
+  \end{itemize}
+	\item
+		Para $t\in (a_1, a_2)$:
+  \begin{itemize}
+      \item $H_2 (t) = H_1 (t) = 0$,
+      \item  $H_0 (t) = \Z_2 \langle x_1 \rangle$.\\[0.2cm]\pause
+  \end{itemize}
+	\item
+		Para $t < a_1$:
+		$H (t) = 0$.
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{}
+    \begin{figure}[!ht]
+	\centering
+	\includegraphics[scale=1]{img/heart_sphere_barcode-1.png}
+	\caption{Código de barras de la esfera con forma de corazón}
+	\label{fig: heart_sphere_barcode}
+\end{figure}
+
+\textbf{{\color{yellow}Observación:}} Las barras infinitas corresponden a los invariantes espectrales $a_1 = c_f ([\text{punto}])$ y $a_4 = c_f ([S^2])$ (los mínimos y máximos). \\[0.3cm] \pause 
+También, las barras finitas tienen longitud $a_3 - a_2$. Lo cual nos da una solución a nuestra pregunta de aproximación.
+\end{frame}
+
+\begin{frame}{}
+\textbf{{\color{yellow}Observación:}} En el caso de que $g: S^2 \to \R$ se la función de Morse de $S^2$ que tiene los mismos mínimos y máximos que $f$. El código de barras correspondiente $\calB (g)$ tiene las mismas dos barras infinitas pero no tiene barras finitas. Aquí $a_1 = \min g,\ a_4 = \max g$.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[scale=1]{img/sphere_height_fnc_barcode-1.png}
+	\caption{Código de barras correspondiente a la esfera redonda}
+	\label{fig: sphere_height_fnc_barcode}
+\end{figure}
+\end{frame}
+
+\begin{frame}{}
+\begin{itemize}
+    \item Por definición, la profundidad de la frontera de la esfera con forma de corazón es $\beta (\calB (f)) = a_3 - a_2$, mientras que $\beta (\calB (g)) = 0$.\pause 
+    \item Notemos que estos valores pueden ser obtenidos también de la descripción alternativa de la profundidad de la frontera. 
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{}
+Regresando a la pregunta de aproximación que vimos al final de la sección 1.4, el \textbf{{\color{cyan}Teorema de Isometría (Teorema 2.2.8)}}, \textbf{{\color{cyan}Teorema 4.2.2}} y la ecuación 
+\begin{equation}\label{eq: interleaving_dist_smaller_than_functions_norm}
+		d_{int} \big( V(f), V(g) \big) \leq
+		%\dis_{C^0} (f \text{ mod } \Diff,\ g \text{ mod } \Diff) :=
+		\inf_{\vphi \in \Diff(M)} \| f - \vphi^* g \| \;.
+\end{equation}
+tenemos que 
+\begin{equation}
+	a_3 - a_2 \leq 2 d_{bot} \big( \calB(f), \calB(g) \big) = 2 d_{int} \big( V(f), V(g) \big) \leq 2 \| f-g \| \;,
+\end{equation}
+
+así $\| f-g \| \geq \frac{1}{2} (a_3 - a_2)$.\\[0.2cm] \pause 
+
+Lo cual nos permite cuantificar la obstrucción a la aproximación de $f: S^2 \to \R$ por una función de Morse con exactamente dos puntos críticos.\\[0.4cm] \pause
+    
+    
+    \textbf{{\color{violet}Ejercicio 4.2.7}}	Encontrar el código de barras para la función altura del círculo con forma de corazón $S^1$.
+\end{frame}
+
+\end{document}
+
