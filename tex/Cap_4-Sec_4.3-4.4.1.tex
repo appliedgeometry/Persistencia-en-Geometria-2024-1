@@ -1,0 +1,366 @@
+
+\documentclass{beamer}
+\setbeamertemplate{theorems}[numbered]
+\usecolortheme{dracula}
+\usepackage[utf8]{inputenc}
+\usepackage[
+  main=spanish
+]{babel}
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+%\usefonttheme[onlymath]{serif}
+
+\newcounter{Ejercicio}
+%\newcounter{Ejemplo}
+
+%\newtheorem{Theorem}{Teorema}[section]
+%\newtheorem{Lemma}[Theorem]{Lema}
+\newtheorem{claim}[theorem]{Afirmaci\'on}
+\newtheorem*{claim*}{Afirmaci\'on}
+%\newtheorem{Ejercicio}[Theorem]{Ejercicio}
+%
+%
+\newtheorem{Ejercicio}[theorem]{Ejercicio}%[count-ejercicio]
+%\newtheorem{Afirmacion}[theorem]{claim}
+\newtheorem{Ejemplo}{Ejemplo}
+\usepackage{cancel}
+%\newtheorem{Proposition}[Theorem]{Proposici\'on}
+%\newtheorem{Conjecture}[Theorem]{Conjecture}
+%\newtheorem{Definition}[Theorem]{Definici\'on}
+\newtheorem{example2}[theorem]{Ejemplo}
+%\newtheorem{Observation}[Theorem]{Observation}
+%\newtheorem{Remark}[Theorem]{Remark}
+\def\matching{apareamiento}
+\def\matched{apareados}
+
+\def \rk{{\mbox {rk}}\,}
+\def \dim{{\mbox {dim}}\,}
+\def \ex{\mbox{\rm ex}}
+\def\df{\buildrel \rm def \over =}
+\def\ind{{\mbox {ind}}\,}
+\def\Vol{\mbox{Vol}}
+\def\V{\mbox{Var}}
+\newcommand{\comp}{\mbox{\tiny{o}}}
+\newcommand{\QED}{{\hfill$\Box$\medskip}}
+
+
+\def\Z{{\bf Z}}
+\def\R\re
+\def\V{\bf V}
+\def\W{\bf W}
+\def\f{\tilde{f}_{k}}
+\def \e{\varepsilon}
+\def \la{\lambda}
+\def \vr{\varphi}
+\def \R{{\bf R}}
+\def \L{{\mathcal L}}
+
+\def \re{{\mathbb R}}
+\def \Q{{\mathbb Q}}
+\def \cp{{\mathbb CP}}
+\def \T{{\mathbb T}}
+\def \C{{\bf C}}
+\def \M{{\widetilde{M}}}
+\def \I{{\mathbb I}}
+\def \H{{\mathbb H}}
+\def \lv{\left\vert}
+\def \rv{\right\vert}
+\def \ov{\overline}
+\def \tx{{\widehat{x}}}
+\def \0{\lambda_{0}}
+\def \la{\lambda}
+\def \ga{\gamma}
+\def \de{\delta}
+\def \x{\widetilde{x}}
+\def \E{\mathbb{E}}
+\def \y{\widetilde{y}}
+\def \A{{\mathcal A}}
+\def\h{{\rm h}_{\rm top}(g)}
+\def\en{{\rm h}_{\rm top}}
+\def\F{{\mathcal F}}
+\def\co{\colon\thinspace}
+
+\usepackage{ragged2e}  % `\justifying` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}       % `\url`s
+\usepackage{listings}  % Code listings
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+\usepackage{xfrac}
+
+
+\title{Parte I: Cap\'itulo 4}
+\subtitle{4.3 Funci\'on de multiplicidad\\ \scalebox{0.6}{\emph{(The Multiplicity Function)}}\\ 4.4.1 Representationes en m\'odulos de persistencia:\\ Desarrollo te\'orico\\ \scalebox{0.6}{\emph{(Representations on persistence modules - Theoretical development)}}} 
+\author{Eduardo Vel\'azquez}
+\logo{
+%\includegraphics[width=2cm]{logo-IMUNAM.png}
+\includegraphics[scale=0.1]{cimat-logo-w.png}
+}
+
+\begin{document}
+
+\frenchspacing
+
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+  \frame{\maketitle}
+
+  %\AtBeginSection[]{% Print an outline at the beginning of sections
+    %\begin{frame}<beamer>
+    %  \frametitle{Contenidos}
+    %  \tableofcontents[currentsection]
+    %\end{frame}}
+
+    %\section{Motivación dinámica}
+%
+%    \subsection{Motivación}
+\begin{frame}{4.3 Funci\'on de Multiplicidad}
+Sea $\mathcal{B}$ un c\'odigo de barras, e $I\subset \mathbb{R}$ un intervalo finito.\\
+\vspace{1em}
+ Denotemos $m(\mathcal{B},I)$ al n\'umero de barras en $\mathcal{B}$ que contienen a $I$.\\
+ \vspace{1em}
+  Adem\'as, sea $I=(a,b]$ y $c\leq \frac{b-a}{2}$ denotemos $I^c=(a+c,b-c]$.
+   \vspace{4em}
+  \begin{block}{Definici\'on 4.3.2}
+  Se define la {\bfseries Funci\'on de multiplicidad} como
+    \begin{gather*}
+\mu_{k}(\mathcal{B})=\mbox{sup}\{ c \,| \,\exists\, \mbox{un intervalo finito I de longitud} > 4c,\\
+\,\hspace{5em} \mbox{tal que } m(\mathcal{B},I)=m(\mathcal{B},I^{2c})=k\}\,.
+  \end{gather*}
+  \end{block}
+  
+  \scalebox{0.7}{En caso de que no exista dicha $c$, $\mu_{k}(\mathcal{B})=0$ .}
+\end{frame}
+
+
+\begin{frame}
+Dado $k\in\mathbb{N}$, $\mu_{k}(\mathcal{B})=sup(\{c\})$
+\begin{itemize}
+\item[] $c\in\mathbb{R}$ tal que:
+\item Podemos encontrar un intervalo $I$ tal que $\frac{\mbox{Longitud}\,I}{4}>c$.
+\item $I$ est\'a contenido en $\mathcal{B}$
+\item $m(\mathcal{B},I)=k$
+\item $m(\mathcal{B},I^{2c}=(a+2c,b-2c]\,)=k$
+\end{itemize}
+\begin{center}
+\includegraphics[scale=0.4]{diagrams/fig06.png}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\includegraphics[scale=0.3]{./diagrams/fig07.png}
+\end{center}
+En palabras, dado $k\in \mathbb{N}$, la funci\'on de multiplicidad busca la m\'axima ventana, i.e. un intervalo $I$ de longitud $>4c$ en $\mathbb{R}$, tal que arriba de ella y del intervalo acortado $I^{2c}$ existan exactamente $k$ barras.
+\end{frame}
+
+\begin{frame}
+\begin{minipage}{0.25\textwidth}
+
+\end{minipage}\hfill\scalebox{0.8}{\begin{minipage}{0.75\textwidth}
+\begin{block}{Ejercicio 4.3.1}
+Sean $\mathcal{B}$ y $\mathcal{C}$ dos c\'odigos de barras tales que
+\begin{gather*}
+d_{bot}\left( \mathcal{B},\,\mathcal{C}\right)<c\,,
+\end{gather*}
+adem\'as, sea $I$ un intervalo de longitud $>4c$ tal que $m(\mathcal{B},I)=m(\mathcal{B},I^{2c})=m_0$. Entonces
+\begin{gather*}
+m(\mathcal{C}, I^c ) = m_0\, .
+\end{gather*}
+\end{block}
+\end{minipage}}
+$\,$\\
+Por el ejercicio 4.3.1, podemos deducir que para dos c\'odigos de barras $\mathcal{B},\,\mathcal{C}$ y cualquier $k\in \mathbb{N}$,
+\begin{gather} \tag{16}\label{eq:16}
+|\mu_k(\mathcal{B})-\mu_k(\mathcal{C})|\leq d_{bot}(\mathcal{B},\mathcal{C})\,.
+\end{gather}
+$\,$\\
+Una aplicaci\'on de~(\ref{eq:16}) es la siguiente.
+\end{frame}
+
+\begin{frame}
+\begin{block}{Definici\'on 4.3.3}
+\begin{itemize}
+\item Decimos que un m\'odulo de persistencia $(V,\pi)$ sobre $\mathbb{R}$ admite una {\bfseries estructura compleja} $J$ si existe un isomorfismo $J:V\rightarrow V$ que satisface $J^2=-\mathbb{1}$.
+
+\item En tal caso, llamaremos a $(V,\pi)$ {\bfseries m\'odulo de persistencia \emph{complejo}}. \\
+
+\item Se sigue adem\'as que $dim V_t$ es par $\forall t\in\mathbb{R}$ .
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+%\setcounter{section}{3}
+%\setcounter{subsection}{3}
+%\setcounter{theorem}{3}
+\begin{claim*}{(4.3.4)} Sea $\mathcal{B}$ el c\'odigo de barra asociado a un m\'odulo de persistencia $(V,\pi)$ que admite una estructura compleja, entonces $m(\mathcal{B},I)$ es par para cualquier intervalo $I$. En particular, se sigue que para un m\'odulo de persistencia complejo $(V,\pi)$, obtenemos $\mu_k\left(\mathcal{B}(V)\right)=0$ para todo entero impar $k\in \mathbb{N}$.
+\end{claim*}
+\begin{proof}\let\qed\relax
+Sea $I=(a,b]$ y $\tilde{a}\in\mathbb{R}$ suficientemente cerca de $a$ tal que $a<\tilde{a}<b$. 
+\vspace{-3em}
+\begin{center}
+\includegraphics[scale=0.35]{./diagrams/fig08a.png}
+\end{center}
+Cualquier barra que contenga a $I$ contribuye en $+1$ a $dim(\mbox{im}\,\pi_{\tilde{a},b})$, es decir, $m(\mathcal{B},I)=dim(\mbox{im}\,\pi_{\tilde{a},b})$.
+\end{proof}
+\end{frame}
+
+
+\begin{frame}
+\begin{center}
+\includegraphics[scale=0.35]{./diagrams/fig08b.png}
+\end{center}
+Como $\pi_{\tilde{a},b}J_{\tilde{a}}=J_{b}\pi_{\tilde{a},b}$, entonces $J_b(\mbox{im}\,\pi_{\tilde{a},b)}\subset \mbox{im}\pi_{\tilde{a},b}$, es decir, $J^\prime:=J_b\vert_{\mbox{im}\,\pi_{\tilde{a},b}}$ tambi\'en satisface $(J^\prime)^2=-\mathbb{1}\Rightarrow dim(\mbox{im}\pi_{\bar{a},b})$ es par.\vfill\hfill$\qed$
+\end{frame}
+
+
+\begin{frame}
+Sea $\mu_{odd}(\mathcal{B}):=$  $\mbox{max}\atop {\scalebox{0.5}{j\,odd}}$ $\mu_{j}(\mathcal{B})$.
+\vspace{1em}
+\begin{claim*}{}Sea $(V,\pi)$ un m\'odulo de persistencia. Entonces para todo m\'odulo $(W,\theta)$ que admita una estructura compleja, la distancia de entrelazamiento entre ellos est\'a acotada por abajo:
+\begin{gather*}
+d_{int}\left((V,\pi),\,(W,\theta) \right)\geq \mu_{odd}\left( \mathcal{B}(V,\pi)\right)\,.
+\end{gather*}
+\end{claim*}
+\begin{itemize}
+\item[] Implicaciones:
+\item La distancia de entrelazamiento entre cualquier m\'odulo de persistencia $(V,\pi)$y la colecci\'on de m\'odulos complejos est\'a acotada por abajo por $\mu_{odd}\left( \mathcal{B}(V,\pi)\right)$.
+\item En el caso de que $\mu_{odd}\left( \mathcal{B}(V,\pi)\right)>0$, obtenemos una restricci\'on para aproximar un m\'odulo de persistencia $(V,\pi)$ dado por un m\'odulo de persistencia complejo.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\begin{proof}
+Por el Teorema de Isometr\'ia, la desigualdad~(\ref{eq:16}) y la Afirmaci\'on 4.3.4, si $(W,\theta)$ es un m\'odulo complejo, entonces
+\begin{eqnarray*}
+d_{int}\left((V,\pi),\,(W,\theta) \right)&=& d_{bot}\left( \mathcal{B}(V,\pi),\,\mathcal{B}(W,\theta)\right)\\
+&\geq& |\mu_{odd}(\mathcal{B}(V,\pi))-\cancel{\mu_{odd}(\mathcal{B}(W,\theta))}|
+\end{eqnarray*}
+\end{proof}
+\end{frame}
+
+
+\begin{frame}{4.4 Representaciones en m\'odulos de persistencia}
+\framesubtitle{4.4.1 Desarrollo te\'orico}
+Recordemos que la representaci\'on de un grupo $G$ es un par $(V,\rho)$, donde $V$ es un espacio vectorial de dimensi\'on finita y $\rho$ es un homomorfismo de $G$ a $\mbox{GL}(V)$. Adaptaremos este concepto a los m\'odulos de persistencia.\\
+\vspace{1em}
+\begin{block}{Definici\'on 4.4.2}
+Una {\bfseries representaci\'on de persistencia de un grupo} $G$ es un par $\left((V,\pi),\rho\right)$, donde $(V,\pi)$ es un m\'odulo de persistencia y $\rho$ es un homomorfismo de $G$ al grupo de automorfismos de persistencia de $(V,\pi)$. Una {\bfseries subrepresentaci\'on de persistencia} $\left( (W,\pi),\rho\right)$ de $\left((V,\pi),\rho\right)$ es un subm\'odulo de persistencia $(W,\pi)$ de $(V,\pi)$ tal que $\forall t\in \mathbb{R}$, $W_t$ es invariante bajo $\rho(g)_t$ para cualquier $g\in G$.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{example2}Un \emph{m\'odulo de persistencia con involuci\'on} (pmi), denotado $((V,\pi),A)$, es una representaci\'on de persistencia de $G=\mathbb{Z}_2$. En otras palabras, $A$ es un homomorfismo de $G$ al grupo de persistencia de automorfismos de $(V,\pi)$ tal que para cualquier $t\in \mathbb{R}$, $A_t^2=\mathbb{1}$. 
+\end{example2}
+\vspace{1em}
+\begin{block}{Definici\'on 4.3.3}
+Sean $((V,\pi),\rho^V)$ y $((W,\theta),\rho^W)$ dos representaciones de persistencia del grupo $G$. Un {\bfseries morfismo} $G$-{\bfseries persistente} $\mathfrak{f}:((V,\pi),\rho^V)\rightarrow ((W,\theta),\rho^W)$ es una $\mathbb{R}$-familia de morfismos persistentes $G$-equivariantes $f_t:V_t\rightarrow W_t$, $t\in \mathbb{R}$.
+\end{block}
+\end{frame}
+
+
+\begin{frame}
+Dado un $G$-morfismo persistente $\mathfrak{f}:((V,\pi),\rho^V)\rightarrow ((W,\theta),\rho^W)$, se puede considerar
+\begin{gather*}
+\mbox{ker}(\mathfrak{f})=\left\{  v\in V_t \vert f_t(v)=0\right\}_{t\in \mathbb{R}}\\
+y\\
+\mbox{im}(\mathfrak{f})=\left\{ f_t(v)\in W_t\vert v\in V_t\right\}_{t\in \mathbb{R}}\,.
+\end{gather*}
+
+\begin{minipage}{0.25\textwidth}
+
+\end{minipage}\hfill\scalebox{0.8}{\begin{minipage}{0.75\textwidth}
+\begin{block}{Ejercicio 4.4.4} Demuestre que $(\mbox{ker}(\mathfrak{f}),\rho^V)$ es una subrepresentaci\'on persistente de $((V,\pi),\rho^V)$ y, an\'alogamente, $(\mbox{im}(\mathfrak{f}),\rho^W)$ de $((W,\theta),\rho^W)$ .
+\end{block}
+\end{minipage}}\\
+\begin{block}{Ejemplo 4.4.5}
+Sea $((V,\pi),\rho^V)$ una representaci\'on persistente sobre $\mathbb{C}$ del grupo finito $\mathbb{Z}_p = \{0, 1, \cdots, p - 1\}$. Sea $\xi$ la $p$-\'esima ra\'iz de la unidad. Consideremos $(L_\xi)_t=\mbox{ker}(\rho(1)_t-\xi\mathbb{1}_{V_t})$ para todo $t\in \mathbb{R}$. Entonces $((\{ (L_\xi)_t \}_{t\in\mathbb{R}} , \pi), \rho)$ es una subrepresentaci\'on persistente de $((V,\pi),\rho^V)$.
+\end{block}
+\end{frame}
+
+
+\begin{frame}
+Recordemos que un $\delta$ corrimiento de un m\'odulo de persistencia $(V,\pi)$, denotado $(V[\delta],\pi[\delta])$, se define como $V[\delta]_{t}=V_{t+\delta}$ y $\pi[\delta]_{s,t}=\pi_{s+\delta,t+\delta}$. An\'alogamente, para cualquier morfismo persistence $\mathfrak{f}:(V,\pi)\rightarrow (W,\theta)$ definimos su $\delta$-corrimiento:
+\begin{gather*}
+\mathfrak{f}[\delta]:(V[\delta],\pi[\delta])\rightarrow(W[\delta],\theta[\delta])\\
+(\mathfrak{f}[\delta])_t=f_{t+\delta}\,.
+\end{gather*}
+Observe que si $((V,\pi),\rho)$ es una representaci\'on persistente de $G$, tambi\'en lo es $((V[\delta],\pi[\delta]),\rho[\delta])$ .
+\end{frame}
+
+\begin{frame}{Definici\'on 4.4.7}
+Sean $((V,\pi),\rho^V)$ y $((W,\theta),\rho^W)$ dos representaciones de persistencia del grupo $G$. Decimos que $(V,\pi)$ y $(W,\theta)$ est\'an $(\delta,G)$-entrelazados si existen $G$-morfismos persistentes $\mathfrak{f}:(V,\pi)\rightarrow(W[\delta],\theta[\delta])$ y $\mathfrak{g}:(W,\theta)\rightarrow(V[\delta],\pi[\delta])$ tales que los siguientes diagramas conmutan:
+\begin{center}
+\includegraphics[scale=0.4]{diagrams/fig09.png}
+\end{center}
+\end{frame}
+
+
+\begin{frame}
+Consistentemente, podemos definir la distancia de $G$-entrelazamiento como
+\begin{gather*}
+d_{G-int}\left( (V,\pi),\,(W,\theta)\right)=\mbox{inf}\left\{\delta >0\vert (V,\pi) \mbox{ y } (W,\theta) \mbox{ est\'an }\right.\\
+\, \hspace{20em} \left. (\delta,G)\mbox{-entrelazados} \right\}\,.
+\end{gather*}
+
+\vspace{2em}
+
+\begin{block}{Proposici\'on 4.4.8}
+Sean $((V,\pi),\rho^V)$ y $((W,\theta),\rho^W)$ dos representaciones de persistencia del grupo $G$. Entonces,
+\begin{gather*}
+d_{G-int}\left( (V,\pi),\,(W,\theta)\right)\geq d_{int}\left( (V,\pi),\,(W,\theta)\right)\,.
+\end{gather*}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Ejemplo 4.4.9}
+Sean $((V,\pi),\rho^V)$ y $((W,\theta),\rho^W)$ dos representaciones de persistencia sobre $\mathbb{C}$ del grupo finito $\mathbb{Z}_{p}=\{0,1,\cdots,p-1\}$, con $p$ un n\'umero primo. Para cualquier ra\'iz $p$-\'esima de la unidad $\xi$, denotemos como $((L_{\xi}^{V},\pi),\rho^V)$ y $((L_{\xi}^{W},\theta),\rho^W)$ a las subrepresentaciones de persistencia de $((V,\pi),\rho^V)$ y $((W,\theta),\rho^W)$, respectivamente (ver Ejemplo 4.4.5). Si $((V,\pi),\rho^V)$ y $((W,\theta),\rho^W)$ est\'an $(\delta,G)$-entrelazados, se puede demostrar que $((L_{\xi}^{V},\pi),\rho^V)$ y $((L_{\xi}^{W},\theta),\rho^W)$ tambi\'en est\'an $(\delta,G)$-entrelazados. Por tanto,
+\begin{eqnarray*}
+d_{G-int}((V,\pi),(W,\theta))&\geq& d_{G-int}\left( (L_{\xi}^{V},\pi), \,(L_{\xi}^{W},\theta)\right)\\
+&\geq& d_{int}\left( (L_{\xi}^{V},\pi), \,(L_{\xi}^{W},\theta)\right)\\
+&=&d_{bot}\left( (L_{\xi}^{V},\pi), \,(L_{\xi}^{W},\theta)\right)\,.
+\end{eqnarray*}
+\end{block}
+\end{frame}
+
+\begin{frame}
+En esta secci\'on no se trabaja con el caso general $G=\mathbb{Z}_{p}$ sino s\'olo con $p=2,4$. Note que si $\mathbb{Z}_4$ act\'ua en un conjunto, esta acci\'on induce una $\mathbb{Z}_2$-acci\'on sobre el mismo conjunto, por el homomorfismo $\mathbb{Z}_2\rightarrow\mathbb{Z}_4$, $1\mapsto 2$. Decimos que un módulo de persistencia con involución (pmi) $((W,\theta),B)$ es un $\mathbb{Z}_4$-pmi si su $\mathbb{Z}_2$ acci\'on $B$ proviene de una $\mathbb{Z}_4$-acci\'on, es decir, si existe un morfismo de persistencia $C:(W,\theta)\rightarrow (W,\theta)$, tal que $B=C^2$ y $C^4=\mathbb{1}$.
+\vspace{2em}
+
+Sea $((V,\pi),A)$ un pmi. Retomando el Ejemplo 4.4.5 con $\xi=-1$, denotemos $L^V$ al m\'odulo de persistencia resultante construido a partir de los $(-1)-$espacios propios.
+\end{frame}
+
+
+\begin{frame}{Teorema 4.4.11}
+Sea $((V,\pi),A)$ un módulo de persistencia con involución (pmi). La $\mathbb{Z}_2$-distancia de entrelazamiento entre $V$ y la collecci\'on de m\'odulos de persistencia con involuci\'on cuya $\mathbb{Z}_2$ acci\'on proviene de una $\mathbb{Z}_4$, est\'a acotada por abajo en t\'erminos de la funci\'on de multiplicidad:\\
+Para cualquier $\mathbb{Z}_4$-pmi $((W,\theta),B)$,
+\begin{gather*}
+d_{\mathbb{Z}_2-int}\left(V,W\right)\geq \mu_{odd}\left(L^V \right)\,.
+\end{gather*}
+\begin{proof}
+\begin{enumerate}
+\item[] Ejercicio 4.4.12:
+\item Demostrar que si $(V,\pi)$ y $(W,\theta)$ est\'an $\mathbb{Z}_2$-entrelazados, entonces $L^V$ y $L^W$ est\'an $\delta$-entrelazados.
+\item Demostrar que $C(L^W)=L^W$, y deducir que $C^2\vert_{L^W}=-\mathbb{1}$ .
+\end{enumerate}
+En consecuencia, $L^W$ es un m\'odulo de peristencia complejo (Definici\'on 4.3.3). Por tanto, por la Afirmaci\'on 4.3.5,
+\vspace{-0.7em}
+\begin{gather*}
+d_{\mathbb{Z}_2-int}\left((V,\pi),(W,\theta)\right)\geq d_{int}(L^V,L^W)\geq \mu_{odd}\left(L^V \right)\,.
+\end{gather*}
+\end{proof}
+\end{frame}
+\end{document}
+
+
+
+
