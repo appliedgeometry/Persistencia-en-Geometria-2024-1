@@ -1,0 +1,269 @@
+
+\documentclass{beamer}
+\setbeamertemplate{theorems}[numbered]
+\usecolortheme{dracula}
+\usepackage[utf8]{inputenc}
+\usepackage[
+  main=spanish
+]{babel}
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+%\usefonttheme[onlymath]{serif}
+
+\newcounter{Ejercicio}
+%\newcounter{Ejemplo}
+\uselanguage{spanish}
+\languagepath{spanish}
+\deftranslation[to=spanish]{Lemma}{Lema}
+%\newtheorem{Theorem}{Teorema}[section]
+%\newtheorem{Lemma}[Theorem]{Lema}
+\newtheorem{claim}[theorem]{Afirmaci\'on}
+\newtheorem*{claim*}{Afirmaci\'on}
+%\newtheorem{Ejercicio}[Theorem]{Ejercicio}
+%
+%
+\newtheorem{Ejercicio}[theorem]{Ejercicio}%[count-ejercicio]
+%\newtheorem{Afirmacion}[theorem]{claim}
+\newtheorem{Ejemplo}{Ejemplo}
+\usepackage{cancel}
+%\newtheorem{Proposition}[Theorem]{Proposici\'on}
+%\newtheorem{Conjecture}[Theorem]{Conjecture}
+%\newtheorem{Definition}[Theorem]{Definici\'on}
+\newtheorem{example2}[theorem]{Ejemplo}
+%\newtheorem{Observation}[Theorem]{Observation}
+%\newtheorem{Remark}[Theorem]{Remark}
+\def\matching{apareamiento}
+\def\matched{apareados}
+
+\def \rk{{\mbox {rk}}\,}
+\def \dim{{\mbox {dim}}\,}
+\def \ex{\mbox{\rm ex}}
+\def\df{\buildrel \rm def \over =}
+\def\ind{{\mbox {ind}}\,}
+\def\Vol{\mbox{Vol}}
+\def\V{\mbox{Var}}
+\newcommand{\comp}{\mbox{\tiny{o}}}
+\newcommand{\QED}{{\hfill$\Box$\medskip}}
+
+
+\def\Z{{\bf Z}}
+\def\R\re
+\def\V{\bf V}
+\def\W{\bf W}
+\def\f{\tilde{f}_{k}}
+\def \e{\varepsilon}
+\def \la{\lambda}
+\def \vr{\varphi}
+\def \R{{\bf R}}
+\def \L{{\mathcal L}}
+
+\def \re{{\mathbb R}}
+\def \Q{{\mathbb Q}}
+\def \cp{{\mathbb CP}}
+\def \T{{\mathbb T}}
+\def \C{{\bf C}}
+\def \M{{\widetilde{M}}}
+\def \I{{\mathbb I}}
+\def \H{{\mathbb H}}
+\def \lv{\left\vert}
+\def \rv{\right\vert}
+\def \ov{\overline}
+\def \tx{{\widehat{x}}}
+\def \0{\lambda_{0}}
+\def \la{\lambda}
+\def \ga{\gamma}
+\def \de{\delta}
+\def \x{\widetilde{x}}
+\def \E{\mathbb{E}}
+\def \y{\widetilde{y}}
+\def \A{{\mathcal A}}
+\def\h{{\rm h}_{\rm top}(g)}
+\def\en{{\rm h}_{\rm top}}
+\def\F{{\mathcal F}}
+\def\co{\colon\thinspace}
+
+\usepackage{ragged2e}  % `\justifying` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}       % `\url`s
+\usepackage{listings}  % Code listings
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+\usepackage{xfrac}
+
+\date{23 de noviembre de 2023}%23 de noviembre de 2023
+\title{Parte II: Cap\'itulo 5}
+\subtitle{5.3 Aprendizaje de Variedades\\ \scalebox{0.6}{\emph{(Manifold learning)}}\\ 6.1 Teor\'ia de Funciones Topol\'ogicas - Pr\'ologo\\ \scalebox{0.6}{\emph{(Topological function theory - Prologue)}}} 
+\author{Eduardo Vel\'azquez}
+\logo{
+%\includegraphics[width=2cm]{logo-IMUNAM.png}
+\includegraphics[scale=0.1]{cimat-logo-w.png}
+}
+
+\begin{document}
+
+\frenchspacing
+
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+  \frame{\maketitle}
+
+  %\AtBeginSection[]{% Print an outline at the beginning of sections
+    %\begin{frame}<beamer>
+    %  \frametitle{Contenidos}
+    %  \tableofcontents[currentsection]
+    %\end{frame}}
+
+    %\section{Motivación dinámica}
+%
+%    \subsection{Motivación}
+\begin{frame}{5.3 Aprendizaje de Variedades}{}
+{\bfseries Objetivo:} Estudiar una variedad riemanniana $M$ extrayendo información acerca de ella a partir de un conjunto finito de puntos $X=\{x_1,x_2.\cdots,x_N\}$.\\
+$\,$\\
+Una \emph{cubierta buena} $\mathcal{U}=\{U_i\}$ de un espacio topol\'ogico es una cubierta abierta tal que cualquier intersecci\'on de un n\'umero finito de elementos de $\mathcal{U}$ es vac\'ia o contraible.\\
+$\,$\\
+\begin{lemma}{Lema de Nerve (Hatcher, Algebraic topology)} Sea $\mathcal{U}=\{U_i\}$ una buena cubierta de $M$. Entonces la homolog\'ia del correspondiente complejo de Cech de $\mathcal{U}$ es igual al de la variedad: 
+$$H_\ast\left(\check{C}\left( \mathcal{U}\right)\right)=H_\ast\left( M\right).$$
+\end{lemma}
+\end{frame}
+
+
+\begin{frame}
+Sea $X\subset M$ un conjunto finito de puntos. Consideremos el complejo de Rips $R_t(X)$ con conjunto de v\'ertices $X$ y s\'implices $\sigma$ formados por los subconjuntos de $X$ que tienen di\'ametro menor a $t$. Para $X$ suficientemente denso (o $t$ suficientemente grande) la colecci\'on $\mathcal{U}_t=\mathcal{U}_t(X)=\{B_{2^{t/2}}(x)\}_{x\in X}$ es una cubierta de $M$. En este caso consideramos tambi\'en al complejo de \v{C}ech, $\check{C}_t(X)$, asociado a esta cubierta. Tambi\'en sabemos que los m\'odulos de persistencia $V_a=\check{C}_{2^a}$ y $W_a=R_{2^a}$ est\'an 1-entrelazados.
+\end{frame}
+
+\begin{frame}
+\begin{block}{Teorema 5.3.2} Sea $M$ una variedad riemanniana y $X\subset M$ una muestra finita de puntos. Supongamos que existe $\varepsilon_{-}<\varepsilon_{+}$ con  $\varepsilon_{+}-\varepsilon_{-}>4$, tal que para cualquier $t\in (\varepsilon_{-},\varepsilon_{+}]$, la colecci\'on $\mathcal{U}_t$ es una buena cubierta de $M$. Entonces para cualquier $k\geq 0$ la $k$-\'esima homolog\'ia de $M$ puede recuperarse del correspondiente m\'odulo de persistencia de Rips $(W,\pi^W)$ asociado a $X$, es decir,
+\begin{gather*}
+\mbox{im}(\pi_{\varepsilon_{-}+1,\varepsilon_{+}-1}^{W})\simeq H_k(M)\,\,\, \forall\, k\geq 0\,.
+\end{gather*}
+\end{block}
+\begin{proof}\phantom{\qedhere}
+Sea $(V,\pi)$ un m\'odulo de persistencia e $I\subset\mathbb{R}$ un intervalo de la forma $(a,b]$, donde $b\leq \infty$. Consideremos el m\'odulo de persistencia truncado $(\bar{V},\bar{\pi})$, es decir, $\bar{V}_t$ coincide con $V_t$ para $t\in I$ y cero en otro caso, y $\bar{pi}$ se trunca conforme a este criterio.
+\end{proof}
+\end{frame}
+
+\begin{frame}{Teorema 5.3.2 (cont.)}
+\begin{minipage}{0.25\textwidth}
+\end{minipage}\hfill\begin{minipage}{0.7\textwidth}
+\begin{block}{Ejercicio 5.3.4} Sean $(V,\pi)$ y $(W,\sigma)$ dos m\'odulos de persistencia $\delta$-entrelazados, y sea $I=(a,b]$ un intervalo fijo tal que $b\leq\infty$. Muestre que los m\'odulos de persistencia truncados respecto $I$, $\bar{V}$ y $\bar{W}$ tambi\'en est\'an $\delta$-entrelazados.
+\end{block}
+\end{minipage}\\
+$\,$\\
+\vspace{1em}
+Sea $J=(\varepsilon_{-},\varepsilon_{+}]$ y $k\geq 0$ un entero, escribiremos $V$ y $W$ para referirnos s\'olo a la homolog\'ia de grado $k$. Como $\mathcal{U}_t$ es una buena cubierta para cualquier $t\in J$, por el Lema de Nerve tenemos que
+\begin{gather*}
+V_t=H_k(\check{C}(U_t))=H_k(M)\,,
+\end{gather*}
+as\'i que la dimensi\'on de $V_t$ es constante en $J$. Entonces el n\'umero de intervalos en $\mathcal{B}(V)$ que contienen a $J$ es exactamente $\mbox{dim}H_k(M)$.
+\end{frame}
+
+
+\begin{frame}
+Sean $\bar{V}$ y $\bar{W}$ los m\'odulos de persistencia truncados respecto $J$, por el ejercicio 5.3.4, $\bar{V}$ y $\bar{W}$ est\'an $1$-entrelazados; y por el Teorema de Isometry sus c\'odigos de barras satisfacen
+\begin{gather*}
+d_{\mbox{bot}}\left( \mathcal{B}(V),\mathcal{B}(W)\right)\leq 1\,,
+\end{gather*}
+es decir, existe un $1$-\matching~$\mu:\mathcal{B}(\bar{V})\rightarrow\mathcal{B}(\bar{W})$.\\
+
+Notemos que $\mathcal{B}(\bar{V})$ contiene exactamente $\mbox{dim}\,H_k(M)$ copias de $J$, cada una de ellas de longitud mayor a 4, por lo que est\'a apareada por $\mu$ a una barra de $\mathcal{B}(\bar{W})$ que contiene a $J^1=(\varepsilon_{-}+1,\varepsilon_{+}-1]$. Por otra parte, cada barra $\mathcal{B}(\bar{W})$ que contiene a $J^1$ es a\'un de longitud mayor a 2, por lo que est\'a apareada por $\mu$ a una barra de $\mathcal{B}(\bar{V})$ que contiene a $J^2=(\varepsilon_{-}+2,\varepsilon_{+}-2]$. Esta barra s\'olo puede ser de la forma $J$, por lo tanto, el n\'umero de intervalos en $\mathcal{B}(\bar{W})$ que contienen a $J^1$ es exactamente $\mbox{dim}\,H_{k}(M)$, es decir, $$\mbox{dim}\,\mbox{im}(\pi_{\varepsilon_{-}+1,\varepsilon_{+}-1}^{W})=\mbox{dim}\,H_{k}(M).$$
+$\,$\hfill $\qed$
+\end{frame}
+
+\begin{frame}{Observaciones 5.3.5}
+\begin{itemize}
+\item En la pr\'actica, barras largas en el c\'odigo de barras del complejo de Rips contienen m\'as informaci\'on confiable sobre la homolog\'ia de $M$ que las barras cortas, las cuales se pueden interpretar como ruido topol\'ogico [39]. Por lo que a mayor tama\~no $(\varepsilon_{-},\varepsilon_{+}]$, m\'as confiable el c\'alculo de $H_{\ast}(M)$ propuesto en el Teorema 5.3.2.
+\end{itemize}
+\vspace{2em}
+\scalebox{0.7}{[39] Robert Ghrist, \emph{Barcodes: the persistent topology of data}, Bull. Amer. Math. Soc. 45 (2008)}
+\end{frame}
+
+\begin{frame}{Observaciones 5.3.5 (cont.)}
+\begin{itemize}
+\item En [73] consideran el caso en el que $X$ es una colecci\'on de puntos $\frac{\varepsilon}{2}$-densa muestreada de una subvariedad $M\subset\mathbb{R}^n$. Considere la uni\'on de bolas euclidianas $U = \{ \bigcup_{x_i \in X} B_t (x_i )\}$ centrado en los puntos de $X$. Resulta que al variar $t$ en un cierto intervalo que depende de la geometr\'ia de $M$, la deformaci\'on del conjunto $U$ se retrae a $M$, y en particular sus homolog\'as son iguales. Adem\'as, si $X$ consta de un n\'umero suficientemente grande de puntos independientes e id\'enticamente distribuidos muestreados con respecto a la medida de probabilidad uniforme en $M$, la homolog\'ia de $U$ es igual a la homolog\'ia de $M$.
+\end{itemize}
+\vspace{2em}
+\scalebox{0.7}{[73] Partha Niyogi, Stephen Smale, and Shmuel Weinberger,} \scalebox{0.7}{\emph{Finding the homology of submanifolds with high conﬁdence from random samples},}  \scalebox{0.7}{Discrete Comput. Geom. 39 (2008)}
+\end{frame}
+
+\begin{frame}{Observaciones 5.3.5 (cont.)}
+\begin{itemize}
+\item En [60] se obtiene el siguiente resultado: Para una variedad riemanniana cerrada $M$, existe $\varepsilon_0> 0$ lo suficientemente peque\~na, tal que para cualquier $0 < \varepsilon \leq \varepsilon_0$, existe $\delta_\varepsilon > 0$, para la que si $Y$ es un espacio m\'etrico que tiene una distancia de Gromov-Hausdorff menor que $\delta_\varepsilon$ a $M$ , entonces su complejo Rips $R_{\varepsilon}(Y)$ es homot\'opicamente equivalente a $M$. En particular se sigue que: si $Y \subseteq M$ es finito y $\delta_{\varepsilon}$-denso en $M$, entonces $R_{\varepsilon}(Y)$ y $M$ tienen el mismo tipo de homotop\'ia.
+\end{itemize}
+\vspace{2em}
+\scalebox{0.7}{[60] Janko Latschev, \emph{Vietoris-Rips complexes of metric spaces near a closed Riemannian manifold},} \scalebox{0.7}{Arch. Math. (Basel) 77 (2001)}
+\end{frame}
+
+
+\begin{frame}{6. Teor\'ia de Funciones Topol\'ogicas}{6.1 Pr\'ologo}
+Estudia características de funciones suaves en una variedad que son invariantes bajo la acción del grupo de difeomorfismo.\\
+\vspace{1em}
+\begin{itemize}
+\item Denotaremos como $||\cdot ||_0$ a la norma uniforme, y como $||\cdot ||_2$ a la norma $L_2$.
+\item Para una funci\'on de Morse $f$, $\nu(f)$ denotar\'a el n\'umero de barars en el c\'odigo de barras de $f$.
+\item $\zeta(M)$ es el n\'umero de rayos infinitos.
+\item $\nu(f,c)$ denotar\'a al n\'umero de barras finitas de longitud mayor a $c$.
+\item $\ell (f):=\mbox{length}(\mathcal{B}(f) \cap [\min f,\max f])$ mide la longitud total de todas las barras finitas de $f$ y los segmentos de los rayos infinitos en el intervalo $[\min f,\max f])$.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Observaciones}
+\begin{itemize}
+\item $c\nu(f,c)$ es decreciente en $c$ y $c\nu(f,c)\leq \ell (f)$.
+\item $\ell $ es discontinua bajo perturbaciones en la norma uniforme: Se pueden generar un conjunto arbitrariamente grande de barras cortas mediante perturbaciones; sin embargo, para cualquier par de funciones de Morse $f$ y $h$ tenemos
+$$\ell(f)-\ell(g)\leq (2\nu(f)+\xi(M))||f-h||_0$$ y $$\nu(f,c)\geq \nu(h,c+2||f-h||_{0})\,.$$\\
+Estas desigualdades se siguen de que los c\'odigos de barras de $f$ y $g$ admiten un $\delta$-apareamiento con $\delta=||f-h||_0$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Observaciones}
+\begin{itemize}
+\item Sea $f$ una funci\'on de Morse en $\mathbb{S}^1$, todos los puntos cr\'iticos de $f$ son m\'inimos locales o m\'aximos locales, m\'as a\'un, si hay $N$ m\'inimos locales $x_{1},\cdots,x_{N}$ tambi\'en hay $N$ m\'aximos locales $y_1,\cdots,y_N$ que pueden ordenarse como $$x_1,y_1,x_2,y_2,\cdots,c_N,y_N,x_1.$$
+\item El c\'odigo de barras de $f$ contiene $N-1$ barras finitas de grado 0 cuyos extremos del lado izquierdo son m\'inimos y cuyos extremos del lado derecho son m\'aximos; as\'i como dos barras infinitas de grado 1 y 0 comenzando en el m\'aximo global y el m\'inimo global,respectivamente. De esto se sigue: $$\ell(f)=\sum_{i=1}^{N}(f(y_i)-f(x_i))\,.$$
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Observaciones (cont.)}
+\begin{itemize}
+\item Por otra parte,
+\begin{gather*}
+\ell(f)=\frac{1}{2}\int_{0}^{2\pi}||f^\prime(t)||\,dt.
+\end{gather*}
+En consecuencia, $$\nu(f,c)\leq \pi ||f^\prime||_{0}/c\,.$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Teorema 6.1.1 (Teorema de Chebyshev)} Sea $\mathcal{T}_n$ el conjunto de polinomios trigonom\'etricos de grado menor o igual a $n$ en $\mathbb{S}^1$ y sea $p\in\mathcal{T}_{n-1}$. Entonces $p$ es la mejor aproximaci\'on uniforme en $\mathcal{T}_{n-1}$ a una funci\'on $f$ si y s\'olo si existen $2n$ puntos $0\leq x_1\leq \cdots\leq x_{2n}\leq 2\pi$ tales que las diferencias $f(x_i)-p(x_i)$ alcanzan el valor m\'aximo $||f-p||_0$ con signos alternantes.\\
+\vspace{1em}
+A la existencia de estos puntos extremos se le llama \emph{alternancia}.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Proposici\'on 6.1.2}
+Sean $h,\,q$ dos funciones de Morse en una variadad cerrada $M$ tal que para alguna $c>0$ $q$ tiene estrictamente menos de $2\nu(h,c)+\zeta(M)$ puntos cr\'iticos. Entonces $$||h-q||_0\geq c/2.$$
+\end{block}
+\begin{proof}
+Supongamos lo contrario, i.e. $||h-q||_0<(c-\varepsilon)/2$ para alguna $\varepsilon >0$ suficientemente grande. Sea $N$ el n\'umero de puntos cr\'iticos de $q$. Exactamente $\zeta(M)$ de ellos contribuyen a los rayos infinitos del c\'odigo de barras. Entonces el n\'umero de barras finitas en el c\'odigo de barras de $q$ no puede ser mayor a $(N-\zeta(M))/2$. Por tanto, $\nu(q,\varepsilon)<\nu(h,c)$; sin embargo por la ec. 24: $$\nu(q,\varepsilon)\geq \nu(h,\varepsilon+2||h-q||_0)\geq \nu(h,c),$$ lo cual es una contradicci\'on.
+\end{proof}
+\end{frame}
+
+
+\begin{frame}{Demostraci\'on Teorema de Chebyshev ($\Rightarrow$)}
+Sea $h=f-p$ y $c=||h||_0$. Por la propiedad de alternancia, el c\'odigo de barras de $h$  consiste en dos rayos infinitos y $\nu(h,2c-\varepsilon)=n-1$ para $\varepsilon>0$ suficientemente peque\~na (Ejercicio). \\
+\vspace{1em}
+Por otra parte, todo polinomio trigonom\'etrico $q$ no constante de grado menor o igual a $n-1$ tiene a lo m\'as $2n-2$ puntos cr\'iticos. Por la proposici\'on 6.1.2, $$||h-q||_0\geq c,$$ pero $$h-q=f-(p+q)\Rightarrow ||f-r||_0\geq c$$ para cualquier polinomio trigonom\'etrico $r\in \mathcal{T}_{n-1}$. Sin embargo como $||f-p||_0=c$, $p$ es la mejor aproximaci\'on polinomial de grado menor o igual a $n-1$.
+\end{frame}
+\end{document}
+
+
+
+
