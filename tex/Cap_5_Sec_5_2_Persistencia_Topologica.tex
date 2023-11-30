@@ -1,0 +1,383 @@
+\documentclass{beamer}
+\setbeamertemplate{theorems}[numbered]
+\usecolortheme{dracula}
+\usepackage[utf8]{inputenc}
+\usepackage[
+  main=spanish
+]{babel}
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+
+\newcounter{Ejercicio}
+%\newcounter{Ejemplo}
+
+%\newtheorem{Theorem}{Teorema}[section]
+%\newtheorem{Lemma}[Theorem]{Lema}
+%\newtheorem{Corollary}[Theorem]{Corolario}
+%\newtheorem{Ejercicio}[Theorem]{Ejercicio}
+%
+%
+\newtheorem{Ejercicio}[theorem]{Ejercicio}%[count-ejercicio]
+
+\newtheorem{Ejemplo}{Ejemplo}
+
+%\newtheorem{Proposition}[Theorem]{Proposici\'on}
+%\newtheorem{Conjecture}[Theorem]{Conjecture}
+%\newtheorem{Definition}[Theorem]{Definici\'on}
+%\newtheorem{Example}[Theorem]{Ejemplo}
+%\newtheorem{Observation}[Theorem]{Observation}
+%\newtheorem{Remark}[Theorem]{Remark}
+
+\def \rk{{\mbox {rk}}\,}
+\def \dim{{\mbox {dim}}\,}
+\def \ex{\mbox{\rm ex}}
+\def\df{\buildrel \rm def \over =}
+\def\ind{{\mbox {ind}}\,}
+\def\Vol{\mbox{Vol}}
+\def\V{\mbox{Var}}
+\newcommand{\comp}{\mbox{\tiny{o}}}
+\newcommand{\QED}{{\hfill$\Box$\medskip}}
+
+
+\def\Z{{\bf Z}}
+\def\R\re
+\def\V{\bf V}
+\def\W{\bf W}
+\def\f{\tilde{f}_{k}}
+\def \e{\varepsilon}
+\def \la{\lambda}
+\def \vr{\varphi}
+\def \R{{\bf R}}
+\def \L{{\mathcal L}}
+
+\def \re{{\mathbb R}}
+\def \Q{{\mathbb Q}}
+\def \cp{{\mathbb CP}}
+\def \T{{\mathbb T}}
+\def \C{{\bf C}}
+\def \M{{\widetilde{M}}}
+\def \I{{\mathbb I}}
+\def \H{{\mathbb H}}
+\def \lv{\left\vert}
+\def \rv{\right\vert}
+\def \ov{\overline}
+\def \tx{{\widehat{x}}}
+\def \0{\lambda_{0}}
+\def \la{\lambda}
+\def \ga{\gamma}
+\def \de{\delta}
+\def \x{\widetilde{x}}
+\def \E{\mathbb{E}}
+\def \y{\widetilde{y}}
+\def \A{{\mathcal A}}
+\def\h{{\rm h}_{\rm top}(g)}
+\def\en{{\rm h}_{\rm top}}
+\def\F{{\mathcal F}}
+\def\co{\colon\thinspace}
+
+\usepackage{ragged2e}  % `\justifying` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}       % `\url`s
+\usepackage{listings}  % Code listings
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+\usepackage{xfrac}
+
+
+\title{Seminario de Persistencia en Geometría 2024-1}
+\subtitle{5.2. Complejos de \v{C}ech y Rips, y Análisis Topológico de Datos.} %% that will be typeset on the
+\author{Miguel Evangelista}
+\logo{
+%\includegraphics[width=2cm]{logo-IMUNAM.png}
+\includegraphics[width=2cm]{LogoIMUNAM_Bco.png}
+}
+
+\begin{document}
+
+\frenchspacing
+
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+  \frame{\maketitle}
+
+  \AtBeginSection[]{% Print an outline at the beginning of sections
+    \begin{frame}<beamer>
+      \frametitle{Contenidos}
+      \tableofcontents[currentsection]
+    \end{frame}
+}
+
+\section{Considereaciones}
+
+
+\begin{frame}{Consideracionnes}
+    Sea $M$ una variedad Riemmaniana y sea $X\subseteq M$ una muestra finita de puntos de $M$.
+    \newline
+    \pause
+    
+    Dado lo anterior, surgen las siguientes preguntas.
+    \begin{itemize}
+        \item Teniendo sólo $X$, ¿es posible reconstruir $M$?, 
+        \item ¿Qué tan bien podemos reconstruir $M$?
+    \end{itemize} 
+\end{frame}
+
+\begin{frame}{Consideracionnes}
+    Denotemos por $d$ la distancia de Riemann en $M$ (y por consecuencia la distancia inducida en $X$). Decimos que el espacio métrico $(X,d)$ modela una nube de datos.
+    \newline
+    \pause
+
+    Para responder la pregunta anterior, se tiene que que reconstruir la topología de $M$ utilizando la geometría “local” del conjunto $X$
+    \newline
+    \pause
+    
+    Dado que uno de los principios del análisis de datos topológicos es "no confiar en grandes distancias". \textit{(Ver Michael W. Mahoney, et al, Algorithmic and statistical challenges in modern large-scale data analysis are the focus of MMDS 2008, 2008)}
+\end{frame}
+
+\section{Complejo de Rips}
+
+\begin{frame}{Complejo de Rips}
+    Consideramos un espacio métrico finito $(X, d)$. 
+
+    Se define el complejo simplicial $R_{\alpha}(X)$ de la siguiente manera: 
+    \begin{itemize}
+        \item los vértices de $R_{\alpha}(X)$ son los puntos del conjunto $X$, y  
+        \pause
+        \item los $k+1$ puntos en X determinan un $k-$ simplejo $\sigma = [x_{0},...,x_{k}]$ si $d(x_{i}, x_{j})< \alpha \qquad \forall i, j$
+    \end{itemize}
+    para $0 < \alpha\in \mathbf{R}$  
+\end{frame}
+
+\begin{frame}{Módulo de Rips}
+    \begin{block}{Obs.}
+        \begin{itemize}
+            \item El complejo de Rips está completamente determinado por su $1-$esqueleto, es de hecho, un complejo de bandera.
+
+            \pause
+            \item Para $0<\alpha\leq min_{x, y\in X, x\neq y}d(x, y)$ el complejo $R_{\alpha}(X)$ es una colección finita de puntos.
+        \end{itemize}
+        
+        %, mientras que para $\alpha > diam(X)$, $R_{\alpha}(X)$ es un complejo de dimensión  $|X|-1$. 
+    \end{block}
+\end{frame}
+
+\begin{frame}{Complejo de Rips}
+    Esta construcción se ilustra en la siguiente figura 
+    
+    \includegraphics[width=10cm]{rips_white}
+    
+\end{frame}
+
+\begin{frame}{Módulo de Rips}
+    Para $\alpha \neq \beta$ existe una función  simplicial \textit{natural}
+    $$i_{\alpha, \beta}: R_{\alpha}(X) \to R_{\beta}(X).$$ 
+    \pause
+    
+    Tomando $V_{\alpha}(X) = H_{\ast}(R_{\alpha}(X))$ y $\pi_{\alpha,\beta} = (i_{\alpha,\beta})_{\ast}$, obtenemos un módulo de persistencia, que denominamos módulo de Rips.
+    \pause
+    
+    \begin{block}{Obs.}
+        Los complejos de Rips fueron introducidos por primera vez por Vietoris.
+    \end{block}
+
+\end{frame}
+
+\section{Complejo de \v{C}ech}
+\begin{frame}{Complejo de \v{C}ech}
+    Para $t > 0$, escribimos $B_{t}(x)$ que denota  la bola abierta con centro en $x$ de radio $t$ con respecto a la métrica $d$.
+    \newline
+    \pause
+
+    \begin{block}{Definición 5.2.1}
+        Sea $U = \{U_{i}\}$ una colección finita de subconjuntos de un conjunto $A$. Definimos el complejo \v{C}ech \v{C}$(U)$ asociado a $U$ como:
+        \begin{itemize}
+            \item Los vértices son los conjuntos $U_i$.
+            \item Una colección ordenada $\sigma = [U_{0}, \ldots, U_{k}]$  es un $k-$simplejo si $\bigcap U_{j} \neq \emptyset$.
+            \item Los operadores de frontera se definen de la manera estándar, lo que permite a uno considerar la homología correspondiente $H_{*}$\v{C}$(U)$.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Complejo de \v{C}ech}
+    \begin{block}{Remark 5.2.2}
+        Un caso especial que será de particular interés para nosotros es el siguiente: Sea $(X,d)$ y fije $t > 0$. 
+        \newline
+        \pause
+        
+        Considere la colección de bolas abiertas de radio $\frac{t}{2}$ centradas en el punto $x_{i} \in X$ denotado por $U_i = B_{\frac{t}{2}}(x_i)$. 
+        \newline
+        \pause
+        
+        Examinaremos la homología asociada al complejo \v{C}ech de esta colección $U_t = \{U_i\}$, y la denotaremos por \v{C}$_{t}(X)$\footnote{Esto es para que la notación sea similar a la del complejo Rips}.
+    \end{block}
+\end{frame}
+
+
+\begin{frame}{Complejo de \v{C}ech}
+    Variando $t>0$, de manera similar al caso del complejo Rips, podemos considerar el módulo de persistencia $H_{*}$\v{C}$(U)$ con los mapeos de persistencia inducidos por los mapeos de inclusión $i_{s,t}:$\v{C}$_{s}(X) \to $\v{C}$_{t}(X)$
+    \newline
+    \pause
+
+    Notemos que los los módulos de persistencia provenientes de los complejos \v{C}ech y Rips correspondientes a un espacio métrico finito $(X, d)$ son $1-$entrelazados (after passing to a \textit{logarithmic scale}).
+\end{frame}
+
+\begin{frame}{Complejos de \v{C}ech y Rips}
+    \begin{block}{Lema 5.2.3}
+        Sea $(X, d)$ un espacio métrico finito. Tome  $V_{a} = H_{*}(R_{2^{a}}(X))$ y $W_{a}=H_{*}($\v{C}$_{2^{a}}(X))$, con morfismos inducidos a partir de los complejos Rips y \v{C}ech respectivamente. Entonces $V$ y $W$ son $1-$entrelazados.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Complejos de \v{C}ech y Rips}
+    \begin{block}{Dem.}
+        \begin{itemize}
+            \item Si $[y_0,...,y_k]$ es un simplejo en $R_{t}(X)$ se tiene que $d(y_i,y_j) < t$, entonces $y_i \in B_{t}(y_j)$ para todo $i,j$.\\
+            
+            En particular, $y_0$ es un punto común para todo $B_{t}(y_{j})$, por lo que $[y_0,...,y_k]$ determina un $k-$simplejo en \v{C}$_{2t}$. Por tanto, $R_t \subset \v{C}$_{2t}$.
+            \newline
+            \pause
+            
+            \item Si $[y_0,...,y_k]$ es un simplejo \v{C}$_{t}(X)$, es decir, $\bigcap_{j} B_{\frac{t}{2}}(y_j) \neq \emptyset$, en particular para cada $y_i, y_j$ las bolas $B_{\frac{t}{2}}(yi)$ y $B_{\frac{t}{2}}(y_j)$ se intersectan, dado que $d(y_i, y_j) < t$.\\
+            
+            Entonces $[y_0,...,y_k]$ es un simplejo en $R_t(X) \subseteq R_{\frac{t}{2}}(X)$. Por tanto, Por tanto, \v{C}$_{2t} \subset R_t$.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Complejos de \v{C}ech y Rips}
+    \begin{block}{Dem.}
+        \begin{itemize}
+            Pasando a la “escala logarítmica” y considerando los módulos de persistencia como antes, vemos que $V$ y $W$ son $1-$entrelazados, con mapas entrelazados inducidos por la identidad.
+            $\hfill\square$
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{}
+    \begin{block}{Remark 5.2.4}
+       Mencionemos que los “módulos de persistencia” $V$ y $W$ reescalados logarítmicamente discutidos aquí no cumplen completamente con la definición 1.1.1 de módulos de persistencia. 
+       \newline
+       \pause
+       
+       Es decir, la propiedad $4$, que hace que los módulos de persistencia desaparezcan por la izquierda a partir de algún momento, no se cumple. Sin embargo, $V$ y $W$ son módulos de persistencia de tipo localmente finito, como se define en la sección $2.4.$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Ejmeplo}
+    \begin{block}{Ejemplo 5.2.5}
+       Considere un hexágono regular con una longitud de lado 1 (ver la siguiente figura).
+       \newline
+       Calculemos los códigos de barras correspondientes a sus complejos Rips y \v{C}ech.
+    \end{block}
+
+    \newline
+    \pause
+    \includegraphics[width=5cm]{image_14}
+\end{frame}
+
+\begin{frame}{Ejemplo}
+    \begin{block}{Complejo de Rips}
+       Tenemos los siguientes grupos de homología a medida que t varía.
+       \newline
+       \pause
+
+       \begin{itemize}
+           \item Para $0<t \leq 1$, tenemos seis puntos distintos, es decir, $H_{0}=\mathbf{R}^{6}$.
+           \pause
+           \item Para $1<t \leq \sqrt{3}$, tenemos un $\mathbf{S}^{1}$, entonces $H_{0}=\mathbf{R}$ y $H_{1}=\mathbf{R}$.
+           \pause
+           \item Para $\sqrt{3} < t \leq 2$, tenemos una esfera $\mathbf{S}^{2}$, que se obtiene pegando dos discos a lo largo de su frontera. Estos discos están creados por los triángulos que se muestran en la siguiente figura.\\
+
+           Por tanto, $H_0=\mathbf{R}$, $H_1=0$ y $H_2=\mathbf{R}$
+       \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Ejemplo}
+    \begin{block}{Complejo de Rips}
+       \begin{itemize}
+           \item Para $t > 2$, obtenemos un $5-$simplejo creado por los vértices del hexágono, por lo que solo nos queda $H_0 = \mathbf{R}$.
+       \end{itemize}
+    \end{block}
+    \newline
+    \pause
+    \includegraphics[width=11cm]{image_15}
+\end{frame}
+
+
+\begin{frame}{Ejemplo}
+    Por último, el código de barras queda de la siguiente manera.
+    \newline
+    \pause
+    \includegraphics[width=10cm]{image_16}
+\end{frame}
+
+\begin{frame}{Ejemplo}
+    \begin{block}{Complejo de \v{C}ech}
+       Tenemos los siguientes grupos de homología a medida que t varía.
+       \newline
+       \pause
+
+       \begin{itemize}
+           \item Para $0< t \leq 1$, tenemos, $H_{0}=\mathbf{R}^{6}$.
+           \pause
+           \item Para $1<t \leq \sqrt{3}$, tenemos un $\mathbf{S}^{1}$, entonces $H_{0}=\mathbf{R}$ y $H_{1}=\mathbf{R}$. Ver la siguiente figura.
+       \end{itemize}
+    \end{block}
+    \pause
+    \includegraphics[width=7cm]{image_17}
+\end{frame}
+
+\begin{frame}{Ejemplo}
+    \begin{block}{Complejo de \v{C}ech}
+       \begin{itemize}
+           \item Para $\sqrt{3} < t \leq 2$, tenemos un $\mathbf{S}^{1}$, que se obtiene de la unión de triángulos que es homotípico a $\mathbf{S}^{1}$, es decir, todavía tenemos
+           $H_{0}=\mathbf{R}$ y $H_{1}=\mathbf{R}$. 
+           Ver la siguiente figura.\\
+           
+           \pause
+           Hay que tener en cuenta que los grandes triángulos equiláteros todavía no están presentes.
+       \end{itemize}
+    \end{block}
+    \pause
+    \includegraphics[width=9cm]{image_18}
+\end{frame}
+
+\begin{frame}{Ejemplo}
+    \begin{block}{Complejo de \v{C}ech}
+       \begin{itemize}
+           \item Para $t > 2$, obtenemos un $5-$simplejo, por lo que solo nos queda $H_0=\mathbf{R}$\\
+       \end{itemize}
+    \end{block}
+    Por último, el código de barras queda de la siguiente manera.
+    \newline
+    \pause
+    \includegraphics[width=10cm]{image_19}
+\end{frame}
+
+\begin{frame}{Ejemplo}
+    Comparando los dos códigos de barras, notamos que el complejo Rips captura una celda bidimensional “redundante” (en el sentido de la topología del hexágono), mientras que el complejo \v{C}ech no. 
+    \newline
+    \pause
+
+    \newline
+    Sin embargo, observemos que el complejo \v{C}ech tiene la desventaja de ser más difícil de calcular y manejar (ver [76], Capítulo 5), ya que necesitamos conocer (y almacenar) la información sobre todos los posibles símplices (es decir, intersecciones) de cualquier número de bolas alrededor de los puntos muestreados).\\ 
+\end{frame}
+
+\begin{frame}{Ejemplo}
+    Al mismo tiempo, para el complejo Rips, como mencionamos en el Ejemplo 1.1.5, la información requerida es solo sobre 1-símplejos, es decir, sobre las distancias entre cada par de puntos del conjunto de muestra  
+\end{frame}
+
+\begin{frame}{Ejemplo}
+    \begin{block}{Ejercicio 5.2.6}
+       Verifique que los dos códigos de barras que encontramos coincidan después de pasar a la \textit{escala logarítmica} descrita en el Lema 5.2.3.
+    \end{block}
+\end{frame}
+
+\end{document}
+ 
