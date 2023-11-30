@@ -33,7 +33,7 @@ Temas
 
 * Aplicaciones de complejos de Rips
     * [Sección 5.1 -- Espacios δ-hiperbolícos](https://github.com/appliedgeometry/Persistencia-en-Geometria-2024-1/blob/main/pdf/Secci%C3%B3n_5.1.pdf)
-    * [Sección 5.2 -- Complejos de Cech, complejos de Rips y análisis topologico de datos]()
+    * [Sección 5.2 -- Complejos de Cech, de Rips y análisis topologico de datos](https://github.com/appliedgeometry/Persistencia-en-Geometria-2024-1/blob/main/pdf/Cap_5_Sec_5_2_Persistencia_Topologica.pdf)
     * [Sección 5.3 -- Aprendizaje de variedades](https://github.com/appliedgeometry/Persistencia-en-Geometria-2024-1/blob/main/pdf/Cap_5-Sec_5.3-6.1.pdf)
 
 *  Teoría de funciones topológicas
