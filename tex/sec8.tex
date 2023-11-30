@@ -1,0 +1,438 @@
+\documentclass{beamer}
+\setbeamertemplate{theorems}[numbered]
+\usecolortheme{dracula}
+\usepackage[utf8]{inputenc}
+\usepackage[
+  main=spanish
+]{babel}
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\newcounter{Ejercicio}
+%\newcounter{Ejemplo}
+
+%\newtheorem{Theorem}{Teorema}[section]
+%\newtheorem{Lemma}[Theorem]{Lema}
+%\newtheorem{Corollary}[Theorem]{Corolario}
+%\newtheorem{Ejercicio}[Theorem]{Ejercicio}
+%
+%
+\newtheorem{Ejercicio}[theorem]{Ejercicio}%[count-ejercicio]
+
+\newtheorem{Ejemplo}{Ejemplo}
+
+%\newtheorem{Proposition}[Theorem]{Proposici\'on}
+%\newtheorem{Conjecture}[Theorem]{Conjecture}
+%\newtheorem{Definition}[Theorem]{Definici\'on}
+%\newtheorem{Example}[Theorem]{Ejemplo}
+%\newtheorem{Observation}[Theorem]{Observation}
+%\newtheorem{Remark}[Theorem]{Remark}
+
+\renewcommand{\d}{d}
+\def \rk{{\mbox {rk}}\,}
+\def \dim{{\mbox {dim}}\,}
+\def \ex{\mbox{\rm ex}}
+\def\df{\buildrel \rm def \over =}
+\def\ind{{\mbox {ind}}\,}
+\def\Vol{\mbox{Vol}}
+\def\V{\mbox{Var}}
+\newcommand{\comp}{\mbox{\tiny{o}}}
+\newcommand{\QED}{{\hfill$\Box$\medskip}}
+\newcommand\norm[1]{\lVert#1\rVert}
+\newcommand{\calB}{{\mathcal{B}}}
+\newcommand{\calC}{{\mathcal{C}}}
+\DeclareMathOperator{\coim}{coim}
+\DeclareMathOperator{\im}{im}
+\newcommand{\restr}{\big|}  % restricted to %
+
+
+\def\CF{\operatorname{CF}}
+\def\HF{\operatorname{HF}}
+\def\dist{\operatorname{dist}}
+\def\dint{\operatorname{d}_{\operatorname{int}}}
+\def\dbot{\operatorname{d}_{\operatorname{bot}}}
+\def\dgh{\operatorname{d}_{\operatorname{GH}}}
+
+\def\dzint{\operatorname{d}_{\mathbf{Z}_2-\operatorname{int}}}
+\def\dzgh{\operatorname{d}_{\mathcal{Z}_2-\operatorname{GH}}}
+
+\def\Z{{\mathbb Z}}
+\def\R\re
+\def\V{\bf V}
+\def\W{\bf W}
+\def\f{\tilde{f}_{k}}
+\def \e{\varepsilon}
+\def \la{\lambda}
+\def \vr{\varphi}
+\def \R{{\bf R}}
+\def \L{{\mathcal L}}
+\newcommand{\id}{\mathbf{1}}
+\newcommand{\mrm}{\mathrm}
+\newcommand{\Ham}{\mrm{Ham}}
+
+\def \FF{{\mathbb F}}
+\def \re{{\mathbb R}}
+\def \Q{{\mathbb Q}}
+\def \cp{{\mathbb CP}}
+\def \T{{\mathbb T}}
+\def \C{{\bf C}}
+\def \M{{\widetilde{M}}}
+\def \I{{\mathbb I}}
+\def \H{{\mathbb H}}
+\def \lv{\left\vert}
+\def \rv{\right\vert}
+\def \ov{\overline}
+\def \tx{{\widehat{x}}}
+\def \0{\lambda_{0}}
+\def \la{\lambda}
+\def \ga{\gamma}
+\def \de{\delta}
+\def \x{\widetilde{x}}
+\def \E{\mathbb{E}}
+\def \y{\widetilde{y}}
+\def \A{{\mathcal A}}
+\def\h{{\rm h}_{\rm top}(g)}
+\def\en{{\rm h}_{\rm top}}
+\def\F{{\mathcal F}}
+\def\co{\colon\thinspace}
+
+\usepackage{ragged2e}  % `\justifying` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}       % `\url`s
+\usepackage{listings}  % Code listings
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+\usepackage{xfrac}
+\usepackage{tikz-cd}
+
+
+\title{Seminario Persistencia en Geometría 2024-I}
+\subtitle{Módulos de Persistencia Hamiltonianos} 
+\author{Miguel Ángel Maurin García de la Vega}
+\logo{
+\includegraphics[width=1cm]{LogoIMUNAM_Bco.png}
+}
+
+\begin{document}
+
+\frenchspacing
+
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+  \frame{\maketitle}
+
+  \AtBeginSection[]{% Print an outline at the beginning of sections
+    \begin{frame}<beamer>
+      \frametitle{Contenidos}
+      \tableofcontents[currentsection]
+    \end{frame}}
+
+    \section{Grupo de Difeomorfismos Hamiltonianos}
+
+
+\begin{frame}{Variedades Simplécticas}
+\begin{block}{Definición 7.2.1}
+Sea $M^{2n}$ una variedad de dimensión par. Una \textit{estructura simpléctica} en $M^{2n}$ es una 2-forma diferencial no degenerada y cerrada $\omega$, \pause es decir, $\omega^n$ es una forma de volumen de $M^{2n}$ y $d\omega = 0$. El par $(M^{2n}, \omega)$ es llamado variedad simpléctica.
+
+ \end{block}  
+
+\end{frame}
+
+    
+\begin{frame}{Difeomorfismo Hamiltoniano}
+
+\begin{block}{Definición 7.3.1}
+Sea $(M, \omega)$ una variedad simpléctica. Dada una función suave de soporte compacto $H: M \times [0,1] \to \R$, definimos \pause el \textit{campo vectorial hamiltoniano} $X_H$ como la solución de la ecuación $\iota_{X_H} \omega = -dH$. \pause El flujo $\phi_H^t$ de $X_H$ se denomina \textit{flujo hamiltoniano}. \pause El mapa a tiempo 1 de este flujo, $\phi = \phi^1_H$, se llama \textit{difeomorfismo hamiltoniano}. \pause La colección de todos los difeomorfismos hamiltonianos en $(M, \omega)$ se denota como $\Ham(M, \omega)$.
+
+
+ \end{block}
+\end{frame}
+
+
+\begin{frame}{Grupo de Difeomorfismos Hamiltonianos}
+\begin{block}{Proposición 7.3.5}
+Sean $\phi, \psi \in \Ham(M, \omega)$ difeomorfismos hamiltonianos generados por funciones hamiltonianas normalizadas dependientes del tiempo $F_t$ y $G_t$, y sea $\phi^t$ el flujo hamiltoniano de $F_t$. Entonces\pause
+\begin{itemize}
+\item[(1)] $\phi \circ \psi$ es un difeomorfismo hamiltoniano generado por $F_t(x) + G_t((\phi^t)^{-1}(x))$;\pause
+\item[(2)] $\phi^{-1}$ es un difeomorfismo hamiltoniano generado por $-F_t((\phi^t)^{-1}(x))$.\pause
+\end{itemize}
+
+
+ \end{block}
+Referencia: Leonid Polterovich, \textit{The Geometry of the Group of Symplectic Diffeomorphisms}.
+\end{frame}
+
+\begin{frame}{Métrica de Hofer}
+\begin{block}{Definición 7.4.1}
+{\it La métrica de Hofer} en $\Ham(M, \omega)$ se define como \pause
+\[ \d_{\rm Hofer}(\phi, \psi) : = \inf\{{\rm longitud}(\{\gamma_t\}_{t \in [0,1]}) \,| \, \mbox{$\gamma_t$ une $\phi$ con $\psi$}\} \]
+para cualesquiera $\phi, \psi \in \Ham(M, \omega)$. \pause Así, {\it la norma de Hofer} en $\Ham(M,\omega)$ se define como $||\phi||_{\rm Hofer} = \d_{\rm Hofer}(\phi, \mathds{1}_M)$.
+
+
+ \end{block}
+\end{frame}
+
+\begin{frame}{Dicotomía pseudo-métricas en $\Ham(M, \omega)$}
+\begin{block}{Ejercicio 7.4.2}
+$\d_{\rm Hofer}$ es pseudo-métrica en $\Ham(M, \omega)$ \pause
+
+
+ \end{block}
+
+
+  \begin{block}{Ejercicio 7.4.5}
+Dada una variedad simpléctica cerrada $(M, \omega)$, cualquier métrica bi-invariante en $\Ham(M, \omega)$ es no degenerada ó idéntica a cero.
+
+
+
+ \end{block}
+
+\end{frame}
+
+\section{Homología de Floer}
+\subsection{Motivación e Ingredientes}
+
+\begin{frame}{Conjetura de Arnold}
+Floer desarrolló esta teoría de Homología en su demostración de la conjetura de Arnold: \pause cada difeomorfismo hamiltoniano de \(M\), posee al menos tantos puntos fijos como una función suave en \(M\) posee puntos críticos.\pause
+
+Para una clase particular de hamiltonianos llamados regulares la \textit{Conjetura Débil de Arnold} afirma que, el número de puntos fijos es al menos igual al número mínimo de puntos críticos de una función de Morse en \(M\),\pause por la desigualdad de Morse, tal número también es mayor o igual a un invariante homológico de \(M\), por ejemplo, la suma de números de Betti.\pause
+
+Construiremos la homología de Floer con coeficinetes en $\Z_2$ para $(M, \omega)$ variedad simpléctica con $\pi_2(M)=0$,
+
+
+
+
+\end{frame}
+
+\begin{frame}{Funcional de Acción Simpléctica}
+Consideramos el espacio de lazos contráctiles $x: S^1 \to M$ denotado por $\mathcal LM$. \pause Para cualquier $x \in \mathcal LM$, podemos tomar un disco $D \subset M$ que abarca a $x$ y considerar el funcional de área $\mathcal A(x) = - \int_D \omega$. \pause  Como $\pi_2(M) = 0$, $\mathcal A$ es una función bien definida en $\mathcal LM$. \pause Queremos investigar los puntos críticos de $\mathcal A$ siguiendo la idea de la teoría de Morse. Los puntos críticos ocurren cuando la variación del funcional es cero, lo que quiere decir  que los puntos críticos de $\mathcal A$ son simplemente lazos constantes.\pause Perturbaremos entonces el funcional como sigue: Fijamos un hamiltoniano dependiente del tiempo $H: \R/\Z \times M \to \R$, y definimos el {\it funcional de acción simpléctica} $\mathcal A_H: \mathcal LM \to \R$ como
+
+\[A_H (x) = - \int_D \omega + \int_0^1 H(x)dt,\]
+
+
+\end{frame}
+
+
+\begin{frame}{Puntos Críticos de $\mathcal A_H$}
+Primero, veamos que el tangente $T_x\mathcal LM$ se puede identificar como el espacio de campos vectoriales tangentes al lazo $\xi(t) \in T_{x(t)} M$. \pause
+
+  \begin{block}{Ejercicio 8.2.1}
+\[d\mathcal A_H(\xi) = \int_0^1 dH(\xi) - \omega(\xi, \dot{x}(t))dt\] \pause
+
+ \end{block}
+Ahora, usando la relación $dH = - \omega(X_H, \cdot)$: \pause
+
+\[ d\mathcal A_H(\xi) = \int_0^1 \omega(\xi, X_H - \dot{x}(t)) dt.\] \pause
+
+Por lo tanto, tenemos el siguiente resultado:
+
+
+\end{frame}
+
+\begin{frame}{Puntos Críticos de $\mathcal A_H$}
+  \begin{block}{Proposición 8.2.2} (Principio de menor acción)
+Un elemento $x \in \mathcal LM$ es un punto crítico de $\mathcal A_H$ si y solo si $x$ es una órbita contractible 1-periódica del flujo hamiltoniano de $H$.\pause
+
+ \end{block} 
+
+ Denotamos $P:= \{ \mbox{puntos críticos de $\mathcal A_H$} \}$
+
+ \pause
+ 
+ Notamos que estos puntos son precisamente los que aparecen en la conjetura de Arnold, es decir, puntos que se quedan fijos bajo el diffeomorfismo hamiltoniano ya que corresponden a órbitas 1-periódicas de su flujo hamiltoniano.
+
+\end{frame}
+
+\begin{frame}{Métrica sobre $\mathcal LM$ }
+Una {\it estructura casi compleja $J$} es un campo suave de automorfismos $J_p: T_p M \to T_p M$ tal que $J_p^2 = -\mathds{1}$. \pause Para $(M, \omega)$, una estructura casi compleja $J$ se llama {\it $\omega$-compatible} si $\omega(\cdot, J\cdot)$ define una métrica riemanniana en $M$. \pause Denotemos por $\mathcal J(M, \omega)$ la colección de todas las estructuras casi complejas $\omega$-compatibles. \pause Un hecho estándar, debido a M.~Gromov, es que $\mathcal J(M, \omega)$ es no vacío y contractible. (Ref. Dusa McDuff and Dietmar Salamon, \it{Introduction to Symplectic Topology}) \pause
+
+Ahora sea $J(t)$ un camino de estructuras casi complejas $\omega$-compatibles en $(M, \omega)$, para cualquier $x \in \mathcal LM$ y campos vectoriales $\xi, \eta \in T_x \mathcal LM$, definimos una métrica en $\mathcal LM$ por \pause
+
+\[\left< \xi(t), \eta(t) \right> : = \int_0^1 \omega(\xi(t), J(t) \eta(t)) dt.\]
+
+\end{frame}
+
+\begin{frame}{Hamiltonianos no degenerados}
+$x \in P$ es llamado {\it no degenerado} si el diferencial
+$\phi_* : T_{x(0)}M \to T_{x(0)}M $ del difeomorfismo hamiltoniano en el del mapa a tiempo uno $\phi=\phi_H^1$ del flujo hamiltoniano de $H$ en el punto fijo $x(0)$ no contiene $1$ en sus eigenvalores. \pause Geométricamente, esto significa que la gráfica de $\phi$ es transversal a la diagonal $M \times M$ en $(x(0),x(0))$. \pause Decimos que $H$ y $\phi$ son no degenerados si esta propiedad se cumple para todas las órbitas de $P$. \pause La condición $x \in P$ no degenerado en términos de la linealización del flujo hamiltoniano es equivalente $x \in P$ no degenerado como punto crítico de la funcional de acción simpléctica $\mathcal A_H$.
+
+\end{frame}
+
+\begin{frame}{Índice de órbita $x\in P$}
+Sea $x \in P$ una órbita cerrada de un difeomorfismo hamiltoniano no degenerado $\phi=\phi_H^1$. \pause
+Elegimos un disco $w: D^2 \to M$ con $w|_{S^1}=x$, donde identificamos $S^1 = \partial D^2$. \pause
+Dado que $w^*TM$ es un haz vectorial simpléctico sobre un espacio base contractible, existe una trivialización $w^*TM \simeq D^2 \times (\R^{2n}, \omega_0)$. \pause  Bajo esta trivialización, la linealización del flujo $\phi_H^t$ en $x(0)$ da lugar a una trayectoria suave $\Phi: [0,1] \to {\rm Sp}(2n)$ tal que $\Phi(0) = \mathds{1}$ y $\Phi(1)$ no contiene $1$ en sus autovalores. 
+
+
+
+
+\end{frame}
+
+\begin{frame}{Índice de órbita $x\in P$}
+Estas son las condiciones necesarias (Sec. 8.1) para la definición del índice de Conley-Zehnder. El cual asigna un número entero a caminos de matrices simplécticas $\Phi$. \pause Denotamos el índice de una órbita hamiltoniana 1-periódica $x \in P$ como ${\rm Ind}(x) := {\rm Ind}(\Phi)$. Se puede demostrar que ${\rm Ind}(x)$ es independiente de la elección de trivializaciones. Además, bajo nuestra suposición $\pi_2(M) = 0$, también es independiente del disco que abarca a $x$.
+
+\end{frame}
+
+\begin{frame}{Cilindros de Trayectorias Gradientes}
+    Dados $x, y \in P$, podemos considerar el espacio de trayectorias gradientes de $\mathcal A_H$ desde $x$ hasta $y$, con respecto a la métrica que definimos para $\mathcal LM$,  denotado por $\widetilde{\mathcal M}(x,y)$. \pause Cualquier trayectoria de gradiente de este tipo es en realidad un cilindro $u(s,t): \R \times \R/\Z \to M$ que satisface la ecuación
+\[
+\frac{\partial u}{\partial s} + J_t(u) \frac{\partial u}{\partial t} - \nabla H_t(u) = 0
+\]
+con condiciones asintóticas $\lim_{s \to \infty} u(s,t) = y(t)$ y $\lim_{s \to -\infty} u(s,t) = x(t)$. \pause
+
+    \begin{center}
+    \includegraphics[scale=0.35]{cilindro.png}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Cilindros de Trayectorias Gradientes}
+Notamos que esto es una versión perturbada de la ecuación de Cauchy-Riemann, más precisamente, $u$ es una {\it curva pseudo-holomorfa}. (Ref. Dusa McDuff and Dietmar Salamon, \it{J-holomorphic curves and symplectic topology})\pause
+
+Una contribución M.~Gromov en su famoso artículo \it{Pseudo holomorphic curves in symplectic manifolds} es que los métodos de la geometría algebraica se pueden generalizar si se reemplazan las estructuras complejas con estructuras casi complejas $\omega$-compatibles.\pause Así, la teoría clásica de las curvas holomorfas se extiende a esta situación no integrable, lo cual ha revolucionado notablemente la geometría simpléctica en las últimas décadas.
+
+
+\end{frame}
+
+
+\begin{frame}{Espacio Modular de Trayectorias}
+Notamos que existe una acción $\R$ en $\widetilde{\mathcal M}(x,y)$ dada por por $T \cdot u(s,t) = u(s+T,t)$ para cualquier $T \in \R$. \pause Luego se puede considerar el espacio de modular $\mathcal M(x,y) : = \widetilde{\mathcal M}(x,y)/\R$. \pause Un hecho no trivial es que genéricamente $\mathcal M(x,y)$ es una variedad compacta de dimensión finita de ${\rm Ind}(x) - {\rm Ind}(y)-1$. \pause En particular, si ${\rm Ind}(x) - {\rm Ind}(y) = 1$, entonces $\mathcal M(x,y)$ es una colección de un número finito de puntos. Definimos $n(x,y) = \# \mathcal M(x,y) \,\mbox{mod $\Z_2$}$.
+\end{frame}
+
+\subsection{Construcción}
+
+\begin{frame}{Complejos de Floer}
+
+Ahora, podemos ensamblar todo lo anterior para formular la siguiente versión de Teoría de Morse, la cual llamaremos Teoría de Floer Hamiltoniana. \pause
+
+Fijamos un grado $k \in \Z$, y denotamos por
+\[ \CF_k(M, H) = {\rm Span}_{\Z_2} \left<x \in P \,| \, {\rm Ind}(x) = k \right>. \]
+
+a los complejos de Floer. Considerando al generador del grupo de difeomorfismos y las combinaciones lineales con coeficientes en \(\Z_2\)
+
+\end{frame}
+
+\begin{frame}{Homología de Floer}
+
+Consideramos el mapa lineal $\Z_2$ $\partial_k: \CF_k(M, H) \to \CF_{k-1}(M, H)$ dado por
+\[
+\partial_k x = \sum_{y \in P, \,\,{\rm Ind}(y) = k-1} n(x,y) y.
+\]
+Resulta que $\partial$ es una diferencial, es decir, $\partial^2 =0$. \pause
+
+Además, cualquier generador $y$ del lado derecho de la igualdad tiene acción simpléctica $\mathcal A_H(y) < \mathcal A_H(x)$. \pause Denotamos la homología de Floer hamiltoniana por $\HF_k(H) = \frac{\ker(\partial_k)}{{\im}(\partial_{k+1})}$ para cualquier $k \in \Z$.
+
+\end{frame}
+
+\begin{frame}{Homología de Floer filtrada}
+
+Para cualquier $\lambda \in \R$ y grado $k \in \Z$, denotamos
+\[ \CF^{\lambda}_k(M, H) = {\rm Span}_{\Z_2} \left< x \in P \, | \, {\rm Ind}(x) = k, \,\,\mbox{y}\,\, \mathcal A_H(x) < \lambda \right>. \] \pause
+
+Dado que $\partial_k$ disminuye estrictamente la acción simpléctica, la diferencial $\partial_k: \CF^{\lambda}_k(M, H) \to \CF_{k-1}^{\lambda}(M,H)$ es un mapa lineal bien definido lineal. \pause
+
+Denotamos la homología de Floer hamiltoniana {\it filtrada} por
+\[ \HF_k^{\lambda}(H) : = \frac{\ker(\partial_k: \CF^{\lambda}_k(M, H) \to \CF_{k-1}^{\lambda}(M,H))}{{\im}(\partial_{k+1}: \CF^{\lambda}_{k+1}(M, H) \to \CF_{k}^{\lambda}(M,H))}. \]
+
+
+    
+\end{frame}
+
+\begin{frame}{Morfismos entre grupos de Homología}
+    Para cualquier $\lambda \leq \eta$, hay un mapa bien definido $\iota_{\lambda, \eta}: \HF_k^{\lambda}(H) \to \HF_k^{\eta}(H)$ inducido por la inclusión $\CF_{k}^{\lambda}(M,H) \to \CF_{k}^{\eta}(M,H)$.\pause  de esta forma, obtenemos la propiedad de persistencia: \pause para cualquier $\lambda \leq \eta \leq \theta$, $\iota_{\lambda, \theta} = \iota_{\eta, \theta} \circ \iota_{\lambda, \eta}$. \pause
+
+    Estos serán los mapas lineales para definir un módulo de persistencia para la Teoría de Homología de Floer. 
+
+
+\end{frame}
+
+
+\begin{frame}{Independencia bajo Hamiltonianos Normalizados}
+
+Un Hamiltoniano $H: M \times S^1 \to \R$ es llamado normalizado si
+$$\int_M H(\cdot,t)\omega^n = 0 \;\;\forall t \in S^1\;.$$\pause
+
+Un hecho notable debido a M.~Schwarz (Ref. \it{On the action spectrum for closed symplectically aspherical manifolds}) es que para Hamiltonianos normalizados, la homología de Floer hamiltoniana filtrada $\HF_k^{\lambda}(H)$ solo depende de $\phi = \phi^1_H$, el mapa a tiempo 1 del flujo hamiltoniano $\phi^t_H$ generado por $H$. Denotaremos esta homología por $\HF_k^{\lambda}(\phi)$.
+    
+\end{frame}
+
+\section{Módulos de Persistencia Hamiltonianos}
+\begin{frame}{Definición}
+\begin{block}{Definición 8.2.3}
+Dada una variedad simpléctica $(M, \omega)$ con $\pi_2(M)=0$, un difeomorfismo hamiltoniano $\phi = \phi_H^1$ generado por alguna función hamiltoniana $H: \R/\Z \times M \to \R$ y un grado $\ast \in \Z$, \pause la colección de datos  $\{\{\HF_*^{\lambda}(\phi)\}_{\lambda \in \R}; \{\iota_{\lambda, \eta}\}_{\lambda \leq \eta} \}$ es llamado {\it módulo de persistencia hamiltoniano en el grado $\ast$}, denotado por $\mathbb {HF}_*(\phi)$. \pause El código de barras de $\mathbb{HF}_*(\phi)$ se denota por $\mathcal B_*(\phi)$, y $\mathcal B(\phi) = \cup_{\ast \in \Z} \mathcal B_*(\phi)$. 
+
+ \end{block} 
+    
+\end{frame}
+
+\begin{frame}{Ejemplo 8.2.4 (i)}
+
+Homología de Morse como caso particular de Homología de Floer: \pause
+
+Sea $(M, \omega)$ una variedad simpléctica compacta con $\pi_2(M) =0$ y $H$ una función Morse autónoma $C^{\infty}$-pequeña con media cero. \pause En este caso, las órbitas hamiltonianas 1-periódicas son lazos constantes y están en biyección con los puntos críticos de $H$. \pause Además, se puede demostrar que el complejo hamiltoniano de Floer se reduce al complejo Morse estándar. \pause Entonces, la barra de código $\mathcal B(\phi)$, donde $\phi = \phi_H^1$, es simplemente la barra de código de la homología de Morse filtrada correspondiente. \pause Dado que $M$ es compacta, cualquier función Morse $H$ de este tipo tiene un máximo global $A = \max_{M} H$ y un mínimo global $B = \min_{M} H$. \pause En particular, $\mathcal B(\phi)$ contiene dos barras de longitud infinita $[A, \infty)$ y $[B, \infty)$.
+
+    
+\end{frame}
+
+\begin{frame}{Ejemplo 8.2.4 (ii)}
+
+Hamialtoniano idéntico a cero como caso límite: \pause
+
+$H \equiv 0$ genera el difeomorfismo hamiltoniano $\phi_H^1 = \mathds{1}_M$, es decir, el mapa identidad en $M$. \pause Dado que $H$ es degenerado, no podemos aplicar directamente la teoría desarrollada anteriormente, consideraremos este caso como el límite de funciones Morse arbitrariamente pequeñas $H_i$. \pause Definimos código de barras $\mathcal B(\mathds{1}_M)$ como el límite de $\mathcal B(\phi_{H_i}^1)$ en la distancia cuello de botella $\dbot$. \pause Así, $\mathcal B(\mathds{1}_M)$ contiene solo la barra $[0, \infty)$ con multiplicidad $\sum_{i} b_i(M)$, el número total de Betti de $M$.
+
+    
+\end{frame}
+
+\begin{frame}{Ejemplo 8.2.4 (iii)}
+
+Conjetura de Arnold: \pause
+
+Para $\lambda$ suficientemente grande (es decir, el espacio límite del módulo de persistencia), la homología de Floer $HF_\lambda^*(\phi)$ no depende de la elección de un difeomorfismo hamiltoniano no degenerado $\phi$. \pause Por el ejemplo (i) anterior, coincide con la homología de la variedad, y por lo tanto, el número de puntos fijos de $\phi$ no es menor al número total de Betti de $M$. \pause Esta es una de las afirmaciones de la conjetura de Arnold establecida por A. Floer (Ref. \it{Symplectic fixed points and holomorphic spheres}) para variedades simplécticas cerradas con $\pi_2 = 0$. \pause En la actualidad, gracias a los esfuerzos de numerosos investigadores, la conjetura está confirmada para todas las variedades simplécticas cerradas, ver, por ejemplo, el artículo John Pardon, \it{An algebraic approach to virtual fundamental cycles on moduli spaces
+of pseudo-holomorphic curves}, y las referencias incluidas en él.
+
+
+    
+\end{frame}
+
+\begin{frame}{Teorema de Estabilidad Dinámica}
+
+\begin{block}{Teorema 8.2.5}
+Sea $(M, \omega)$ una variedad simpléctica con $\pi_2(M) =0$. Para cualquier par de difeomorfismos hamiltonianos no degenerados $\phi, \psi \in \Ham(M, \omega)$, $d_{bot}(\mathcal B(\phi), \mathcal B(\psi)) \leq d_{\rm Hofer}(\phi, \psi)$.
+
+
+ \end{block} \pause
+
+\begin{block}{Corolario 8.2.6}
+Sea $(M, \omega)$ una variedad simpléctica compacta con $\pi_2(M) =0$. Si un difeomorfismo hamiltoniano $\phi \in \Ham(M, \omega)$ no es la identidad $\mathds{1}_M$, entonces $\d(\phi, \mathds{1}_M) >0$.
+
+
+
+ \end{block} 
+    
+\end{frame}
+
+\section{Videos Polterovich}
+\begin{frame}{Links}
+
+Leonid Polterovich: Persistence modules and Hamiltonian diffeomorphisms 
+\begin{center}
+     \href{https://www.youtube.com/watch?v=PH895gWDo2c}{Part 1}\hspace{5pt}
+    \href{https://www.youtube.com/watch?v=9GvpXk_IhAA}{Part 2}\hspace{5pt}
+    \href{https://www.youtube.com/watch?v=WEBNqTSiJCk}{Part 3}\hspace{5pt}
+    \href{https://www.youtube.com/watch?v=IUUXXpjRJ3c&t=1593s}{Part 4}
+\end{center}
+   
+
+
+\end{frame}
+\end{document}
+
