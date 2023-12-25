@@ -1,0 +1,549 @@
+
+\documentclass{beamer}
+\setbeamertemplate{theorems}[numbered]
+\usecolortheme{dracula}
+\usepackage[utf8]{inputenc}
+\usepackage[
+  main=spanish
+]{babel}
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+%\usefonttheme[onlymath]{serif}
+
+\newcounter{Ejercicio}
+%\newcounter{Ejemplo}
+\uselanguage{spanish}
+\languagepath{spanish}
+\deftranslation[to=spanish]{Lemma}{Lema}
+%\newtheorem{Theorem}{Teorema}[section]
+%\newtheorem{Lemma}[Theorem]{Lema}
+\newtheorem{claim}[theorem]{Afirmaci\'on}
+\newtheorem*{claim*}{Afirmaci\'on}
+%\newtheorem{Ejercicio}[Theorem]{Ejercicio}
+%
+%
+\newtheorem{Ejercicio}[theorem]{Ejercicio}%[count-ejercicio]
+%\newtheorem{Afirmacion}[theorem]{claim}
+\newtheorem{Ejemplo}{Ejemplo}
+\usepackage{cancel}
+%\newtheorem{Proposition}[Theorem]{Proposici\'on}
+%\newtheorem{Conjecture}[Theorem]{Conjecture}
+%\newtheorem{Definition}[Theorem]{Definici\'on}
+\newtheorem{example2}[theorem]{Ejemplo}
+%\newtheorem{Observation}[Theorem]{Observation}
+%\newtheorem{Remark}[Theorem]{Remark}
+\def\matching{apareamiento}
+\def\matched{apareados}
+
+\def \rk{{\mbox {rk}}\,}
+\def \dim{{\mbox {dim}}\,}
+\def \ex{\mbox{\rm ex}}
+\def\df{\buildrel \rm def \over =}
+\def\ind{{\mbox {ind}}\,}
+\def\Vol{\mbox{Vol}}
+\def\V{\mbox{Var}}
+\newcommand{\comp}{\mbox{\tiny{o}}}
+\newcommand{\QED}{{\hfill$\Box$\medskip}}
+
+
+\def\Z{{\bf Z}}
+\def\R\re
+\def\V{\bf V}
+\def\W{\bf W}
+\def\f{\tilde{f}_{k}}
+\def \e{\varepsilon}
+\def \la{\lambda}
+\def \vr{\varphi}
+\def \R{{\bf R}}
+\def \L{{\mathcal L}}
+
+\def \re{{\mathbb R}}
+\def \Q{{\mathbb Q}}
+\def \cp{{\mathbb CP}}
+\def \T{{\mathbb T}}
+\def \C{{\bf C}}
+\def \M{{\widetilde{M}}}
+\def \I{{\mathbb I}}
+\def \H{{\mathbb H}}
+\def \lv{\left\vert}
+\def \rv{\right\vert}
+\def \ov{\overline}
+\def \tx{{\widehat{x}}}
+\def \0{\lambda_{0}}
+\def \la{\lambda}
+\def \ga{\gamma}
+\def \de{\delta}
+\def \x{\widetilde{x}}
+\def \E{\mathbb{E}}
+\def \y{\widetilde{y}}
+\def \A{{\mathcal A}}
+\def\h{{\rm h}_{\rm top}(g)}
+\def\en{{\rm h}_{\rm top}}
+\def\F{{\mathcal F}}
+\def\co{\colon\thinspace}
+
+\usepackage{ragged2e}  % `\justifying` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}       % `\url`s
+\usepackage{listings}  % Code listings
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+\usepackage{xfrac}
+
+\date{7 de Diciembre de 2023}%23 de noviembre de 2023
+\title{Parte II: Cap\'itulo 9}
+\subtitle{M\'odulos de Persistencia Simpl\'ecticos\\ \scalebox{0.6}{\emph{(Symplectic persistence modules)}}} 
+\author{Eduardo Vel\'azquez}
+\logo{
+%\includegraphics[width=2cm]{logo-IMUNAM.png}
+\includegraphics[scale=0.1]{cimat-logo-w.png}
+}
+
+\begin{document}
+
+\frenchspacing
+
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+  \frame{\maketitle}
+
+  %\AtBeginSection[]{% Print an outline at the beginning of sections
+    %\begin{frame}<beamer>
+    %  \frametitle{Contenidos}
+    %  \tableofcontents[currentsection]
+    %\end{frame}}
+
+    %\section{Motivación dinámica}
+%
+%    \subsection{Motivación}
+\begin{frame}{Variedades de Liouville}{}
+\begin{block}{Definici\'on 9.1.1} Una variedad de Liouville $(M,\omega,X)$ es una variedad simpl\'ectica con un campo vectorial fijo $X$ que genera un flujo $X^t$ tal que
+\begin{enumerate}
+\item $\omega = d\lambda$, $\lambda=\iota_X\omega$
+\item $\exists \, P\subset M$ hipersuperficie cerrada y conexa, transversa a $X$, y que acota un dominio abierto $U$ de $M$ con cerradura compacta y $M=U\sqcup\cup_{t\geq 0}X^t(P).$
+\end{enumerate}
+Llamamos a $X$ \emph{campo vectorial de Liouville} y a $X^t$, \emph{Flujo de Liouville}.\\
+Cualquier hipersuperficie $P$ y cualquier dominio $U$ de este tipo se denomina \emph{en forma de estrella.}
+\end{block}
+\end{frame}
+
+\begin{frame}{}{}
+Cualquier variedad de Lioville se puede descomponer como
+$$M= M_{\ast,P}\sqcup \mbox{Core}_P(M)$$
+donde $M_{\ast,P}=\cup_{t\geq 0}X^t(P)$ y $\mbox{Core}_P(M)= \cap_{t< 0} X^t(U)$, con $U$ un abierto acotado por $P$. Esta descomposici\'on es independiente de $P$.
+
+\begin{block}{{\bfseries Ejemplos de Variedades de Liouville}}
+\begin{enumerate}
+\item \scalebox{0.9}{$(M,\omega_{std},X_{rad})=\left( \mathbb{R}^{2n},\,\sum_{i=1}^{n}dp_i\wedge dq_i,\, \sum_{i=1}^{n}\frac{1}{2}( q_i\frac{\partial}{\partial q_i}+p_i\frac{\partial}{\partial p_i}) \right)$}\\
+$\, $\\con descomosici\'on: $\mathbb{R}^{2n}=(\mathbb{R}^{2n}\backslash \{0\})\sqcup \{0\}$.
+
+\item $(N,\omega_{cam},X_{can})=\left( T^\ast N,\,\sum_{i=1}^{n} dp_i\wedge dq_i,\, \sum_{i=1}^{n} p_i\frac{\partial}{\partial p_i} \right)$.\\
+$\, $\\con descomosici\'on: $T^{\ast}N=(T^{\ast}\backslash \{0_N\})\sqcup \{0_N\}$,
+$\, $\\
+donde $0_N$ es la secci\'on cero de $T^\ast N$. Un ejemplo de un dominio estrella es el codisco abierto 
+$$U^{\ast}_{g}N:=\{(q,p)\in T^\ast N \,|\, |p|_{g_{q}^{\ast}}<1\}$$
+asociado a una m\'etrica riemanniana $g$  en $N$
+\end{enumerate}
+\end{block}
+\end{frame}
+
+
+\begin{frame}
+\begin{block}{Definici\'on 9.1.6}
+Dada una variedad de Liouville $(M, \omega, X)$, sea $\lambda =\iota_X\omega$. Un simplectomorphismo $\varphi$ de una varieda de Liouville se denomina \emph{exacto} si $\varphi^{\ast}\lambda -\lambda =dF$ para alguna funci\'on $F$ en $M$. Los simplectomorfismos compactamente soportados forman un grupo que denotaremos como $\mbox{Sympex}(M, \omega, X)$, a veces lo abreviaremos como  $\mbox{Sympex}(M)$.
+\end{block}
+\end{frame}
+
+\begin{frame}
+Dada una variedad de Liouville $(M,\omega,X)$ y una hipersuperficie $P$ en forma de estrella, cualquier punto $m\in M_{\ast,P}$ en la descomposici\'on puede identificarse con un punto $(x,u)\in P\times \mathbb{R}_{+}$. \\
+$\,$\\
+En particular, $P=\{u=1\}$, y el dominio estrella $U\subset M$ que acota a $P$ es $\{u<1\}$.\\
+$\,$\\
+Por convenci\'on usaremos: $\mbox{Core}(M)=\{u=0\}$.
+\end{frame}
+
+
+\begin{frame}
+Diremos que una hipersuperficie $P$ en forma de estrella de una variedad de Liouville $(M,\omega,X)$ es {\bfseries no-degenerada}, si su {\bfseries espectro de acci\'on},
+\begin{gather}\mbox{Spec}:=\left\{ \int_{\gamma}\iota_{X}\omega|_P\,\big\vert\,\gamma\in C(P)\right\},\label{ec:spec}
+\end{gather}
+es un subconjunto discreto de $\mathbb{R}$.
+$\,$\\$\,$\\
+Cualquier dominio en forma de estrella $U$ tal que $\partial\bar{U}$ cumpla~(\ref{ec:spec}) es un \emph{dominio con forma de estrella no-degenerado}.
+\end{frame}
+
+
+\section{M\'odulos de Persistencia Simpl\'ecticos}
+\begin{frame}
+\begin{block}{Definici\'on 9.2.1}
+Un conjunto parcialmente ordenado $(I,\preceq)$ est\'a {\bfseries dirigido hacia a bajo} si para cualquier $i,j\in I$, existe $k\in I$ tal que $k\preceq i$ y $k\preceq j$.
+\end{block}
+$\,$\\
+Un \emph{sistema inverso de un espacio vectorial sobre} $\mathbb{Z}_2$ es un functor de un conjunto parcialmente ordenado hacia abajo $(I,\preceq)$ a la categor\'ia de espacios vectoriales. Expl. $A$ asigna a cada $i\in I$ un espacio vectorial $A_{i}$ sobre $\mathbb{Z}_{2}$ y $\sigma$ asigna a cada par $i,j\in I$, tal que $i\preceq j$, un mapeo $\mathbb{Z}_2$-lineal $\sigma_{ij}:A_{i}\rightarrow A_{j}$, tal que $\sigma_{ik}=\sigma_{jk}\circ\sigma_{ij}$ y $\sigma_{ii}=\mathbb{1}_{A_{i}}\,$.
+\end{frame}
+
+\begin{frame}
+\begin{block}{Definici\'on 9.2.2}
+Sea $(A,\sigma)$ un sistema inverso de un espacio vectorial sobre $\mathbb{Z}_2$. El \emph{l\'imite inverso} de $(A,\sigma)$ se define como
+$$\lim_{  \xleftarrow[i\in I]{}} A:= \{ \{x_{i}\}_{i\in I}\in \Pi_{i\in I}A_{i} \,|\, i\preceq j \Rightarrow \sigma_{ij}(x_i)=x_{j}    \}$$
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{block}{}
+\fbox{%
+    \parbox{\textwidth}{Sea $U$ un dominio estrella de una variedad de Liouville $(M,\omega,X)$ y $\mathcal{H}(U)$ el conjunto de todas las funciones aut\'onomas hamiltonianas en $M$ con soporte en $U$.}}
+\end{block}
+Definamos un orden parcial en $\mathcal{H}(U)$:
+\begin{gather*}
+H\preceq G\hspace{1.5em}\mbox{si}\hspace{1.5em}H(x,u)\geq G(x,u)\hspace{1.5em}\mbox{si}\hspace{1.5em} (x,u)\in M
+\end{gather*}
+Si adem\'as podemos considerar una homotop\'ia mon\'otona de $H$ a $G$: $$\{H_s\}_{s\in[0,1]}\hspace{1.5em}\mbox{tal que}\hspace{1.5em}H_0=H,\hspace{1.5em} H_1=G,\hspace{1.5em}\partial_sH_s\leq 0$$
+Este homotop\'ia induce un $\mathbb{Z}_2$ mapeo lineal $$\sigma_{H,G}:HF_{\ast}^{a,\infty}(H)\rightarrow HF_{\ast}^{(a,\infty)}(G)\hspace{1.5em} \mbox{p.c.}\hspace{1.5em} a>0 $$
+\fbox{ \parbox{\textwidth}{$HF_{\ast}^{(a,\infty)}
+(H)$ - homolog\'ia hamiltoniana de Floer de la funci\'on $H$ con coeficientes en $\mathbb{Z}_2$ y ventana de acci\'on $(a,\infty)$.}}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Definici\'on 9.2.4}
+Sea $U$ un dominio estrella no degenerado de una variedad de Liouville $(M,\omega,X)$, Para cualquier $a>0$, la \emph{homolog\'ia filtrada simpl\'ectica de} $U$ se define como:
+\fbox{ \parbox{\textwidth}{$$SH_{\ast}^{(a,\infty)}(U):=\lim_{  \xleftarrow[H\in \mathcal{H}(U)]{}} HF_{\ast}^{(a,\infty)}(H),$$}}
+con las siguientes propiedades
+\end{block}
+\begin{block}{(Ejercicio 9.2.5)}
+\begin{enumerate}
+\item Para cualquier $a>0$ y grado $\ast\in\mathbb{Z},\,SH_{\ast}^{(a,\infty)}$ es de dimensi\'on finita sobre $\mathbb{Z}_2$.
+\item Para cualquier $a\leq b$, el morfismo can\'onico $HF_{\ast}^{(a,\infty)}\rightarrow HF_{\ast}^{(b,\infty)}$ induce un mapeo $\mathbb{Z}_2$ lineal $$\theta_{a,b}:SH_{\ast}^{(a,\infty)}(U)\rightarrow SH_{\ast}^{(b,\infty)}(U).$$
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}
+Sea $U$ un dominio estrella no degenerado de una variedad de Liouville $(M,\omega, X)$. Para cualquier $a>0$, sea $$SH_{\ast}^{\ln a}(U)\rightarrow SH_{\ast}^{(a,\infty)}(U).$$
+Se sigue que
+\fbox{ \parbox{\textwidth}{$$\mathbb{SH}_{\ast}(U)=\left( \{ SH_{\ast}^{\ln a}(U) \}_{a<0}\,,\,\{\theta_{a,b}:SH_{\ast}^{\ln b}(U)\}_{a\leq b}\right).$$}}
+
+\begin{block}{Definici\'on 9.2.6}
+El m\'odulo de persistencia de tipo $\mathbb{SH}_{\ast}(U)$ localmente finito se llama \emph{m\'odulo de persistencia simpl\'ectico de} $U$.
+\end{block}
+\end{frame}
+
+\begin{frame}
+Sea $X$ un campo de Liouville en una variedad de Liouville $(M,\omega,X)$, podemos reescalar el dominio estrella $U$ de la siguiente forma:\\
+$\,$\\
+Para cualquier $C>0$, sea $CU:=\phi^{\ln C}(U)$. $t\in \mathbb{R}$ y grado $\ast\in \mathbb{Z}$, el difeomorfismo
+$$r_{C}^{U}:SH_{\ast}^{t}(U)\rightarrow SH_{\ast}^{t+\ln C}(CU),$$
+resulta en un corrimiento del c\'odigo de barras $\mathcal{B}_{\ast}(U)$
+\end{frame}
+
+\section{9.3 Ejemplos de $\mathbb{SH}_{\ast}(U)$}
+
+\begin{frame}{Ejemplos de $\mathbb{SH}_{\ast}(U)$}{Ejemplo 9.3.1}
+1) Sea $N\geq 1$  un entero y $E(1,N,\cdots,N)$ el elipsoide en $\mathbb{R}^{2n}(=\mathbb{C})$ definido como
+$$E(1,N,\cdots,N)=\left\{ (z_1,\cdots,z_n)\in \mathbb{C}^n\,\,| \pi(\frac{|z_1|}{1},\frac{|z_2|}{N},\cdots,\frac{|z_n|}{N})<1\right\},$$
+
+\begin{itemize}
+\item Su espectro de acci\'on es igual a $\mathbb{Z}$.
+\item $E(1,N,\cdots,N)$ es un dominio estrella de la variedad de Liouville $(\mathbb{R}^{2n},\omega_{std},X_{rad})$.
+\item (Sec. 9.7) $SH_{\ast}^{(a,\infty)} E(1,N,\cdots,N)=\mathbb{Z}_2$ cuando $\ast=-2|\lceil -a\rceil |-2(n-1)|\lceil \frac{-a}{N}\rceil|$, y las homolog\'ias de los dem\'as \'ordenes se anulan.
+\item $\mathbb{SH}_0(E(1,N,\cdots,N))=\mathbb{Z}_2(-\infty,0)$.\\
+donde $\mathbb{Z}_2(-\infty,0)$ denota al m\'odulo de intervalo $(-\infty,0)$ sobre $\mathbb{Z}_2$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Ejemplo 9.3.2 I}
+2) Sea $N$ una variedad cerrada y $g$ una m\'etrica Riemanniana. Consideremos el codisco unitario $U_{g}^{\ast} N$ sobre $N$. Para una elecci\'on gen\'erica de la m\'etrica, $U_{g}^{\ast} N$ es un dominio no degenerado en forma de estrella de $(T^{\ast}N, \omega_{can} , X_{can})$. Fijemos una clase de homotop\'ia $\alpha$ distinta de cero del espacio libre de lazos. Consideremos el m\'odulo de persistencia simpl\'ectico $\mathbb{SH}_{\ast}(U^{\ast}_{g}N)_{\alpha}$ en la clase $\alpha$.
+\end{frame}
+
+\begin{frame}
+%\vspace{1em}
+De acuedo con el {\bfseries Teorema 3.1} de Weber\footnote{Weber, Joa. \emph{Noncontractible periodic orbits in cotangent bundles and Floer homology}, 2004.}, Para cualquier $a>0$, se tiene un isomorfismo entre los espacios vectoriales
+$$SH_{\ast}^{(a,\infty)}(U_{g}^{\ast}N)_{\alpha}\simeq H_{\ast}(\Lambda_{\alpha}^{a}N), $$
+donde $\Lambda_{\alpha}^{a}N$ es el espacio de lazos en $N$ en la clase $\alpha$ de longitud $<a$. M\'as a\'un, esto se extiende a un isomorfismo de los m\'odulos de persistencia $\mathbb{SH}_{\ast}(U_{g}^{\ast}N)_{\ast}$ y $V(N,g)_{\alpha}$ (ver ejemplo 2.4.2).
+
+\end{frame}
+
+
+\begin{frame}{Ejemplo 9.3.2 II}
+3) Sea $N=\mathbb{T}^2$ la representaci\'on del toro como la superficie de revoluci\'on de una funci\'on perfil con dos m\'inimos locales, y extremos abiertos identificados. Dotemos a $N$ con la m\'etrica $g$ inducida por $\mathbb{R}^3$. Los m\'inimos de la funci\'on perfil generan dos geod\'esicas simples $\gamma_1$ y $\gamma_2$; an\'alogamente los m\'aximos locales generan dos geod\'esicas $\Gamma$ y $\Gamma^{\prime}$. \\
+\vspace{1em}
+Asuma que $N$ se comprime en $\gamma_1$ y $\gamma_2$ de manera que las longitudes de $\Gamma$ y $\Gamma^\prime$ son $>2$, y las longitudes $\gamma_1,\,\gamma_2$ son $<1$. Sea $s_{i}=-\ln \mbox{length}_{g}(\gamma_i)$, y $s=(s_1,s_2)$ con $s_1\geq s_2$.
+\begin{center}
+\includegraphics[scale=0.3]{diagrams/torus.png}
+\end{center}
+\end{frame} 
+
+\begin{frame}
+Eligiendo adecuadamente la funci\'on perfil, podemos obtener que $\gamma_1,\,\gamma_2$ y $\Gamma_1,\,\Gamma_2$ son las \'unicas\footnote{Stojisavljević V., Zhang J. \emph{Persistence modules, symplectic Banach-Mazur distance and Riemannian metrics}, p. 34.} geod\'esicas en su clase de homotop\'ia que denotaremos por $\alpha$.\\
+\vspace{1em}
+Consideremos el m\'odulo truncado de persistencia $V(N,g_s)$ de grado uno y rayo $(-\infty,\ln (3/2))$ (definici\'on en Ejercicio 5.3.4). El c\'odigo de barras $\mathcal{B}^{(s)}$ de este m\'odulo truncado se ve como el de la siguiente figura:
+\begin{center}
+\includegraphics[scale=0.3]{diagrams/barcode.png}
+\end{center}
+\end{frame}
+
+\section{Distancia Simpl\'ectica de Banach-Mazur}
+
+\begin{frame}{9.4 Distancia Simpl\'ectica de Banach-Mazur}
+\scalebox{0.6}{Onjetivo: Definir una pseudom\'etrica entre dominios estrella.}\\
+\vspace{1em}
+Sea $\mathcal{S}^{2n}$ el conjunto de todos los dominios estrella de una variedad de Liouville $(M,\omega,X)$. Sea $C>0$ y $\phi\in\mbox{Symp}_{ex}(M)$, a partir del Flujo de Liouville definamos el rescalamiento:
+$$\phi(C)=X^{\ln C}\circ \phi \circ X^{-\ln C}\in \mbox{Symp}_{ex}(M)$$
+
+Sean $U,V\in \mathcal{S}^{2n}$, un $\phi$ morfismo de Liouville de $U$ a $V$ es un simplectomorfismo exacto y compactamente soportado $\phi$ de M tal que $\phi(\bar{U})\subset M$
+\vspace{1em}
+Dicho morfismo se denota: $U  \overset{\phi}{\hookrightarrow} V$
+\end{frame}
+
+
+\begin{frame}{Distancia Simpl\'ectica de Banach-Mazur}
+\begin{block}{Definici\'on 9.4.1}
+Sean $U,V\in \mathcal{S}^{2n}$, diremos que un n\'umero real $C>1$ es $(U,V)$\emph{-admisible} si existe un par de simplectomorfismos $\phi,\psi \in \mbox{Symp}_{ex}(M)$ tal que $$\frac{1}{C}U  \overset{\phi}{\hookrightarrow} V  \overset{\psi}{\hookrightarrow} CU$$
+y existe una isotop\'ia $\{\Phi_s\}_{s\in[0,1]}$ de morfismos de Liouville de $\frac{1}{C}U$ a $CU$ tal que $\Phi_0=\mathbb{1}$ y $\Phi_{1}=\psi\circ \phi$.
+\end{block}
+
+\fbox{ \parbox{1.25\textwidth}{\begin{block}{Definici\'on 9.4.2}
+Definimos la distancia de Banach-Mazur entre $U$ y $V$ como
+$$d_{SBM}(U,V)=\mbox{inf}\{ \ln C>0 \,|\, C \mbox{es} (U,V)\mbox{-admisible} \mbox{y} (V,U)\mbox{-admisible}\}.$$
+\end{block}}}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Teorema 9.4.7 (Estabilidad Topol\'ogica)}
+Sean $U,V\in \mathcal{S}^{2n}$ y sean $\mathcal{B}_{\ast}(U)$ y $\mathcal{B}_{\ast}(V)$ los c\'odigos de barras de los m\'odulos de persistencia $\mathbb{SH}_{\ast}(U)$ y $\mathbb{SH}_{\ast}(V)$, respectivamente. Entonces
+$$d_{bot}(\mathcal{B}_{\ast}(U),\mathcal{B}_{\ast}(V))\leq d_{SBM} (U,V).$$
+\begin{proof}$\,$\hspace{3em}(Sec. 9.6)
+\end{proof}
+\end{block}
+\end{frame}
+
+\begin{frame}{Ejercicios}
+\begin{block}{Ejercicio 9.4.4} $d_{sbm}$ es una pseudom\'etrica en $\mathcal{S}^{2n}$.
+\end{block}
+\vfill
+\begin{block}{Ejercicio 9.4.5} Si $U,V\in \mathcal{S}^{2n}$ son exactamente simplectom\'orficos, $d_{SBM}(U,V)=0$. Una pregunta abierta interesante es si $d_{SBM}$ es una m\'etrica \lq genuina\rq ~en el espacio cociente $\mathcal{S}^{2n}/\mbox{Symp}_{ex}(M).$
+\end{block}
+\vfill
+\begin{block}{Ejercicio 9.4.6} Muestre que $d_{SBM}(U,CU)=\big\vert \ln C\big\vert$ para cualquier $U\in\mathcal{S}^{2n}$ y $C>0$. Esto implica que, como espacio pseudo-m\'etrico, $(\mathcal{S}^{2n},d_{SBM})$ tiene di\'ametro infinito.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Ejercicio 9.4.8}
+Consideremos los elipsoides $E(1,8)$ y $E(2,4)$. Observe que ambos tienen el mismo volumen. Por el ejercicio 9.3.1, tenemos
+$$\mathcal{B}_0(E(1,8))=(-\infty,0)\hspace{2em}\mbox{y}\hspace{2em}\mathcal{B}_0(E(2,4))=(-\infty,\ln 2)\,.$$
+El Teorema 9.4.7 implica que
+$$d_{SBM}(E(1,8),\,E(2,4))\geq \ln 2\,.$$
+\end{block}
+\end{frame}
+
+\section{Propiedades Functorales}
+
+\begin{frame}{9.5 Propiedades Functoriales}{Teorema 9.5.1}
+Sea $(M,\omega,X)$ una variedad de Liouville, y sean $U$, $V$ dominios estrella no-degenerados de $(M,\omega,X)$.
+\begin{enumerate}
+\item Todo morfismo de Liouville $\phi$ de $U$ a $V$ induce un mapeo $\mathbb{Z}_{2}$-lineal $f_{\phi}^{a}:SH_{\ast}^{(a,\infty)}(V)\rightarrow SH_{\ast}^{(a,\infty)}(U)$, $\forall a>0$ y grado $\ast\in \mathbb{Z}$. Denotemos por $\theta^{U}$ y $\theta^{V}$ a los mapeos de estructuras de los m\'odulos de persistencia $U$ y $V$ respectivamente. Entonces para $0<a\leq b$ y grado $\ast \in \mathbb{Z}$,
+\begin{center}
+\includegraphics[scale=0.3]{diagrams/uno.png}
+\end{center}
+Si $W$ es un dominio estrella no-degenerado tal que $U \overset{\phi}{\hookrightarrow} V \overset{\psi}{\hookrightarrow} W$, entonces $\forall a>0$, $f_{\psi \circ \phi}^{a}=f_{\phi}^{a}\circ f_{\psi}^{a}$ \scalebox{0.7}{(Ejemplo 9.5.4).}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{}{Teorema 9.5.1}
+\begin{enumerate}
+\item[2] Sea $r_{C}$ el isomorfismo de rescalamiento, sea $\theta$ el mapeo de estructura de los m\'odulos de persistencia; y sea $i=f_{\mathbb{1}}$ el morfismo inducido por el mapeo identidad $\mathbb{1}$ en $M$, visto como un morfismo de Liouville de $U$ a $CU$. Entonces los siguientes diagramas conmutan para cualquier $a>0$ y grado $\ast \in \mathbb{Z}$.
+\begin{center}
+\includegraphics[scale=0.3]{diagrams/dos.png}
+\includegraphics[scale=0.3]{diagrams/tres.png}
+\end{center}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{}{Teorema 9.5.1}
+\begin{enumerate}
+\item[3] Supongamos que $\bar{U}\subset V$, y $\phi$ es un morfismo de Liouville de $U$ a $V$. Si $\phi$ es isot\'opico a $\mathbb{1}$ atrav\'es de  morfismos de Liouville de $U$ a $V$, entonces $f_{\phi}=i$, donde $f_{\phi}$ es el morfismo inducido por $\phi$ e $i$ es el morfismo inducido por la identidad.
+
+\item[4] Supongamos $\phi$ es un morfismode Liouville de $\frac{1}{C}U$ a $V$, adem\'as $r_{C}$ es el isomorfismo de rescalamiento y $\phi(C)$ es el escalamiento obtenido a partir del Flujo de Liouville. Entonces
+$$f_{\phi(C)}^{Ca}\circ r_{C}^{V}=r_{C}^{\frac{1}{C}U}\circ f_{\phi}^{a}\,.$$
+
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Demostraci\'on Teorema 9.5.1}{(sketch)}
+Sea $\phi$ un morfismo de Liouville de $U$ a $V$. \\
+\vspace{1em}
+(1) Se sigue de que $\phi$ induce un morfismo de espacios de funciones $\phi_{\ast}:\mathcal{H}(U)\rightarrow\mathcal{H}(V)$ dado por el push-forward de $\phi$.\\
+Note que para cualquier $F\in \mathcal{H}(U)$ existe una $G\in \mathcal{H}(V)$ tal que $G\geq \phi_{\ast (F)}$, por lo que $\phi_{\ast}$ induce un morfismo $\tau_{F}:SH_{\ast}^{(a,\infty)}(V)\rightarrow HF_{\ast}^{(a,\infty)}(F)$ que se obtiene con la composici\'on
+$$SH_{\ast}^{(a,\infty)}(V) \xrightarrow[]{\pi_{G}} HF_{\ast}^{(a,\infty)}(G) \xrightarrow[]{\sigma_{G,\phi_{\ast}}(F)} HF_{\ast}^{(a,\infty)}(\phi_\ast F)\simeq HF_{\ast}^{(a,\infty)}(F)\,. $$
+donde $\pi_{G}$ es la proyecti\'on can\'onica, y $\sigma_{G,\phi_{\ast}}(F)$ es el morfismo inducido por una homotop\'ia mon\'otona de $G$ a $\phi_{\ast}(F)$. Se compureba que si $H\geq F \in \mathcal{H}(U)$, $\sigma_{H,F}\circ \tau_{H}=\tau_{F}$. Por el ejercicio 9.2.3 existe un morfismo de $SH_{\ast}^{(a,\infty)}(V)$ a $SH_{\ast}^{(a,\infty)}(U)$.
+\end{frame}
+
+\begin{frame}
+Las pruebas de (2) y (3) usan ideas similares; ambas pueden confirmarse usando el Lema 4.15 in [46] estudiando cuidadosamente el espacio moduli de trayectorias de conexi\'on.\footnote{[46] Gutt, J. \emph{The positive equivariant symplectic homology as an invariant for some contact manifolds}, 2017.}
+\end{frame}
+
+\begin{frame}{Ejemplo 9.5.3}
+\begin{block}{Ejemplo 9.5.3}
+Sea $0<1<R$, denotemos $B_1:=B^{2n}(1)$ y $B_2:=B^{2n}(R)$. Notemos que $B_2=RB_1$. Para toda $a>0$ y grado $\ast\in\mathbb{Z}$, sea $\theta_{a}$ el morfismo de estructura $\theta_{a/R,a}:SH_{\ast}^{(a/R,\infty)}(B_1)\rightarrow SH_{\ast}^{(,\infty)}(B_1)$, y por $i^{a}$ al morfismo $f_{\mathbb{1}}^{a}:SH_{\ast}^{(a/R,\infty)}(B_2)\rightarrow SH_{\ast}^{(,\infty)}(B_1)$ inducido por el mapeo identidad. Entonces el siguiente diagrama conmuta
+\begin{center}
+\includegraphics[scale=0.3]{diagrams/example953.png}\\
+\begin{minipage}{0.45\textwidth}
+Se sigue del Teorema 9.5.1 (2)\\
+\includegraphics[scale=0.23]{diagrams/dos.png}
+\end{minipage}\hfill $\,$
+\end{center}
+\end{block}
+\end{frame}
+
+\begin{frame}{Ejemplo 9.5.4}
+\begin{block}{Ejemplo 9.5.4}
+Sea $(M,\omega,X)$ una variedad de Liouville, y $U,\,V$ dos dominios estrella no degenerados de $(M,\omega,X)$. Supongamos que $C>1$ es $(U,V)$-admisible, entonces por definici\'on de $(U,V)$-admisible 9.4.1, existen $\phi,\,\psi \in \mbox{Symp}_{ex}(M)$ tales que $\frac{1}{C}U \overset{\phi}{\hookrightarrow} V \overset{\psi}{\hookrightarrow} CU$ y $\psi\circ\phi$ isot\'opica a $\mathbb{1}$ mediante morfismos de Liouville de $\frac{1}{C}U$ a $CU$. Por el Teorema 9.5.1 (1), para cualquier $a>0$ el sig. diagrama conmuta
+\begin{center}
+\includegraphics[scale=0.3]{diagrams/9.5.4.png}
+\end{center}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Ejemplo 9.5.4}
+Adem\'as, por el Teorema 9.5.1 (3), $f_{\psi\circ\phi}^{a}=i_{CU,U/C}^{a}$, donde $i_{CU,U/C}$ es el morfismo inducido por la identidad en $M$ (vista como morfismo de $U/C$ a $CU$). Por el Teorema 9.5.1 (2), tenemos el siguiente diagrama 
+\begin{center}
+\includegraphics[scale=0.3]{diagrams/9.5.4.II.png}
+\end{center}
+\end{frame}
+
+\begin{frame}{Ejemplo 9.5.4}
+Sean $$F_{a}:=f_{\psi}^{Ca}\circ r_{C}^{U}:SH_{\ast}^{(a,\infty)}(U)\rightarrow SH_{\ast}^{(Ca,\infty)}(V),$$
+
+$$G_{a}:= r_{C}^{U/C}\circ f_{\phi}^{a}:SH_{\ast}^{(a,\infty)}(V)\rightarrow SH_{\ast}^{(Ca,\infty)}(U).$$
+
+Por el diagrama anterior tenemos $$G_{a} \circ F_{a/C}=\theta_{a/C,Ca}^{U}\hspace{4em}(77)$$
+
+Pasando a escala logar\'itmica concluimos que $\psi \circ\phi$, la cual es isot\'opica a $\mathbb{1}$ a trav\'es de los morfismos de Liouville de $\frac{1}{C}U$ a $CU$, induce los mapeos de estructura $\theta_{a-\ln C,a+\ln C}$ de los m\'odulos de persistencia $\mathbb{SH}_{\ast}(U)$.
+\end{frame}
+
+\section{Applicaciones}
+
+\begin{frame}{9.6 Aplicaciones}
+\begin{block}{Teorema 9.6.1 (No-compresi\'on de Gromov) } Sea $B^{2n}$ una bola y $E(R,R_{\dagger},\cdots,R_{\dagger})$ un elipsode de $\mathbb{R}^{2n}$, para el que asimimos $R_{\dagger}\geq R$. Si existe un morfismo de Liouville de $B^{2n}(r)$ a $E(R,R_{\dagger},\cdots,R_{\dagger})$, entonces $R\geq r$.
+\end{block}
+\begin{proof}\renewcommand{\qedsymbol}{}
+S.P.G. supongamos $r=1$. Denotemos por $\phi$ a un simplectomorfismo exacto compactamente soportado en $\mathbb{R}^{2n}$ tal que $\phi(\overline{B^{2n}(1)})\subset E(R,R_{\dagger},\cdots,R_{\dagger})$. Elijamos $R_{\bullet}>0$ suficientemente grande de manera que $B^{2n}(R)$ contenga al soporte de $\phi$ as\'i como al elipsoide $E(R,R_{\dagger},\cdots,R_{\dagger})$
+
+Denotemos $B_1:=B^{2n}(1)$ y $B_2:=B^{2n}(R_{\bullet})$. Entonces,
+$$\phi(B_1)\subset E(R,R_{\dagger},\cdots,R_{\dagger})\subset B_{2}=\phi(B_2)\,.$$
+\end{proof}
+\end{frame}
+
+\begin{frame}{Teorema 9.6.1 (cont. Dem.)}
+Por (1) y (2) del Teorema 9.5.1 y el Ejemplo 9.5.3, $\forall a>0$ y grado $\ast\in \mathbb{Z}$, tenemos que el siguiente diagrama conmuta:
+\begin{center}
+\includegraphics[scale=0.3]{diagrams/cuatro.png}
+\end{center}
+donde $i$ e $i_{B_2,B_1}$ son los morfismos inducidos por el mapeo identidad en $\mathbb{R}^{2n}$, vistos como morfismos de Liouville de $\phi(B_1)$ a $E(R,R_{\dagger},\cdots,R_{\dagger})$ y de $B_{1}$ a $B_{2}$, respectivamente.
+\end{frame}
+
+
+\begin{frame}{Teorema 9.6.1 (cont. Dem.)}
+Para $\ast=0$, por el Ejemplo 9.3.1 y reescalando, $$\mathbb{SH}_{0}(E(R,R_{\dagger},\cdots,R_{\dagger}))=\mathbb{Z}_{2}(-\infty,\ln R)$$ y $$\mathbb{SH}_{0}(B_1)=\mathbb{Z}_2(-\infty,0)$$
+
+Para cualquier $a<R_{\bullet},\, \theta_{a/R_{\bullet,a}}\neq 0$ $\Rightarrow$ $i_{B_2,B_1}\neq 0$. Entonces para $\ast=0$, $i:\mathbb{Z}_2(-\infty,\ln R)\rightarrow \mathbb{Z}_2(-\infty,0)$ es diferente de zero. Por el ejercicio 1.2.8, $\ln R\geq 0$, es decir, $R\geq 1$ .
+\end{frame}
+
+
+\begin{frame}{Demostraci\'on Teorema 9.4.7}
+Por la definici\'on 9.4.2, para toda $\epsilon >0$, existe $C$ tal que $$1<C\leq e^{d_{SBM}(U,V)+\epsilon},$$
+y morfismos $\frac{1}{C}U \overset{\phi}{\hookrightarrow} V \overset{\psi}{\hookrightarrow} CU$, tales que $\psi\circ\phi$ es isot\'opica a la identidad $\mathbb{1}$ a trav\'es de los morfismos de Liouville de $\frac{1}{C}U$ a $CU$. Afirmamos que los mapeos $F_a$ y $G_a$ definidos anteriormente, definen un $\ln C$-entrelazamiento entre $\mathbb{SH}_{\ast}(U)$ y $\mathbb{SH}_{\ast}(V)$. Recordando que $G_a\circ F_{a/c}=\theta_{a/C,Ca}^{U}$. Basta mostrar que $$F_{a}\circ G_{a/C}=\theta_{a/C,Ca}^V\,.$$
+\end{frame}
+
+\begin{frame}
+Por el punto (4) del teorema 9.5.1, tenemos que
+$$F_a:=f_{\psi}^{Ca}\circ r_{C}^{U}=r_{C}^{V/C}\circ f_{1/C}^{a}\,\hspace{1.5em}\mbox{y}\,\hspace{1.5em}G_{a}:=r_{C}^{U/C}\circ f_{\phi}^{a}=f_{\phi(C)}^{Ca}\circ r_{C}^{V}\,.$$
+
+Intercambiando $U$ por $V$, y $\phi$ por $\psi(1/C)$ en el isomorfismo $V/C \overset{\psi(1/C)}{\hookrightarrow}U \overset{\phi(C)}{\hookrightarrow}V$ y la ec. 77 derivamos la afirmaci\'on anterior.
+\vspace{1em}
+A partir del Teorema de Isometr\'ia, tenemos
+$$d_{bot}(\mathcal{B}_{\ast}(U),\mathcal{B}_{\ast}(V))=d_{int}(\mathbb{SH}_{\ast}(U)),\mathbb{SH}_{\ast}(V))\leq \ln C\leq d_{SBM}(U,V)+\epsilon\,.$$
+El teorema se sigue tomando el l\'imite $\epsilon \rightarrow 0$.
+\end{frame}
+
+
+\section{C\'alculos}
+
+\begin{frame}{9.7 C\'alculos}{C\'alculo de la homolog\'ia simpl. filtrada de $ E(1,N,\cdots,N)$}
+{\bfseries Principio 1.} Es dif\'icil analizar el l\'imite de un sistema inverso directamente, por lo cual consideraremos:\\
+\vspace{1em}
+\begin{block}{Proposici\'on 9.7.1} Sea $(A,\sigma)$ un sustema inverso de espacios vectoriales sobre $\mathbb{Z}_2$. Una sucesi\'on $\{i_{v}\}_{v\in \mathbb{N}}$ se denomina \emph{exhaustivamente hacia abajo} (downward exhausting) para $(A,\sigma)$ si para cada $i_{v+1}\preceq i_{v}$, $\sigma_{i_{v+1}}:A_{i_{v+1}}\rightarrow A_{i_{v}}$ es un isomorfismo, y $\forall i\in I$ existe $v\in \mathbb{N}$ tal que $i_{v}\preceq i$. Entonces, para cualquier sucesi\'on exhaustivamente hacia abajo $\{i_{v}\}_{v\in \mathbb{N}}$ para $(A,\sigma)$, la proyecci\'on can\'onica $$\pi_{i_{v}}: \lim_{  \xleftarrow[i\in I]{}} A\rightarrow A_{i_{v}}$$ es un isomorfismo.
+\end{block}
+\end{frame}
+
+\begin{frame}{9.7 C\'alculos}{C\'alculo de la homolog\'ia simpl. filtrada de $ E(1,N,\cdots,N)$}
+{\bfseries Principio 2.} Sean $H,\,G\in \mathcal{H}(U)$ con $H\preceq G$, sabemos que una homotop\'ia de $H$ a $G$ induce un $\mathbb{Z}_2$ mapeo linear $\sigma_{H,G}:HF_{\ast}^{(a,\infty)}(H)\rightarrow HF_{\ast}^{(a,\infty)}(G)$ para cualquier $a>0$. En general, $\sigma_{H,G}$ no es inyectiva ni supreyectiva, excepto en las siguientes condiciones:\\
+\vspace{1em}
+\begin{block}{Proposici\'on 9.7.2}
+Sea $U$ un dominio estrella no degenerado de una variedad de Liouville $(M,\omega, X)$, y sean $H\preceq G \in \mathcal{H}(U)$ y $a>0$. Supongamos que existe una homotop\'ia mon\'otona $\{H_{s}\}_{s\in [0,1]}$ de $H$ a $G$ tal que $H_{s}$ no tiene 1-\'orbitas peri\'odicas con acci\'on igual a $a$. Entonces $\sigma_{H,G}:HF_{\ast}^{(a,\infty)}(H)\rightarrow HF_{\ast}^{(a,\infty)}(G)$ es un isomorfismo.
+\end{block}
+\end{frame}
+
+
+\begin{frame}{}
+Sea $U$ un dominio estrella no degenerado de $(\mathbb{R}^{2n},\omega_{std},X_{rad})$. Para cualquier $a>0$, consideremos una sucesi\'on $h_{a}(U)=\{H_{i}\}_{i\in \mathbb{N}}$ con las siguientes porpiedades:\\
+\begin{columns}
+\begin{column}{0.5\textwidth}
+   \begin{itemize}
+   \item $H_{i+1}\geq H_{i}$
+   \item $H_{i}(0)>a$ y $H_{i}(0)=C_{i}$ con $C_{i}\rightarrow \infty$ cuando $i\rightarrow \infty$
+   \item $H_{i} \equiv 0$ para $u\geq 1-\epsilon_{i}$ cuando $\lim_{i\rightarrow \infty}\epsilon = 0$
+   \end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}  %%<--- here
+    \begin{center}
+     \includegraphics[width=1\textwidth]{diagrams/9.7.png}
+     \end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+Como $C_{i}$ diverge, para toda $H\in \mathcal{H}(U)$ existe $i\in \mathbb{N}$ tal que $H_{i}\preceq H$ p.a. $H_{i}\in h_{a}(U)$. M\'as a\'un, por el Principio 2, existe una homotop\'ia mon\'otona de $H_{i+1}$ a $H_{i}$ tal que $$\sigma_{H_{i+1},H_{i}}:HF_{\ast}^{(a,\infty)}(H_{i+1})\rightarrow HF_{\ast}^{(a,\infty)}(H_i)$$
+es un isomorfismo. En otras palabras, para cualquier $a>0$, $h_{a}(U)$ resulta en una sucesi\'on exhaustivamente hacia abajo para el sistema inverso $(HF_{\ast}^{(a,\infty)}(H),\sigma_{H,G})$.\\
+\vspace{1em}
+Por la Proposici\'on 9.7.1 (Principio 1) se tiene la siguiente f\'ormula para el c\'alculo de la homolog\'ia simpl\'ectica filtrada.
+$$SH_{\ast}^{(a,\infty)}(U)=HF_{\ast}^{(a,\infty)}(H_{i}),$$
+para cualquier $H_{i}\in h_{a}(U)$.
+\end{frame}
+
+\begin{frame}
+Sea $U=E(1,N,\cdots,N)$, consideremos cada punto $z\in \mathbb{C}^{n}\backslash \{0\}$ como el par $(x,u)$, donde 
+$$u(z)=\pi\left(  \frac{|z_1|^2}{1}+\frac{|z_2|^2}{N}+\cdots+\frac{|z_n|^2}{N}\right)\hspace{1em}\mbox{y}\hspace{1em}x(z)=\frac{z}{\sqrt{u(z)}}.$$
+$\,$\\
+Sea $a>0$, $$H_{a}(x,u)=\frac{-a-\delta}{1-\epsilon}u+(a+\delta)$$
+p.a. $\epsilon>0$ y $H_{a}(x,u)$ lisa en $u=1-\epsilon$. El valor de $\delta$ es tan peque\~no que el intervalo $(a,\frac{a+\delta}{1-\epsilon})$ no contiene valores de acciones simpl\'ecticas de \'orbitas Hamiltonianas 1-peri\'odicas de $H_{a}(x,u)$. Por lo cual, en la ventana de acci\'on $(a,\infty)$, s\'olo existen \'orbitas 1-peri\'odicas de $H_{a}(x,u)$ y el m\'aximo global se alcanza en $u=0$. Por tanto la homolog\'ia de filtrada de Floer es un espacio vectorial sobre $\mathbb{Z}_2$ generado por este punto fijo.
+\end{frame}
+
+\begin{frame}
+Con una elecci\'on apropiada de $\epsilon$ y $\delta$ en la vecindad de $u=0$,
+\begin{eqnarray*}
+H_{a}(z_1,\cdots,c_n)&=&\frac{-a-\delta}{1-\epsilon}\left(  \pi \frac{|z_1|^2}{1}+\frac{|z_2|^2}{N}+\cdots+\frac{|z_n|^2}{N}\right)+(a+\delta)\\
+&=&\pi\lceil -a\rceil |z_1|^2+\sum_{i=2}^{n}\pi\lceil \frac{-a}{N}\rceil |z_i|^2 + \sum_{i=1}^{n}\pi\alpha_{i}|z_i|^2\\
+& &+(a+\delta),
+\end{eqnarray*}
+para cada $\alpha_i \in (-1,0)$. Por la secci\'on 8.1 $$\mbox{Ind}(0)=-2\big\vert \lceil -a \rceil \big\vert -2(n-1)|\lceil \frac{-a}{N}\rceil|\,.$$
+
+\vspace{1em}
+Por tanto se concluye que,
+$$SH_{\ast}^{(a,\infty)}(E(1,N,\cdots,N))=\mathbb{Z}_{2}$$
+cuando $\ast=-2\big\vert \lceil -a \rceil \big\vert -2(n-1)|\lceil \frac{-a}{N}\rceil |.$\hfill $\qed$
+\end{frame}
+\end{document}
+
+
+
+
