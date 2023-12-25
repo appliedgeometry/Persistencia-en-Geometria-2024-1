@@ -59,3 +59,7 @@ Temas
 *  Teoría de funciones topológicas
     * Seccion 6.1 -- Prológo
         * [pdf](https://github.com/appliedgeometry/Persistencia-en-Geometria-2024-1/blob/main/pdf/Cap_5-Sec_5.3-6.1.pdf)   
+
+*  Módulos de Persistencia Simplécticos
+    * Seccion 9.1 -- 9.7
+        * [pdf](https://github.com/appliedgeometry/Persistencia-en-Geometria-2024-1/blob/main/pdf/Cap_9.pdf) 
